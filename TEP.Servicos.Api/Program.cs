@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace TEP.Api
+namespace TEP.Servicos.Api
 {
     public class Program
     {
