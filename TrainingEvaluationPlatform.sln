@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Servicos.Api", "TEP.Servicos.Api\TEP.Servicos.Api.csproj", "{EEA2CEA4-0523-47CF-986E-8E330B2BC8A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Servicos.Api", "TEP.Servicos.Api\TEP.Servicos.Api.csproj", "{EEA2CEA4-0523-47CF-986E-8E330B2BC8A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Presentation", "01-Presentation", "{89E7464B-0BEA-404A-969C-ED0049D1A950}"
 EndProject
@@ -15,15 +15,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Domain", "04-Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Infra", "05-Infra", "{C5FF4ADC-8E4B-4DA4-9901-0D6EA135BCC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Domain", "TEP.Domain\TEP.Domain.csproj", "{3EDA2AFF-DB3B-44FC-828D-62910D7C8016}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Domain", "TEP.Domain\TEP.Domain.csproj", "{3EDA2AFF-DB3B-44FC-828D-62910D7C8016}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Infra.Data", "TEP.Infra.Data\TEP.Infra.Data.csproj", "{C92E1CB1-3A5B-4239-8DC2-AF79B2D4B6D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.Data", "TEP.Infra.Data\TEP.Infra.Data.csproj", "{C92E1CB1-3A5B-4239-8DC2-AF79B2D4B6D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Infra.IoC", "TEP.Infra.IoC\TEP.Infra.IoC.csproj", "{7FF5A398-765C-451C-A287-E401F98279AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.IoC", "TEP.Infra.IoC\TEP.Infra.IoC.csproj", "{7FF5A398-765C-451C-A287-E401F98279AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Appication", "TEP.Appication\TEP.Appication.csproj", "{5861180B-25D5-4542-BD86-C62E3E079862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Appication", "TEP.Appication\TEP.Appication.csproj", "{5861180B-25D5-4542-BD86-C62E3E079862}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA3E4145-33E0-4926-AC4E-49C51A8BB207}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{32508329-FD2A-4044-B1E0-D17A7C893C52}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\TEP documentation\classes0.png = ..\..\..\Desktop\TEP documentation\classes0.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
