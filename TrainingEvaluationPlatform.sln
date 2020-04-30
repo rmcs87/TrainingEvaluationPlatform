@@ -25,10 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Appication", "TEP.Appic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA3E4145-33E0-4926-AC4E-49C51A8BB207}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{32508329-FD2A-4044-B1E0-D17A7C893C52}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\TEP documentation\classes0.png = ..\..\..\Desktop\TEP documentation\classes0.png
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{EDA9EF5B-6E33-48BF-BE8E-FF7C43D04831}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
