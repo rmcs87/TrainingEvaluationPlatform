@@ -4,8 +4,4 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TEP.Shared\TEP.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

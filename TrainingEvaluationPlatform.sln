@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA3E4145
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{EDA9EF5B-6E33-48BF-BE8E-FF7C43D04831}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Shared", "TEP.Shared\TEP.Shared.csproj", "{CF5E8B43-3955-4072-A8BF-8E60C01F0AC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{5861180B-25D5-4542-BD86-C62E3E079862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5861180B-25D5-4542-BD86-C62E3E079862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5861180B-25D5-4542-BD86-C62E3E079862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5E8B43-3955-4072-A8BF-8E60C01F0AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5E8B43-3955-4072-A8BF-8E60C01F0AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5E8B43-3955-4072-A8BF-8E60C01F0AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5E8B43-3955-4072-A8BF-8E60C01F0AC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
