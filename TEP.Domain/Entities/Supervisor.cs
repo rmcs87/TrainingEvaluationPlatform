@@ -6,5 +6,6 @@ namespace TEP.Domain.Entities
 {
     class Supervisor : Worker
     {
+        public int SystemPassword { get; private set; }
     }
 }

@@ -5,6 +5,6 @@ using System.Text;
 namespace TEP.Domain.Entities
 {
     class Operator : Worker
-    {
+    {        
     }
 }
