@@ -8,13 +8,13 @@ namespace TEP.Domain.Entities
 {
     class ExecutionStep : Step
     {
-        public ExecutionStep(Standard standard, string name, IEnumerable<Action> actions) : base(standard, name)
+        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions) : base(standard, name)
         {
-            Actions = actions;
+            Interactions = interactions;
         }
 
-        public IEnumerable<Action> Actions { get; private set; }
+        public IEnumerable<Interaction> Interactions { get; private set; }
         public Duration ExecutionTime { get; private set; }
     }
 }
-}
+

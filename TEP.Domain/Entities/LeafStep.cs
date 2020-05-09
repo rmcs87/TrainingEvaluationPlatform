@@ -7,11 +7,11 @@ namespace TEP.Domain.Entities
 {
     class LeafStep : Step
     {
-        public LeafStep(Standard standard, string name, IEnumerable<Step> steps) : base(standard, name)
+        public LeafStep(Standard standard, string name, IEnumerable<Interaction> interactions) : base(standard, name)
         {
-            Steps = steps;
+            Interactions = interactions;
         }
 
-        public IEnumerable<Step> Steps { get; private set; }
+        public IEnumerable<Interaction> Interactions { get; private set; }
     }
 }

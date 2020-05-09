@@ -7,11 +7,11 @@ namespace TEP.Domain.Entities
 {
     class RecursiveStep : Step
     {
-        public RecursiveStep(Standard standard, string name, IEnumerable<Action> actions) : base(standard, name)
+        public RecursiveStep(Standard standard, string name, IEnumerable<Step> steps) : base(standard, name)
         {
-            Actions = actions;
+            Steps = steps;
         }
 
-        public IEnumerable<Action> Actions { get; private set; }
-    }
+    public IEnumerable<Step> Steps { get; private set; }
+}
 }

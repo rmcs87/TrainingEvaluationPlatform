@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TEP.Domain.Entities
 {
-    class EntityBase
+    public class EntityBase
     {
         public int Id { get; set; }
     }
