@@ -90,11 +90,11 @@ namespace TEP.Domain.Entities
         /// <summary>
         /// Gets the Target Asset for this Interaction.
         /// </summary>
-        public IAsset Target { get; private set; }
+        public IAsset Target { get; set; }
         /// <summary>
         /// Gets the Source Asset for this Interaction.
         /// </summary>
-        public IAsset Source { get; private set; }
+        public IAsset Source { get; set; }
         
     }
 }

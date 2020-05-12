@@ -15,7 +15,7 @@ namespace TEP.Domain.Entities
         /// <param name="name">The name fo this Step.</param>
         /// <param name="interactions">The Interactions to be Performed in this Step.</param>
         /// <param name="executionTime">Execution Time spent to execute this step.</param>
-        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions, Duration executionTime) : base(standard, name, interactions)
+        public ExecutionStep(Standard standard, string name, Interaction interaction, Duration executionTime, Step nextStep) : base(standard, name, interaction, nextStep)
         {
             ExecutionTime = executionTime;
         }
