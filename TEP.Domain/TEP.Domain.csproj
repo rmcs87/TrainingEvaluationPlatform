@@ -8,4 +8,8 @@
     <ProjectReference Include="..\TEP.Shared\TEP.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

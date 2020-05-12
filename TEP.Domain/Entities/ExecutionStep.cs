@@ -8,10 +8,18 @@ namespace TEP.Domain.Entities
 {
     class ExecutionStep : LeafStep
     {
-        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions) : base(standard, name, interactions)
+        /// <summary>
+        /// Creates a Step executed during a Trainning Session.
+        /// </summary>
+        /// <param name="standard">The classification for a step, which implies how it will be hadled by the trainning APP.</param>
+        /// <param name="name">The name fo this Step.</param>
+        /// <param name="interactions">The Interactions to be Performed in this Step.</param>
+        /// <param name="executionTime">Execution Time spent to execute this step.</param>
+        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions, Duration executionTime) : base(standard, name, interactions)
         {
+            ExecutionTime = executionTime;
         }
-
+        //Gets the Execution Time spent to execute this step.
         public Duration ExecutionTime { get; private set; }
     }
 }

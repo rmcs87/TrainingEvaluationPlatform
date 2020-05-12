@@ -13,6 +13,7 @@ namespace TEP.Domain.ValueObjects
         Grab,
         Hold,
         Press,
-        Timer
+        Timer,
+        Bubble  //Special case where the operator is between two steps.
     }
 }

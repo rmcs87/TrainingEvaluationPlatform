@@ -6,6 +6,9 @@ using System.Text;
 
 namespace TEP.Domain.Entities.Tests
 {
+    /*
+     *Posso ter interações sem tempo, ou sem alguma das coisas? 
+     */
     [TestClass()]
     public class InteractionTests
     {
