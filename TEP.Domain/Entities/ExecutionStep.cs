@@ -6,14 +6,12 @@ using TEP.Shared.ValueObjects;
 
 namespace TEP.Domain.Entities
 {
-    class ExecutionStep : Step
+    class ExecutionStep : LeafStep
     {
-        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions) : base(standard, name)
+        public ExecutionStep(Standard standard, string name, IEnumerable<Interaction> interactions) : base(standard, name, interactions)
         {
-            Interactions = interactions;
         }
 
-        public IEnumerable<Interaction> Interactions { get; private set; }
         public Duration ExecutionTime { get; private set; }
     }
 }
