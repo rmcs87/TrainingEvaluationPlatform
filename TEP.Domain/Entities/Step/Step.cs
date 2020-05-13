@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities
+namespace TEP.Domain.Entities.Step
 {
     /// <summary>
     /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.
@@ -15,13 +15,11 @@ namespace TEP.Domain.Entities
         /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.
         /// </summary>
         /// <param name="standard">The classification for a step, which implies how it will be hadled by the trainning APP.</param>
-        /// <param name="name">The name fo this Step.</param>
-        /// <param name="nextStep">the next step of the Procedure. Returns NULL if it is the last step. In case of OUTOFORDER steps an default next Step shall be provided</param>
-        public Step(Standard standard, string name, Step nextStep)
+        /// <param name="name">The name fo this Step.</param>        
+        public Step(Standard standard, string name)
         {
             Standard = standard;
             Name = name;
-            NextStep = nextStep;
 
             _expectedDuration = new Duration(0.0f);
             _limitDuration = new Duration(0.0f);
@@ -30,7 +28,14 @@ namespace TEP.Domain.Entities
         private Duration _expectedDuration;
         private Duration _limitDuration;
 
-        public bool Processed { get; set; }
+        /// <summary>
+        /// Gets if this Step is being executed
+        /// </summary>
+        public bool Active { get; protected set; }
+        /// <summary>
+        /// Gets if this Step was processed to calculate expected and limi times;
+        /// </summary>
+        public bool Processed { get; protected set; }
         /// <summary>
         /// Gets the classification for this Step.
         /// </summary>
@@ -48,12 +53,17 @@ namespace TEP.Domain.Entities
         /// </summary>        
         public Duration LimitDuration { get => Processed ? _limitDuration : ThrowInvalidOperation(); }
         /// <summary>
-        /// Gets the next step of the Procedure. Returns NULL if it is the last step. In case of OUTOFORDER steps
-        /// an default next Step shall be provided
+        /// Gets if this step was completed or not.
         /// </summary>
-        public Step NextStep { get; private set; }
+        public bool Completed { get; protected set; }
         /// <summary>
-        /// Calculates all times for this step, inlcuding substeps when present.
+        /// Gets the time spent to complete this step.
+        /// </summary>
+        public Duration CompletionDuration { get; protected set; }
+
+
+        /// <summary>
+        /// Starts the current step.
         /// </summary>
         public abstract void ProcessDuration();
         /// <summary>

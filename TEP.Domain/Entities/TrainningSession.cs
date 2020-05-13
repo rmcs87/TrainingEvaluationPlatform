@@ -6,8 +6,7 @@ namespace TEP.Domain.Entities
 {
     class TrainningSession : EntityBase
     {
-        public ProDefinition Procedure { get; private set; }
-        public ProExecution Execution { get; private set; }
+        public Procedure Procedure { get; private set; }
         public DateTime Date { get; private set; }
         public Operator Operator { get; private set; }
         public Supervisor Supervisor { get; private set; }

@@ -11,7 +11,7 @@ namespace TEP.Shared.ValueObjects
             Milis = milis;
         }
 
-        public float Milis { get; private set; }
+        public float Milis { get; set; }
         public void Increment(float increment)
         {
             Milis += increment;
