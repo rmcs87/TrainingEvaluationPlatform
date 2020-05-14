@@ -21,6 +21,7 @@ namespace TEP.Domain.Entities.Step
         {
             Standard = standard;
             Name = name;
+            ExecutionTime = new Duration(0);
         }
 
         //Private Variables

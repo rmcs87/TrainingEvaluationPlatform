@@ -39,15 +39,17 @@ namespace TEP.Domain.Entities.Step
         /// </summary>
         public override void CalculateDuration()
         {
-            _expectedDuration = new Duration(0.0f);
-            _limitDuration = new Duration(0.0f);
+            _expectedDuration = new Duration(0);
+            _limitDuration = new Duration(0);
+            ExecutionTime = new Duration(0); ;
 
             foreach (var step in SubSteps)
             {
                 step.CalculateDuration();
 
                 ExpectedDuration.Increment(step.ExpectedDuration);
-                LimitDuration.Increment(step.LimitDuration);                
+                LimitDuration.Increment(step.LimitDuration);
+                
             }
         }
         /// <summary>

@@ -20,7 +20,7 @@ namespace TEP.Domain.Entities.Step
         /// <param name="interaction">The Interactions to be Performed in this Step.</param>
         public LeafStep(Standard standard, string name, Interaction interaction ) : base(standard, name)
         {
-            Interaction = interaction;
+            Interaction = interaction;            
         }
 
         //Private Variables
@@ -57,7 +57,7 @@ namespace TEP.Domain.Entities.Step
             {
                 Active = false;
                 Completed = true;
-                ExecutionTime = new Duration(now.Millisecond - _startingTime.Millisecond);
+                ExecutionTime.Milis = now.Millisecond - _startingTime.Millisecond;
             }
             else
             {

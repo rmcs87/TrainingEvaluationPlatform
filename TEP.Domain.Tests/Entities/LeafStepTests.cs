@@ -13,7 +13,111 @@ namespace TEP.Domain.Tests.Entities
     public class LeafStepTests
     {
         [TestMethod]
-        public void ExpeectedTime_for_Interaction()
+        public void CorrectInitialStatsForLeafStep()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            // Act
+ 
+            // Assert
+            Assert.AreEqual(false, leafStep.Active);
+            Assert.AreEqual(false, leafStep.Completed);
+        }
+        [TestMethod]
+        public void CorrectAdvanceStepForNonActiveNonCompletedStep()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            // Act
+            leafStep.AdvanceStep(DateTime.Now);
+            // Assert
+            Assert.AreEqual(true, leafStep.Active);
+            Assert.AreEqual(false, leafStep.Completed);
+        }
+        [TestMethod]
+        public void CorrectAdvanceStepForActiveNonCompletedStep()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            // Act
+            leafStep.AdvanceStep(DateTime.Now);
+            leafStep.AdvanceStep(DateTime.Now);
+            // Assert
+            Assert.AreEqual(false, leafStep.Active);
+            Assert.AreEqual(true, leafStep.Completed);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "This step has already been completed. Can't perform it again.")]
+        public void CorrectAdvanceStepForCompletedStep()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            // Act
+            leafStep.AdvanceStep(DateTime.Now);
+            leafStep.AdvanceStep(DateTime.Now);
+            leafStep.AdvanceStep(DateTime.Now);
+        }
+        [TestMethod]
+        public void CorrectExecutionTimeOnStart()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            // Act
+
+            // Assert
+            Assert.AreEqual(0 , leafStep.ExecutionTime.Milis);
+        }
+        [TestMethod]
+        public void CorrectExecutionTimeOnCompletion()
+        {
+            // Arrange
+            List<Category> categories = new List<Category>();
+            categories.Add(Category.Operational);
+            Description description = new Description("Take the Key.");
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
+            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
+            DateTime firstTime = DateTime.Now;
+            DateTime secondTime = DateTime.Now;
+            // Act
+            leafStep.AdvanceStep(firstTime);
+            leafStep.AdvanceStep(secondTime);
+            // Assert
+            Assert.AreEqual(secondTime.Millisecond - firstTime.Millisecond, leafStep.ExecutionTime.Milis);
+        }
+        [TestMethod]
+        public void ExpectedTime_for_Interaction()
         {
             // Arrange
             List<Category> categories = new List<Category>();
@@ -35,8 +139,8 @@ namespace TEP.Domain.Tests.Entities
             List<Category> categories = new List<Category>();
             categories.Add(Category.Operational);
             Description description = new Description("Take the Key.");
-            Duration expected = new Duration(1000.0f);
-            Duration limit = new Duration(2000.0f);
+            Duration expected = new Duration(1000);
+            Duration limit = new Duration(2000);
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act

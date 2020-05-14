@@ -6,17 +6,18 @@ namespace TEP.Shared.ValueObjects
 {
     public class Duration
     {
-        public Duration(float milis)
+        //Manages the duration of an event in miliseconds, to a max of 596.52 Hour.
+        public Duration(int milis)
         {
             Milis = milis;
         }
 
-        public float Milis { get; set; }
-        public void Increment(float increment)
+        public int Milis { get; set; }
+        public void Increment(int increment)
         {
             Milis += increment;
         }
-        public void Decrement(float decrement)
+        public void Decrement(int decrement)
         {
             Milis -= decrement;
         }public void Increment(Duration increment)
@@ -29,7 +30,7 @@ namespace TEP.Shared.ValueObjects
         }
         public void Reset()
         {
-            Milis = 0.0f;
+            Milis = 0;
         }
     }
 }
