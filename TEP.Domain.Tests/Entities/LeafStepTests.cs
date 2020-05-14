@@ -24,7 +24,7 @@ namespace TEP.Domain.Tests.Entities
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
-            leafStep.ProcessDuration();
+            leafStep.CalculateDuration();
             // Assert
             Assert.AreEqual(expected.Milis, leafStep.ExpectedDuration.Milis);
         }       
@@ -40,7 +40,7 @@ namespace TEP.Domain.Tests.Entities
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
-            leafStep.ProcessDuration();
+            leafStep.CalculateDuration();
             // Assert
             Assert.AreEqual(limit.Milis, leafStep.LimitDuration.Milis);
         }

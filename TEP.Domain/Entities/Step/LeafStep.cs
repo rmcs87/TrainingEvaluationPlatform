@@ -11,8 +11,9 @@ namespace TEP.Domain.Entities.Step
     /// </summary>
     public class LeafStep : Step
     {
+        //Constructors
         /// <summary>
-        /// Creates a Step constituted of Interactions.
+        /// Creates a leafStep which contais an interaction to be performed.
         /// </summary>
         /// <param name="standard">The classification for a step, which implies how it will be hadled by the trainning APP.</param>
         /// <param name="name">The name fo this Step.</param>
@@ -22,37 +23,48 @@ namespace TEP.Domain.Entities.Step
             Interaction = interaction;
         }
 
+        //Private Variables
+        private DateTime _startingTime;
+
+        //Properties
         /// <summary>
-        /// Gets all interactions to be performed in this Step.
+        /// Gets the interaction performed in this Step.
         /// </summary>
         public Interaction Interaction { get; private set; }
-        
-        /// <summary>
-        /// Calculates all times for this step, consifering all Interaction to be performed druing the step.
-        /// </summary>        
-        public override void ProcessDuration()
-        {
-            Processed = true;
 
-            ExpectedDuration.Increment(Interaction.EstimatedTime);
-            LimitDuration.Increment(Interaction.TimeLimit);            
+        //Methods
+        /// <summary>
+        /// Calculates: Expected, Limit.
+        /// </summary>     
+        public override void CalculateDuration()
+        {
+            _expectedDuration = new Duration(Interaction.EstimatedTime.Milis);
+            _limitDuration = new Duration(Interaction.TimeLimit.Milis);
         }
         /// <summary>
-        /// Marks this step as Executed.
+        /// Marks the current Step as completed, and starts the next.
         /// </summary>
-        public void SetCompletionTime(float timeTaken)
+        /// <param name="now">The current DateTime when the Step transition occurs.</param>
+        /// <returns>The current Active LeafStep, which contains the current Interaction.</returns>
+        public override LeafStep AdvanceStep(DateTime now)
         {
-            CompletionDuration = new Duration(timeTaken);
-        }
-        /// <summary>
-        /// Mark this Step as completed if all its subSteps are also completed.
-        /// </summary>
-        public void MarkAsCompleted()
-        {
-            if (CompletionDuration == null)
-                throw new InvalidOperationException(message: $"{nameof(SetCompletionTime)} must be setted before setting this step as completed.");
-
-            Completed = true;
+            if (!Active && !Completed)
+            {
+                Active = true;
+                _startingTime = now;
+            }
+            else if(Active && !Completed)
+            {
+                Active = false;
+                Completed = true;
+                ExecutionTime = new Duration(now.Millisecond - _startingTime.Millisecond);
+            }
+            else
+            {
+                throw new InvalidOperationException(message: "This step has already been completed. Can't perform it again.");
+            }
+            
+            return null;
         }
     }
 }

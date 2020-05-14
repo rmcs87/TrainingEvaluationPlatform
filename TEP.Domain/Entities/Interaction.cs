@@ -5,7 +5,6 @@ using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 using TEP.Shared;
 
-
 namespace TEP.Domain.Entities
 {
     /// <summary>
@@ -13,6 +12,7 @@ namespace TEP.Domain.Entities
     /// </summary>
     public class Interaction : EntityBase
     {   
+        //Constructors
         /// <summary>
         /// A constructor to create an objectless Interaction. (such as waiting for a period of time)
         /// </summary>
@@ -67,6 +67,8 @@ namespace TEP.Domain.Entities
             Target = target;
             Source = source;
         }
+
+        //Properties
         /// <summary>
         /// Gets the Categories related to this Interaction.
         /// </summary>

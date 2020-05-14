@@ -11,8 +11,9 @@ namespace TEP.Domain.Entities.Step
     /// </summary>
     public abstract class Step : EntityBase
     {
+        //Constructors
         /// <summary>
-        /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.
+        /// A Step is part of procedure that may be constitued of several substeps.
         /// </summary>
         /// <param name="standard">The classification for a step, which implies how it will be hadled by the trainning APP.</param>
         /// <param name="name">The name fo this Step.</param>        
@@ -20,38 +21,17 @@ namespace TEP.Domain.Entities.Step
         {
             Standard = standard;
             Name = name;
-
-            _expectedDuration = new Duration(0.0f);
-            _limitDuration = new Duration(0.0f);
         }
 
-        private Duration _expectedDuration;
-        private Duration _limitDuration;
+        //Private Variables
+        protected Duration _expectedDuration;
+        protected Duration _limitDuration;
 
+        //Properties
         /// <summary>
         /// Gets if this Step is being executed
         /// </summary>
         public bool Active { get; protected set; }
-        /// <summary>
-        /// Gets if this Step was processed to calculate expected and limi times;
-        /// </summary>
-        public bool Processed { get; protected set; }
-        /// <summary>
-        /// Gets the classification for this Step.
-        /// </summary>
-        public Standard Standard { get; private set; }
-        /// <summary>
-        /// Gets this name of this Step.
-        /// </summary>
-        public string Name { get; private set; }       
-        /// <summary>
-        /// Gets the expected duration for this step, including sub steps.
-        /// </summary>        
-        public Duration ExpectedDuration { get => Processed ? _expectedDuration : ThrowInvalidOperation();}        
-        /// <summary>
-        /// Gets the maximum duration for this step, including sub steps. If durations was not calculated, it will call ProcessDuration and return it.
-        /// </summary>        
-        public Duration LimitDuration { get => Processed ? _limitDuration : ThrowInvalidOperation(); }
         /// <summary>
         /// Gets if this step was completed or not.
         /// </summary>
@@ -59,21 +39,41 @@ namespace TEP.Domain.Entities.Step
         /// <summary>
         /// Gets the time spent to complete this step.
         /// </summary>
-        public Duration CompletionDuration { get; protected set; }
-
-
+        public Duration ExecutionTime{ get; protected set; }
         /// <summary>
-        /// Starts the current step.
+        /// Gets the expected duration for this step, including sub steps.
+        /// </summary>        
+        public Duration ExpectedDuration { get => _expectedDuration ?? ThrowInvalidOperation(); }
+        /// <summary>
+        /// Gets this name of this Step.
         /// </summary>
-        public abstract void ProcessDuration();
+        public string Name { get; private set; }
+        /// <summary>
+        /// Gets the maximum duration for this step, including sub steps. If durations was not calculated, it will call ProcessDuration and return it.
+        /// </summary>        
+        public Duration LimitDuration { get => _limitDuration ?? ThrowInvalidOperation(); }
+        /// <summary>
+        /// Gets the classification for this Step.
+        /// </summary>
+        public Standard Standard { get; private set; }
+
+        //Methods
+        /// <summary>
+        /// Calculates: Expected, Limit.
+        /// </summary>
+        public abstract void CalculateDuration();
+        /// <summary>
+        /// Marks the current Step as completed, and starts the next.
+        /// </summary>
+        /// <param name="now">The current DateTime when the Step transition occurs. </param>
+        /// <returns>The current Active LeafStep, which contains the current Interaction.</returns>
+        public abstract LeafStep AdvanceStep(DateTime now);
         /// <summary>
         /// Throws an InvalidOperationException.
         /// </summary>
         private Duration ThrowInvalidOperation()
         {
-            throw new InvalidOperationException(message: $"{nameof(ProcessDuration)} must be executed before getting Time.");
+            throw new InvalidOperationException(message: $"{nameof(CalculateDuration)} must be executed before getting Time.");
         }
-
     }
-
 }
