@@ -64,7 +64,7 @@ namespace TEP.Domain.Entities.Step
                 throw new InvalidOperationException(message: "This step has already been completed. Can't perform it again.");
             }
             
-            return null;
+            return this;
         }
     }
 }

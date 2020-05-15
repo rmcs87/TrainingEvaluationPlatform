@@ -53,7 +53,7 @@ namespace TEP.Domain.Entities.Step
             }
         }
         /// <summary>
-        /// Adds a subStep to this Step.
+        /// Adds a subStep to this Step. The sequence they are added, correspondes to the execution order.
         /// </summary>
         /// <param name="step">subStep to be executed in this Step.</param>
         public void AddSubStep(Step step)
