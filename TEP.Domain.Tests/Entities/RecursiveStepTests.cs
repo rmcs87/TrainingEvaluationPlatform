@@ -114,9 +114,9 @@ namespace TEP.Domain.Tests.Entities
             sequentialStep.AdvanceStep(thirdTime);
             sequentialStep.AdvanceStep(fourthTime);
             // Assert
-            //Assert.AreEqual(null, sequentialStep.CurrentStep);
+            Assert.AreEqual(null, sequentialStep.CurrentSubStep);
             Assert.AreEqual(true, sequentialStep.Completed);
-           // Assert.AreEqual(false, sequentialStep.Active);
+            Assert.AreEqual(false, sequentialStep.Active);
         }
         [TestMethod]
         public void OnActivationShouldReturnFirstInteractionBeActiveAndNonCompleted()
@@ -154,8 +154,39 @@ namespace TEP.Domain.Tests.Entities
             Assert.AreEqual(false, sequentialStep.Completed);
             Assert.AreEqual(true, sequentialStep.Active);
         }
-
-        //tetnar avançar ja tendo acabado lança excessão
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "This step has already been completed. Can't perform it again.")]
+        public void OnCompletedAdvancingStepShouldFail()
+        {
+            // Arrange            
+            List<Step> steps = new List<Step>();
+            RecursiveStep sequentialStep = new RecursiveStep(Standard.Mandatory, "Door", steps);
+            sequentialStep.AddSubStep(_takeKeyStep);
+            sequentialStep.AddSubStep(_insertKeyStep);
+            sequentialStep.AddSubStep(_openDoorStep);
+            DateTime firstTime = DateTime.Now;
+            DateTime secondTime = DateTime.Now;
+            DateTime thirdTime = DateTime.Now;
+            DateTime fourthTime = DateTime.Now;
+            DateTime fifthTime = DateTime.Now;
+            // Act
+            sequentialStep.AdvanceStep(firstTime);  //starts
+            sequentialStep.AdvanceStep(secondTime); //finishes first and starts second
+            sequentialStep.AdvanceStep(thirdTime);  //finishes second and starts third
+            sequentialStep.AdvanceStep(fourthTime); //finishes third and completes
+            sequentialStep.AdvanceStep(fifthTime);  //exception            
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void OnEmptySubStepsShouldThrowException()
+        {
+            // Arrange            
+            List<Step> steps = new List<Step>();
+            RecursiveStep sequentialStep = new RecursiveStep(Standard.Mandatory, "Door", steps);
+            DateTime firstTime = DateTime.Now;
+            // Act
+            sequentialStep.AdvanceStep(firstTime);  //starts        
+        }
 
         //avançar sem subpassos laça excessão
 

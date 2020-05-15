@@ -31,7 +31,7 @@ namespace TEP.Domain.Entities.Step
         /// <summary>
         /// Gets the Current subStep being executed in this step.
         /// </summary>
-        public Step CurrentStep { get => SubSteps[_currentSubStepIndex]; }
+        public Step CurrentSubStep { get; private set; }
 
         //Mehods
         /// <summary>
@@ -83,6 +83,8 @@ namespace TEP.Domain.Entities.Step
         /// <returns>The current Active LeafStep, which contains the current Interaction.</returns>
         public override LeafStep AdvanceStep(DateTime now)
         {
+            var leafStep = SubSteps[_currentSubStepIndex].AdvanceStep(now);
+
             if (!Active && !Completed)
             {
                 Active = true;                
@@ -95,11 +97,14 @@ namespace TEP.Domain.Entities.Step
                     {
                         Active = false;
                         Completed = true;
+                        CurrentSubStep = null;
                         return null;
                     }
                     else
                     {                        
                         _currentSubStepIndex++;
+                        CurrentSubStep = SubSteps[_currentSubStepIndex];
+                        leafStep = CurrentSubStep.AdvanceStep(now);
                     }
                 }
             }
@@ -107,7 +112,7 @@ namespace TEP.Domain.Entities.Step
             {
                 throw new InvalidOperationException(message: "This step has already been completed. Can't perform it again.");
             }
-            return SubSteps[_currentSubStepIndex].AdvanceStep(now);
+            return leafStep;
         }        
     }
 }
