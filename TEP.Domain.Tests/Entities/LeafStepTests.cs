@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.Step;
+using TEP.Domain.Entities.StepEntities;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
@@ -128,7 +128,7 @@ namespace TEP.Domain.Tests.Entities
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
-            leafStep.CalculateDuration();
+            leafStep.UpdateDuration();
             // Assert
             Assert.AreEqual(expected.Milis, leafStep.ExpectedDuration.Milis);
         }       
@@ -144,7 +144,7 @@ namespace TEP.Domain.Tests.Entities
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
-            leafStep.CalculateDuration();
+            leafStep.UpdateDuration();
             // Assert
             Assert.AreEqual(limit.Milis, leafStep.LimitDuration.Milis);
         }

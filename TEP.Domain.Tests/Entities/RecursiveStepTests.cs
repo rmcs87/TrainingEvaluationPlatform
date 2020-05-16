@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.Step;
+using TEP.Domain.Entities.StepEntities;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
@@ -80,7 +80,7 @@ namespace TEP.Domain.Tests.Entities
             sequentialStep.AddSubStep(_takeKeyStep);
             sequentialStep.AddSubStep(_insertKeyStep);
             sequentialStep.AddSubStep(_openDoorStep);
-            sequentialStep.CalculateDuration();
+            sequentialStep.UpdateDuration();
             // Assert
             Assert.AreEqual(3000, sequentialStep.ExpectedDuration.Milis);
             Assert.AreEqual(6000, sequentialStep.LimitDuration.Milis);
@@ -254,7 +254,7 @@ namespace TEP.Domain.Tests.Entities
             DateTime fifthTime = DateTime.Now;
 
             // Act
-            multiNivelSequentialStep.CalculateDuration();
+            multiNivelSequentialStep.UpdateDuration();
             multiNivelSequentialStep.AdvanceStep(firstTime);
             multiNivelSequentialStep.AdvanceStep(secondTime);
             multiNivelSequentialStep.AdvanceStep(thirdTime);

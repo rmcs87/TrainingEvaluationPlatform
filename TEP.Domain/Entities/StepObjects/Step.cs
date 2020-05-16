@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.Step
+namespace TEP.Domain.Entities.StepEntities
 {
     /// <summary>
     /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.
@@ -62,7 +62,7 @@ namespace TEP.Domain.Entities.Step
         /// <summary>
         /// Calculates: Expected, Limit.
         /// </summary>
-        public abstract void CalculateDuration();
+        public abstract void UpdateDuration();
         /// <summary>
         /// Marks the current Step as completed, and starts the next.
         /// </summary>
@@ -74,7 +74,7 @@ namespace TEP.Domain.Entities.Step
         /// </summary>
         private Duration ThrowInvalidOperation()
         {
-            throw new InvalidOperationException(message: $"{nameof(CalculateDuration)} must be executed before getting Time.");
+            throw new InvalidOperationException(message: $"{nameof(UpdateDuration)} must be executed before getting Time.");
         }
     }
 }

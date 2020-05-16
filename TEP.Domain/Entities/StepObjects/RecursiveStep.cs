@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.Step
+namespace TEP.Domain.Entities.StepEntities
 {
     public class RecursiveStep : Step
     {
@@ -37,7 +37,7 @@ namespace TEP.Domain.Entities.Step
         /// <summary>
         /// Calculates ExpectedDuration and LimitDuration for this step, considering all subSteps to be performed during the step.
         /// </summary>
-        public override void CalculateDuration()
+        public override void UpdateDuration()
         {
             _expectedDuration = new Duration(0);
             _limitDuration = new Duration(0);
@@ -45,7 +45,7 @@ namespace TEP.Domain.Entities.Step
 
             foreach (var step in SubSteps)
             {
-                step.CalculateDuration();
+                step.UpdateDuration();
 
                 ExpectedDuration.Increment(step.ExpectedDuration);
                 LimitDuration.Increment(step.LimitDuration);

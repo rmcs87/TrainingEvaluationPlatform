@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.Step
+namespace TEP.Domain.Entities.StepEntities
 {
     /// <summary>
     /// A Step specialization that contains Interactions only, no substeps are alowed.
@@ -36,7 +36,7 @@ namespace TEP.Domain.Entities.Step
         /// <summary>
         /// Calculates: Expected, Limit.
         /// </summary>     
-        public override void CalculateDuration()
+        public override void UpdateDuration()
         {
             _expectedDuration = new Duration(Interaction.EstimatedTime.Milis);
             _limitDuration = new Duration(Interaction.TimeLimit.Milis);
