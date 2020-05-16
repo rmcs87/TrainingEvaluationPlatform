@@ -14,10 +14,12 @@ namespace TEP.Domain.Tests.Entities
         private readonly LeafStep _takeKeyStep;
         private readonly LeafStep _insertKeyStep;
         private readonly LeafStep _openDoorStep;
+        private readonly LeafStep _grabHugStep;
 
         private readonly Interaction _keyInteraction;
         private readonly Interaction _keyholeInteraction;
         private readonly Interaction _doorInteraction;
+        private readonly Interaction _grabHugInteraction;
 
         public RecursiveStepTests()
         {
@@ -44,13 +46,22 @@ namespace TEP.Domain.Tests.Entities
             Duration openDoorLimit = new Duration(2000);
             _doorInteraction = new Interaction(openDoorCategories, Act.Grab, openDoorDescription, openDoorExpected, openDoorLimit);
             _openDoorStep = new LeafStep(Standard.Mandatory, "Insert key.", _doorInteraction);
+
+            List<Category> grabHugCategories = new List<Category>();
+            grabHugCategories.Add(Category.Operational);
+            grabHugCategories.Add(Category.Security);
+            Description grabHugDescription = new Description("Grab HUg.");
+            Duration grabHugExpected = new Duration(1000);
+            Duration grabHugLimit = new Duration(2000);
+            _grabHugInteraction = new Interaction(grabHugCategories, Act.Grab, grabHugDescription, grabHugExpected, grabHugLimit);
+            _grabHugStep = new LeafStep(Standard.Mandatory, "Insert key.", _grabHugInteraction);
         }
 
         [TestMethod]
         public void OnInitialStateShouldBeNonActiveAndNonCompleted()
         {
             // Arrange            
-            List<Step> steps = new List<Step>();            
+            List<Step> steps = new List<Step>();
             RecursiveStep sequentialStep = new RecursiveStep(Standard.Mandatory, "Door", steps);
             sequentialStep.AddSubStep(_takeKeyStep);
             sequentialStep.AddSubStep(_insertKeyStep);
@@ -62,7 +73,7 @@ namespace TEP.Domain.Tests.Entities
         }
         [TestMethod]
         public void OnInitialStateExecutionAndLimitTimeShouldBeCorrectCalculated()
-        {            
+        {
             // Arrange            
             List<Step> steps = new List<Step>();
             RecursiveStep sequentialStep = new RecursiveStep(Standard.Mandatory, "Door", steps);
@@ -187,14 +198,133 @@ namespace TEP.Domain.Tests.Entities
             // Act
             sequentialStep.AdvanceStep(firstTime);  //starts        
         }
-
-        //avançar sem subpassos laça excessão
-
-        /*[TestMethod]
-        public void CorrectMultiLevelStep...()
+        [TestMethod]
+        public void OnCompletionMultinivelSequentialStepsShouldBeCompletedAndNonActive()
         {
+            // Arrange    
+            List<Step> hugSteps = new List<Step>();
+            RecursiveStep hugSequentialStep = new RecursiveStep(Standard.Mandatory, "Hug.", hugSteps);
+            hugSequentialStep.AddSubStep(_grabHugStep);
+            hugSequentialStep.AddSubStep(_takeKeyStep);
 
-        }*/
+            List<Step> doorSteps = new List<Step>();
+            RecursiveStep doorSequentialStep = new RecursiveStep(Standard.Mandatory, "Door", doorSteps);
+            doorSequentialStep.AddSubStep(_insertKeyStep);
+            doorSequentialStep.AddSubStep(_openDoorStep);
 
+            List<Step> multiNivelSequentialSteps = new List<Step>();
+            RecursiveStep multiNivelSequentialStep = new RecursiveStep(Standard.Mandatory, "Unlock Door", multiNivelSequentialSteps);
+            multiNivelSequentialStep.AddSubStep(hugSequentialStep);
+            multiNivelSequentialStep.AddSubStep(doorSequentialStep);
+
+            // Act
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+
+            // Assert
+            Assert.AreEqual(true, multiNivelSequentialStep.Completed);
+            Assert.AreEqual(false, multiNivelSequentialStep.Active);
+        }
+        [TestMethod]
+        public void OnCompletionAndCalculationAllTimesShouldBeCorrect()
+        {
+            // Arrange    
+            List<Step> hugSteps = new List<Step>();
+            RecursiveStep hugSequentialStep = new RecursiveStep(Standard.Mandatory, "Hug.", hugSteps);
+            hugSequentialStep.AddSubStep(_grabHugStep);
+            hugSequentialStep.AddSubStep(_takeKeyStep);
+
+            List<Step> doorSteps = new List<Step>();
+            RecursiveStep doorSequentialStep = new RecursiveStep(Standard.Mandatory, "Door", doorSteps);
+            doorSequentialStep.AddSubStep(_insertKeyStep);
+            doorSequentialStep.AddSubStep(_openDoorStep);
+
+            List<Step> multiNivelSequentialSteps = new List<Step>();
+            RecursiveStep multiNivelSequentialStep = new RecursiveStep(Standard.Mandatory, "Unlock Door", multiNivelSequentialSteps);
+            multiNivelSequentialStep.AddSubStep(hugSequentialStep);
+            multiNivelSequentialStep.AddSubStep(doorSequentialStep);
+
+            DateTime firstTime = DateTime.Now;
+            DateTime secondTime = DateTime.Now;
+            DateTime thirdTime = DateTime.Now;
+            DateTime fourthTime = DateTime.Now;
+            DateTime fifthTime = DateTime.Now;
+
+            // Act
+            multiNivelSequentialStep.CalculateDuration();
+            multiNivelSequentialStep.AdvanceStep(firstTime);
+            multiNivelSequentialStep.AdvanceStep(secondTime);
+            multiNivelSequentialStep.AdvanceStep(thirdTime);
+            multiNivelSequentialStep.AdvanceStep(fourthTime);
+            multiNivelSequentialStep.AdvanceStep(fifthTime);
+
+            // Assert
+            Assert.AreEqual(4000, multiNivelSequentialStep.ExpectedDuration.Milis);
+            Assert.AreEqual(8000, multiNivelSequentialStep.LimitDuration.Milis);
+            Assert.AreEqual(fifthTime.Millisecond - firstTime.Millisecond, multiNivelSequentialStep.ExecutionTime.Milis);
+        }
+        [TestMethod]
+        public void OnTwoAdvancesMultinivelSequentialStepsShouldBeNonCompletedActiveAndReturnSecondInteraction()
+        {
+            // Arrange    
+            List<Step> hugSteps = new List<Step>();
+            RecursiveStep hugSequentialStep = new RecursiveStep(Standard.Mandatory, "Hug.", hugSteps);
+            hugSequentialStep.AddSubStep(_grabHugStep);
+            hugSequentialStep.AddSubStep(_takeKeyStep);
+
+            List<Step> doorSteps = new List<Step>();
+            RecursiveStep doorSequentialStep = new RecursiveStep(Standard.Mandatory, "Door", doorSteps);
+            doorSequentialStep.AddSubStep(_insertKeyStep);
+            doorSequentialStep.AddSubStep(_openDoorStep);
+
+            List<Step> multiNivelSequentialSteps = new List<Step>();
+            RecursiveStep multiNivelSequentialStep = new RecursiveStep(Standard.Mandatory, "Unlock Door", multiNivelSequentialSteps);
+            multiNivelSequentialStep.AddSubStep(hugSequentialStep);
+            multiNivelSequentialStep.AddSubStep(doorSequentialStep);
+
+            // Act
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            LeafStep second = multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+
+            // Assert
+            Assert.AreEqual(false, multiNivelSequentialStep.Completed);
+            Assert.AreEqual(true, multiNivelSequentialStep.Active);
+            Assert.AreEqual(_takeKeyStep.Interaction, second.Interaction);
+        }
+        [TestMethod]
+        public void OnThreeAdvancesShouldChangeActiveRecursiveSubStepAndReturnThirdInteraction()
+        {
+            // Arrange    
+            List<Step> hugSteps = new List<Step>();
+            RecursiveStep hugSequentialStep = new RecursiveStep(Standard.Mandatory, "Hug.", hugSteps);
+            hugSequentialStep.AddSubStep(_grabHugStep);
+            hugSequentialStep.AddSubStep(_takeKeyStep);
+
+            List<Step> doorSteps = new List<Step>();
+            RecursiveStep doorSequentialStep = new RecursiveStep(Standard.Mandatory, "Door", doorSteps);
+            doorSequentialStep.AddSubStep(_insertKeyStep);
+            doorSequentialStep.AddSubStep(_openDoorStep);
+
+            List<Step> multiNivelSequentialSteps = new List<Step>();
+            RecursiveStep multiNivelSequentialStep = new RecursiveStep(Standard.Mandatory, "Unlock Door", multiNivelSequentialSteps);
+            multiNivelSequentialStep.AddSubStep(hugSequentialStep);
+            multiNivelSequentialStep.AddSubStep(doorSequentialStep);
+
+            // Act
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+            LeafStep third = multiNivelSequentialStep.AdvanceStep(DateTime.Now);
+
+            // Assert
+            Assert.AreEqual(true, hugSequentialStep.Completed);
+            Assert.AreEqual(false, hugSequentialStep.Active);
+            Assert.AreEqual(false, doorSequentialStep.Completed);
+            Assert.AreEqual(true, doorSequentialStep.Active);
+            Assert.AreEqual(_insertKeyStep.Interaction, third.Interaction);
+            Assert.AreEqual(doorSequentialStep, multiNivelSequentialStep.CurrentSubStep);
+        }
     }
 }
