@@ -70,6 +70,11 @@ namespace TEP.Domain.Entities.StepEntities
         /// <returns>The current Active LeafStep, which contains the current Interaction.</returns>
         public abstract LeafStep AdvanceStep(DateTime now);
         /// <summary>
+        /// Gets all substeps of this step, if any.
+        /// </summary>
+        /// <returns>A set of SubSteps.</returns>
+        public abstract List<Step> GetSubSteps();
+        /// <summary>
         /// Throws an InvalidOperationException.
         /// </summary>
         private Duration ThrowInvalidOperation()

@@ -2,12 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TEP.Domain.Entities;
+using TEP.Domain.Entities.StepEntities;
+using TEP.Domain.ValueObjects;
+using TEP.Shared;
+using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Tests.Entities
+namespace TEP.Domain.Tests
 {
     [TestClass]
-    public class ProcedureTests
+    public class ProcedureTests : Setup
     {
+
         [TestMethod]
         public void OnToJsonReturnsJSONString()
         {
@@ -52,7 +58,7 @@ namespace TEP.Domain.Tests.Entities
         public void OnNextInteractionAfterCompletionThrowsException()
         {
 
-        }        
+        }
         [TestMethod]
         public void OnUpdateTimeWithouStartingExecutionTimesAreCorrect()
         {
@@ -67,11 +73,16 @@ namespace TEP.Domain.Tests.Entities
         public void OnUpdateTimeAfterExecutionTimesAreCorrect()
         {
 
-        }
+        }   
         [TestMethod]
-        public void OnRequiredAssetsReturnsAllAssetsUsedInSubstepsOfThisProcedure()
+        public void OnCallRequiredAssets_ShoulReturnListWithNonDuplicatedAssets()
         {
-
+            //Arrange
+            var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
+            //Act
+            List<IAsset> assets = procedure.RequiredAssets();
+            //Assert
+            Assert.AreEqual(3, assets.Count);
         }
     }
 }

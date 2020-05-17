@@ -27,7 +27,7 @@ namespace TEP.Domain.Entities.StepEntities
         /// <summary>
         /// Gets all SubSteps to be performed in this Step.
         /// </summary>
-        public List<Step> SubSteps { get; private set; }
+        private List<Step> SubSteps { get;  set; }
         /// <summary>
         /// Gets the Current subStep being executed in this step.
         /// </summary>
@@ -113,6 +113,14 @@ namespace TEP.Domain.Entities.StepEntities
                 throw new InvalidOperationException(message: "This step has already been completed. Can't perform it again.");
             }
             return leafStep;
-        }        
+        }
+        /// <summary>
+        /// Gets all substeps of this step, if any.
+        /// </summary>
+        /// <returns>A set of SubSteps.</returns>
+        public override List<Step> GetSubSteps()
+        {
+            return SubSteps;
+        }
     }
 }

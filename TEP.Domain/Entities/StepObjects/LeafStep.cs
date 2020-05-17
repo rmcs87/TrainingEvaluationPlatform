@@ -66,5 +66,13 @@ namespace TEP.Domain.Entities.StepEntities
             
             return this;
         }
+        /// <summary>
+        /// Gets all substeps of this step, if any.
+        /// </summary>
+        /// <returns>A set of SubSteps.</returns>
+        public override List<Step> GetSubSteps()
+        {
+            return new List<Step>();
+        }
     }
 }

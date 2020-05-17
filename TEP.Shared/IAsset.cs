@@ -8,5 +8,7 @@ namespace TEP.Shared
     /// </summary>
     public interface IAsset
     {
+        public string Path { get;}
+        public string Name { get;}
     }
 }

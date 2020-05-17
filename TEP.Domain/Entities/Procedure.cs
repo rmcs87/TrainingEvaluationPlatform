@@ -4,6 +4,7 @@ using System.Text;
 using TEP.Shared.ValueObjects;
 using TEP.Domain.Entities.StepEntities;
 using TEP.Shared;
+using System.Linq;
 
 namespace TEP.Domain.Entities
 {
@@ -97,12 +98,37 @@ namespace TEP.Domain.Entities
 
         }
         /// <summary>
-        /// Recover all Assets necessary to perform this procedure.
+        /// Recover all Assets necessary to perform this procedure, removing duplicates.
         /// </summary>
         /// <returns>A set of All required assets to perform this procedure.</returns>
-        public IEnumerable<IAsset> RequiredAssets()
+        public List<IAsset> RequiredAssets()
         {
-            throw new NotImplementedException();
+            List<IAsset> assets = ExtractIAssetFromStep(RootStep);
+            assets.RemoveAll(item => item == null);
+            return new HashSet<IAsset>(assets).ToList();
+        }
+        /// <summary>
+        /// Interates through all Steps, reaching all leafs and finding the assets in its interactions.
+        /// </summary>
+        /// <param name="rootStep"></param>
+        /// <returns></returns>
+        private List<IAsset> ExtractIAssetFromStep(Step rootStep)
+        {
+            var leaf = rootStep as LeafStep;
+            var list = new List<IAsset>();
+
+            if (leaf != null)
+            {                
+                list.Add(leaf.Interaction.Source);
+                list.Add(leaf.Interaction.Target);
+            }
+            else { 
+                foreach (var s in rootStep.GetSubSteps())
+                {
+                    list.AddRange(ExtractIAssetFromStep(s));
+                }
+            }
+            return list;
         }
 
     }
