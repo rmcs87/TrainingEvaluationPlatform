@@ -10,3 +10,4 @@ Good Practices:
 
 Tests:
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
+* Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
