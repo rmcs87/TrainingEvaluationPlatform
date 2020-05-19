@@ -82,8 +82,8 @@ namespace TEP.Domain.Tests.Entities
             sequentialStep.AddSubStep(_openDoorStep);
             sequentialStep.UpdateDuration();
             // Assert
-            Assert.AreEqual(3000, sequentialStep.ExpectedDuration.Milis);
-            Assert.AreEqual(6000, sequentialStep.LimitDuration.Milis);
+            Assert.AreEqual(3000, sequentialStep.ExpectedDuration.Seconds);
+            Assert.AreEqual(6000, sequentialStep.LimitDuration.Seconds);
         }
         [TestMethod]
         public void OnCompletionExecutionTimeShouldBeCalculated()
@@ -104,7 +104,7 @@ namespace TEP.Domain.Tests.Entities
             sequentialStep.AdvanceStep(thirdTime);
             sequentialStep.AdvanceStep(fourthTime);
             // Assert
-            Assert.AreEqual(fourthTime.Millisecond - firstTime.Millisecond, sequentialStep.ExecutionTime.Milis);
+            Assert.AreEqual(fourthTime.Subtract(firstTime).TotalSeconds, sequentialStep.ExecutionTime.Seconds);
         }
         [TestMethod]
         public void OnCompletionShouldReturnNullAsInteractionBeCompletedAndNonActive()
@@ -258,13 +258,15 @@ namespace TEP.Domain.Tests.Entities
             multiNivelSequentialStep.AdvanceStep(firstTime);
             multiNivelSequentialStep.AdvanceStep(secondTime);
             multiNivelSequentialStep.AdvanceStep(thirdTime);
+            System.Threading.Thread.Sleep(2000);
             multiNivelSequentialStep.AdvanceStep(fourthTime);
             multiNivelSequentialStep.AdvanceStep(fifthTime);
 
             // Assert
-            Assert.AreEqual(4000, multiNivelSequentialStep.ExpectedDuration.Milis);
-            Assert.AreEqual(8000, multiNivelSequentialStep.LimitDuration.Milis);
-            Assert.AreEqual(fifthTime.Millisecond - firstTime.Millisecond, multiNivelSequentialStep.ExecutionTime.Milis);
+            Assert.AreEqual(4000, multiNivelSequentialStep.ExpectedDuration.Seconds);
+            Assert.AreEqual(8000, multiNivelSequentialStep.LimitDuration.Seconds);
+            var timeOffset = fifthTime.Subtract(firstTime).TotalSeconds;
+            Assert.AreEqual((long)timeOffset, (long)multiNivelSequentialStep.ExecutionTime.Seconds);
         }
         [TestMethod]
         public void OnTwoAdvancesMultinivelSequentialStepsShouldBeNonCompletedActiveAndReturnSecondInteraction()

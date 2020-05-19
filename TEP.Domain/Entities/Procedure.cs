@@ -39,17 +39,21 @@ namespace TEP.Domain.Entities
         /// </summary>
         public Step RootStep { get; private set; }
         /// <summary>
+        /// Gets if this procedure is complete.
+        /// </summary>
+        public bool Completed { get => RootStep.Completed; }
+        /// <summary>
         /// Gets Expected Time for this Procedure.
         /// </summary>
-        public Duration Expected { get; private set; }
+        public Duration Expected { get => RootStep.ExpectedDuration;}
         /// <summary>
         /// Gets Limit Time for this Procedure.
         /// </summary>
-        public Duration Limit { get; private set; }
+        public Duration Limit { get => RootStep.LimitDuration; }
         /// <summary>
-        /// Gets Execution Time for this Procedure.
+        /// Gets Execution Time for this Procedure, after completion only.
         /// </summary>
-        public Duration Execution { get; private set; }
+        public Duration Execution { get => RootStep.ExecutionTime; }
 
         //Methods
         /// <summary>
@@ -83,19 +87,24 @@ namespace TEP.Domain.Entities
             throw new NotImplementedException();
         }
         /// <summary>
-        /// Advances the execution of this Procedure to the next interaction.
+        /// Advances the execution of this Procedure to the next interaction. Return Null if there is no more Interactions.
         /// </summary>
+        /// <param name="now">The time when the transition form one interaction to the other occurs.</param>
         /// <returns>The Current Interaction after advancing. Returns null if there is no more interactions.</returns>
-        public Interaction NextInteraction()
+        public Interaction NextInteraction(DateTime now)
         {
-            throw new NotImplementedException();
+            if(Completed)
+                throw new InvalidOperationException(message: "This Procedure has already been completed. Can't perform it again.");
+
+            var nextLeafStep = RootStep.AdvanceStep(now);
+            return nextLeafStep == null ? null : nextLeafStep.Interaction;
         }
         /// <summary>
-        /// Updates values of: expected, limit and execution times.
+        /// Updates values of: expected, limit and execution times. Execution Time is updated only on completion.
         /// </summary>
-        public void UpdateDuration()
+        public void ProcessDuration()
         {
-
+            RootStep.UpdateDuration();
         }
         /// <summary>
         /// Recover all Assets necessary to perform this procedure, removing duplicates.
@@ -104,7 +113,9 @@ namespace TEP.Domain.Entities
         public List<IAsset> RequiredAssets()
         {
             List<IAsset> assets = ExtractIAssetFromStep(RootStep);
+            //Removes nulls
             assets.RemoveAll(item => item == null);
+            //Removes Duplicates
             return new HashSet<IAsset>(assets).ToList();
         }
         /// <summary>

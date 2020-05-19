@@ -95,7 +95,7 @@ namespace TEP.Domain.Tests.Entities
             // Act
 
             // Assert
-            Assert.AreEqual(0 , leafStep.ExecutionTime.Milis);
+            Assert.AreEqual(0 , leafStep.ExecutionTime.Seconds);
         }
         [TestMethod]
         public void CorrectExecutionTimeOnCompletion()
@@ -114,7 +114,7 @@ namespace TEP.Domain.Tests.Entities
             leafStep.AdvanceStep(firstTime);
             leafStep.AdvanceStep(secondTime);
             // Assert
-            Assert.AreEqual(secondTime.Millisecond - firstTime.Millisecond, leafStep.ExecutionTime.Milis);
+            Assert.AreEqual(secondTime.Subtract(firstTime).TotalSeconds, leafStep.ExecutionTime.Seconds);
         }
         [TestMethod]
         public void ExpectedTime_for_Interaction()
@@ -130,7 +130,7 @@ namespace TEP.Domain.Tests.Entities
             // Act
             leafStep.UpdateDuration();
             // Assert
-            Assert.AreEqual(expected.Milis, leafStep.ExpectedDuration.Milis);
+            Assert.AreEqual(expected.Seconds, leafStep.ExpectedDuration.Seconds);
         }       
         [TestMethod]
         public void LimitTime_for_Interaction()
@@ -146,7 +146,7 @@ namespace TEP.Domain.Tests.Entities
             // Act
             leafStep.UpdateDuration();
             // Assert
-            Assert.AreEqual(limit.Milis, leafStep.LimitDuration.Milis);
+            Assert.AreEqual(limit.Seconds, leafStep.LimitDuration.Seconds);
         }
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException), "ProcessDuration must be executed before getting Time.")]
@@ -161,7 +161,7 @@ namespace TEP.Domain.Tests.Entities
             Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             /// Act
-            var millis = leafStep.ExpectedDuration.Milis;
+            var millis = leafStep.ExpectedDuration.Seconds;
         }
        
     }

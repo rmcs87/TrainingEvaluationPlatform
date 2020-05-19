@@ -38,8 +38,8 @@ namespace TEP.Domain.Entities.StepEntities
         /// </summary>     
         public override void UpdateDuration()
         {
-            _expectedDuration = new Duration(Interaction.EstimatedTime.Milis);
-            _limitDuration = new Duration(Interaction.TimeLimit.Milis);
+            _expectedDuration = new Duration(Interaction.EstimatedTime.Seconds);
+            _limitDuration = new Duration(Interaction.TimeLimit.Seconds);
         }
         /// <summary>
         /// Marks the current Step as completed, and starts the next.
@@ -57,7 +57,7 @@ namespace TEP.Domain.Entities.StepEntities
             {
                 Active = false;
                 Completed = true;
-                ExecutionTime.Milis = now.Millisecond - _startingTime.Millisecond;
+                ExecutionTime.Seconds = now.Subtract(_startingTime).TotalSeconds;
             }
             else
             {

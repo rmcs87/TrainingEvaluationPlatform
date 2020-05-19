@@ -93,6 +93,7 @@ namespace TEP.Domain.Entities.StepEntities
             {
                 if (SubSteps[_currentSubStepIndex].Completed)
                 {
+                    ExecutionTime.Increment( SubSteps[_currentSubStepIndex].ExecutionTime );
                     if (IsLastSubStep())
                     {
                         Active = false;
