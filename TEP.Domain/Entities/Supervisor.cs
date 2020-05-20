@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TEP.Domain.Entities
 {
-    class Supervisor : Worker
+    public class Supervisor : Worker
     {
         public int SystemPassword { get; private set; }
     }

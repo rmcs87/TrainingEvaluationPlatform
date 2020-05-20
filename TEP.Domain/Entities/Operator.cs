@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TEP.Domain.Entities
 {
-    class Operator : Worker
+    public class Operator : Worker
     {        
     }
 }
