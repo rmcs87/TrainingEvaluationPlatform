@@ -5,6 +5,8 @@ using TEP.Shared.ValueObjects;
 using TEP.Domain.Entities.StepEntities;
 using TEP.Shared;
 using System.Linq;
+using System.Text.Json;
+using System.IO;
 
 namespace TEP.Domain.Entities
 {
@@ -24,6 +26,9 @@ namespace TEP.Domain.Entities
             Name = name;
             RootStep = rootStep;
         }
+
+        //Private Variables
+        private Interaction _currentInteraction;
 
         //Properties
         /// <summary>
@@ -55,36 +60,13 @@ namespace TEP.Domain.Entities
         /// </summary>
         public Duration Execution { get => RootStep.ExecutionTime; }
 
-        //Methods
-        /// <summary>
-        /// FullFills the Procedure with Steps.
-        /// </summary>
-        /// <param name="json">JSON object with steps.</param>
-        public void FromJson(string json)
+        //Methods     
+        public Interaction GetCurrentInteraction()
         {
-            //2do
-            //https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
-            //https://www.newtonsoft.com/json
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Transforms this procedure into a JSON.
-        /// </summary>
-        /// <returns>Return the JSON object relative to this Procedure.</returns>
-        public string ToJson()
-        {
-            //2do
-            //https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
-            //https://www.newtonsoft.com/json
-            throw new NotImplementedException();
-        }
-        /// <summary>
-        /// Gets the currentInteraction under execution.
-        /// </summary>
-        /// <returns>The Current Interaction.</returns>
-        public Interaction CurrentInteraction()
-        {
-            throw new NotImplementedException();
+            if(_currentInteraction == null && !Completed)
+                throw new InvalidOperationException(message: $"This Procedure has not Been started. Call {nameof(NextInteraction)} to start.");
+
+            return _currentInteraction;
         }
         /// <summary>
         /// Advances the execution of this Procedure to the next interaction. Return Null if there is no more Interactions.
@@ -97,7 +79,11 @@ namespace TEP.Domain.Entities
                 throw new InvalidOperationException(message: "This Procedure has already been completed. Can't perform it again.");
 
             var nextLeafStep = RootStep.AdvanceStep(now);
-            return nextLeafStep == null ? null : nextLeafStep.Interaction;
+
+            //If null, sets null, else, sets interaction;
+            _currentInteraction = nextLeafStep?.Interaction;
+             
+            return _currentInteraction;
         }
         /// <summary>
         /// Updates values of: expected, limit and execution times. Execution Time is updated only on completion.

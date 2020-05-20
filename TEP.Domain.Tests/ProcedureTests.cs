@@ -12,37 +12,56 @@ namespace TEP.Domain.Tests
 {
     [TestClass]
     public class ProcedureTests : Setup
-    {
+    {       
+        [TestMethod]
+        public void OnGettingCurrentInteraction_ReturnsCorretInteraction_OnMiddleStep()
+        {
+            //Arrange
+            var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
+            DateTime firstTime = DateTime.Now;
+            DateTime secondTime = DateTime.Now;
+            DateTime thirdTime = DateTime.Now;
+            DateTime fourthTime = DateTime.Now;
+            DateTime fifthTime = DateTime.Now;
+            //Act
+            procedure.NextInteraction(firstTime);
+            procedure.NextInteraction(secondTime);
 
-        [TestMethod]
-        public void OnToJsonReturnsJSONString()
-        {
-            throw new NotImplementedException();
+            Interaction currentInteraction = procedure.GetCurrentInteraction();
+            //Assert
+            Assert.AreEqual(_keyInteraction, currentInteraction);
         }
         [TestMethod]
-        public void OnToJsonWithInconsistentJsonThrowsError()
+        public void OnGettingCurrentInteraction_ReturnsNull_IfCompleted()
         {
-            throw new NotImplementedException();
+            //Arrange
+            var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
+            DateTime firstTime = DateTime.Now;
+            DateTime secondTime = DateTime.Now;
+            DateTime thirdTime = DateTime.Now;
+            DateTime fourthTime = DateTime.Now;
+            DateTime fifthTime = DateTime.Now;
+            //Act
+            procedure.NextInteraction(firstTime);
+            Interaction secondInteractions = procedure.NextInteraction(secondTime);
+            procedure.NextInteraction(thirdTime);
+            procedure.NextInteraction(fourthTime);
+            procedure.NextInteraction(fifthTime);
+
+            Interaction currentInteraction = procedure.GetCurrentInteraction();
+            //Assert
+            Assert.AreEqual(null, currentInteraction);
         }
         [TestMethod]
-        public void OnFromJsonFullFillsTheProcedureWithSteps()
+        [ExpectedException(typeof(InvalidOperationException), "This Procedure has not Been started. Call Procedure.NextInteraction to start.")]
+        public void OnGettingCurrentInteraction_ThrowsException_IfNotStarted()
         {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public void OnFromJsonWithInconsistentJsonThrowsError()
-        {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public void OnGettingCurrentInteractionReturnsCorretInteraction()
-        {
-            throw new NotImplementedException();
-        }
-        [TestMethod]
-        public void OnGettingCurrentReturnsNullIfCompleted()
-        {
-            throw new NotImplementedException();
+            //Arrange
+            var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
+            //Act            
+            Interaction currentInteraction = procedure.GetCurrentInteraction();
+            //Assert
+           
         }
         [TestMethod]
         public void OnCallNextInteraction_IfNotCompletedNorLastInteraction_ReturnsCorretInteraction()
