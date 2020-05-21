@@ -16,5 +16,6 @@ Tests:
 * Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
 https://github.com/Moq/moq4/wiki/Quickstart
 
-JSon
-*https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
+JSon & Polymorphism
+* https://blog.maartenballiauw.be/post/2020/01/29/deserializing-json-into-polymorphic-classes-with-systemtextjson.html
+* https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
