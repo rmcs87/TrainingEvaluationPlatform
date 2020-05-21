@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.StepEntities
+namespace TEP.Domain.Entities
 {
     public class RecursiveStep : Step
     {

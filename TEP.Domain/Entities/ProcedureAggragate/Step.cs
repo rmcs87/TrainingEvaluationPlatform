@@ -4,7 +4,7 @@ using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.StepEntities
+namespace TEP.Domain.Entities
 {
     /// <summary>
     /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.

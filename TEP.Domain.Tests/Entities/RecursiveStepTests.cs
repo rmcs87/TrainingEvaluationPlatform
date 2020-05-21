@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.StepEntities;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 

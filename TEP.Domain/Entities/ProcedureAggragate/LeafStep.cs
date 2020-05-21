@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
-namespace TEP.Domain.Entities.StepEntities
+namespace TEP.Domain.Entities
 {
     /// <summary>
     /// A Step specialization that contains Interactions only, no substeps are alowed.

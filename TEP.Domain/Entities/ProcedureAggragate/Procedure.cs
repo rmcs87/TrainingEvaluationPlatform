@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using TEP.Shared.ValueObjects;
-using TEP.Domain.Entities.StepEntities;
 using TEP.Shared;
 using System.Linq;
-using System.Text.Json;
-using System.IO;
+using TEP.Domain.ValueObjects;
 
 namespace TEP.Domain.Entities
 {

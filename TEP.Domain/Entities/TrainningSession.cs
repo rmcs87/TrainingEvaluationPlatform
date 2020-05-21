@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TEP.Domain.ValueObjects;
 
 namespace TEP.Domain.Entities
