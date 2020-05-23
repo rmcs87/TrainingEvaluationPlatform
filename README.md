@@ -23,4 +23,4 @@ JSon & Polymorphism
 * https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
 
 Tools:
-* Apresentando e usando o AutoMapper: http://www.macoratti.net/15/07/net_amap1.htm
+* AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
