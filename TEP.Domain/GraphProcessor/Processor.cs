@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TEP.Domain.Entities;
-using TEP.Domain.Interfaces.Services;
 
-namespace TEP.Domain.Services
+namespace TEP.GraphProcessor
 {
-    public class GraphProcessor : IGraphService
+    public class Processor : IGraphProcessor
     {
         public int CompareProcedures(Procedure targetProcedure, Procedure executedProcedure)
         {

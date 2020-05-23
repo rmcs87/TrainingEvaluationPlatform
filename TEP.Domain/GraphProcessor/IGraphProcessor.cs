@@ -1,8 +1,8 @@
 ﻿using TEP.Domain.Entities;
 
-namespace TEP.Domain.Interfaces.Services
+namespace TEP.GraphProcessor
 {
-    interface IGraphService
+    public interface IGraphProcessor
     {
         /// <summary>
         /// Processes tow procedures and returns the similarity level of the execution compared to the procedure description;

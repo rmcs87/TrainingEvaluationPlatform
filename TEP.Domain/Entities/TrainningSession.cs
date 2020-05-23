@@ -1,5 +1,7 @@
 ﻿using System;
+using TEP.Domain.Interfaces;
 using TEP.Domain.ValueObjects;
+using TEP.GraphProcessor;
 
 namespace TEP.Domain.Entities
 {
@@ -14,7 +16,7 @@ namespace TEP.Domain.Entities
         /// <param name="operator">The person who is performing the trainning session.</param>
         /// <param name="supervisor">The person who is surpevising the trainning session.</param>
         /// <param name="performance">The results of the trainning.</param>
-        public TrainningSession(Procedure targetProcedure, Procedure executedProcedure, DateTime date, Operator @operator, Supervisor supervisor, Performance performance)
+        public TrainningSession(Procedure targetProcedure, Procedure executedProcedure, DateTime date, Operator @operator, Supervisor supervisor, Performance performance, IGraphProcessor graphProcessor)
         {
             TargetProcedure = targetProcedure;
             ExecutedProcedure = executedProcedure;
@@ -22,7 +24,11 @@ namespace TEP.Domain.Entities
             Operator = @operator;
             Supervisor = supervisor;
             Performance = performance;
+            _graphProcessor = graphProcessor;
         }
+
+        //private
+        private IGraphProcessor _graphProcessor;
 
         //Properties
         /// <summary>
