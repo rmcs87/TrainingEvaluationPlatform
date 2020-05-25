@@ -7,6 +7,6 @@ namespace TEP.Domain.Entities
     public class Worker:EntityBase
     {
         public string Name { get; private set; }
-        public int registry { get; private set; }
+        public int Registry { get; private set; }
     }
 }
