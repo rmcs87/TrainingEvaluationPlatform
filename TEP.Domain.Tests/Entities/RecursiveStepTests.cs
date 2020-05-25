@@ -103,7 +103,7 @@ namespace TEP.Domain.Tests.Entities
             sequentialStep.AdvanceStep(thirdTime);
             sequentialStep.AdvanceStep(fourthTime);
             // Assert
-            Assert.AreEqual(fourthTime.Subtract(firstTime).TotalSeconds, sequentialStep.ExecutionTime.Seconds);
+            Assert.AreEqual(fourthTime.Subtract(firstTime).TotalSeconds, sequentialStep.ExecutionTime.Seconds, 0.1);
         }
         [TestMethod]
         public void OnCompletionShouldReturnNullAsInteractionBeCompletedAndNonActive()
