@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using TEP.Shared;
+using TEP.Domain.ValueObjects;
 
-namespace TEP.Domain.ValueObjects
+namespace TEP.Domain.Entities
 {
     /// <summary>
     /// Class that represents an Interaction made by the Operator in a procedure. 
     /// </summary>
-    public class Interaction
+    public class Interaction : EntityBase
     {   
         //Constructors
         /// <summary>

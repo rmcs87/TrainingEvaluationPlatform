@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TEP.Appication.DTO;
+using TEP.Domain.Entities;
 
 namespace TEP.Appication.Interfaces
 {
-    class IInteractionApp
+    public interface IInteractionApp : IAppBase<Interaction, InteractionDTO>
     {
     }
 }
