@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
+using TEP.Domain.Interfaces.Services;
 
 namespace TEP.Appication.Services
 {
@@ -10,34 +12,37 @@ namespace TEP.Appication.Services
         where TEntity : EntityBase
         where TEntityDTO : DTOBase
     {
+        protected readonly IServiceBase<TEntity> _service;
+        protected readonly IMapper _iMapper;
+
+        public ServiceAppBase(IServiceBase<TEntity> service, IMapper iMapper) : base()
+        {
+            _service = service;
+            _iMapper = iMapper;
+        }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _service.Delete(id);
         }
-
         public void Delete(TEntityDTO entity)
         {
-            throw new NotImplementedException();
+            _service.Delete(_iMapper.Map<TEntity>(entity));
         }
-
         public TEntityDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            return _iMapper.Map<TEntityDTO>(_service.GetById(id));
         }
-
         public int Insert(TEntityDTO entity)
         {
             throw new NotImplementedException();
         }
-
         public IEnumerable<TEntityDTO> List()
         {
-            throw new NotImplementedException();
+            return _iMapper.Map<IEnumerable<TEntityDTO>>(_service.List());
         }
-
         public void Update(TEntityDTO entity)
         {
-            throw new NotImplementedException();
+            _service.Update(_iMapper.Map<TEntity>(entity));
         }
     }
 }

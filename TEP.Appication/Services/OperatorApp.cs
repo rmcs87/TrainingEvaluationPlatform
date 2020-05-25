@@ -9,9 +9,9 @@ using TEP.Domain.Interfaces.Services;
 
 namespace TEP.Appication.Services
 {
-    public class StepApp : ServiceAppBase<Step, StepDTO>, IStepApp
+    public class OperatorApp : ServiceAppBase<Operator, OperatorDTO>, IOperatorApp
     {
-        public StepApp(IServiceBase<Step> service, IMapper iMapper) : base(service, iMapper)
+        public OperatorApp(IServiceBase<Operator> service, IMapper iMapper) : base(service, iMapper)
         {
         }
     }

@@ -2,7 +2,7 @@
 
 namespace TEP.Domain.Interfaces.Services
 {
-    public interface IOperatorService : IBaseService<Operator>
+    public interface IOperatorService : IServiceBase<Operator>
     {
     }
 }

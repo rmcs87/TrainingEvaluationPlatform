@@ -2,7 +2,7 @@
 
 namespace TEP.Domain.Interfaces.Services
 {
-    public interface ITrainningSessionService : IBaseService<TrainningSession>
+    public interface ITrainningSessionService : IServiceBase<TrainningSession>
     {
     }
 }

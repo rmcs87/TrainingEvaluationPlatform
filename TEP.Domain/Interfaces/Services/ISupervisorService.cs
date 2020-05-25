@@ -2,7 +2,7 @@
 
 namespace TEP.Domain.Interfaces.Services
 {
-    public interface ISupervisorService : IBaseService<Supervisor>
+    public interface ISupervisorService : IServiceBase<Supervisor>
     {
     }
 }

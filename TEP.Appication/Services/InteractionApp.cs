@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
+using TEP.Appication.DTO;
+using TEP.Appication.Interfaces;
+using TEP.Domain.Entities;
+using TEP.Domain.Interfaces.Services;
 
 namespace TEP.Appication.Services
 {
-    public class InteractionApp
+    public class InteractionApp : ServiceAppBase<Interaction, InteractionDTO>, IInteractionApp
     {
+        public InteractionApp(IServiceBase<Interaction> service, IMapper iMapper) : base(service, iMapper)
+        {
+        }
     }
 }

@@ -5,7 +5,7 @@ using TEP.Domain.Interfaces.Services;
 
 namespace TEP.Domain.Services
 {
-    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : EntityBase
+    public class BaseService<TEntity> : IServiceBase<TEntity> where TEntity : EntityBase
     {
         protected readonly IBaseRepository<TEntity> _repository;
 

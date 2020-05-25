@@ -2,7 +2,7 @@
 
 namespace TEP.Domain.Interfaces.Services
 {
-    public interface IProcedureService : IBaseService<Procedure>
+    public interface IProcedureService : IServiceBase<Procedure>
     {
     }
 }
