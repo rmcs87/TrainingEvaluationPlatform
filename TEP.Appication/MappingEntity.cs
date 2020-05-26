@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using TEP.Appication.DTO;
 using TEP.Domain.Entities;
+using TEP.Domain.ValueObjects;
 
 namespace TEP.Appication
 {
@@ -12,23 +13,30 @@ namespace TEP.Appication
         public MappingEntity()
         {
             //Interaction
-            CreateMap<Interaction, InteractionDTO>();
-            CreateMap<InteractionDTO, Interaction>();
+            CreateMap<Interaction, InteractionDTO>()
+                .ReverseMap();
             //Operator
-            CreateMap<Operator, OperatorDTO>();
-            CreateMap<OperatorDTO, Operator>();
+            CreateMap<Operator, OperatorDTO>()
+                .ReverseMap();
             //Procedure
-            CreateMap<Procedure, ProcedureDTO>();
-            CreateMap<ProcedureDTO, Procedure>();
+            CreateMap<Procedure, ProcedureDTO>()
+                .ReverseMap();
             //Step
-            CreateMap<Step, StepDTO>();
-            CreateMap<StepDTO, Step>();
+            CreateMap<Step, StepDTO>()
+                .ReverseMap();
             //Supervisor
-            CreateMap<Supervisor, SupervisorDTO>();
-            CreateMap<SupervisorDTO, Supervisor>();
+            CreateMap<Supervisor, SupervisorDTO>()
+                .ReverseMap();
             //TrainningSession
-            CreateMap<TrainningSession, TrainningSessionDTO>();
-            CreateMap<TrainningSessionDTO, TrainningSession>();
+            CreateMap<TrainningSession, TrainningSessionDTO>()
+                .ForMember(dest => dest.Score, act => act.MapFrom(src => src.Performance.Score))
+                .ForMember(dest => dest.TimeExecution, act => act.MapFrom(src => src.Performance.TimeExecution))
+                .ReverseMap()
+                .ForMember(dest => dest.Performance, act => act.MapFrom(src => new Performance()
+                {
+                    TimeExecution = new Shared.ValueObjects.Duration(src.TimeExecution),
+                    Score = src.Score
+                })) ;
         }
     }
 }

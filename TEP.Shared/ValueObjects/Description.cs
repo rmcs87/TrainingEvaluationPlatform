@@ -8,9 +8,9 @@ namespace TEP.Shared.ValueObjects
     {
         public Description(string text)
         {
-            this.text = text;
+            this.Text = text;
         }
 
-        public string text { get; private set; }
+        public string Text { get; private set; }
     }
 }
