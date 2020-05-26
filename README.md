@@ -24,3 +24,11 @@ JSon & Polymorphism
 
 Tools:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
+* AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
+* AutoMapper Complex Mapping in C#: https://dotnettutorials.net/lesson/automapper-with-nested-types/
+* Mapping Complex type to Primitive Type using AutoMapper in C#: https://dotnettutorials.net/lesson/mapping-complex-type-to-primitive-type-using-automapper/
+* Reverse Mapping Using AutoMapper in C#: https://dotnettutorials.net/lesson/reverse-mapping-using-automapper/
+* AutoMapper Conditional Mapping in C#: https://dotnettutorials.net/lesson/automapper-conditional-mapping-dotnet/
+* AutoMapper Ignore Property in C#: https://dotnettutorials.net/lesson/ignore-using-automapper-in-csharp/
+* UseValue ResolveUsing and Null Substitution in AutoMapper: https://dotnettutorials.net/lesson/usevalue-resolveusing-and-null-substitution-using-automapper/
+* 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
