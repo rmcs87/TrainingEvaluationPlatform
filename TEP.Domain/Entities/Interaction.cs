@@ -9,8 +9,28 @@ namespace TEP.Domain.Entities
     /// Class that represents an Interaction made by the Operator in a procedure. 
     /// </summary>
     public class Interaction : EntityBase
-    {   
+    {
         //Constructors
+        /// <summary>
+        /// A constructor to create an Interaction with have a source and a target only. (such as inserting a key[source] in a keyhole[target])
+        /// </summary>
+        /// <param name="category">The categories in which this Interaction is classified.</param>
+        /// <param name="act">The act made by the Operator to perform the inteeraction.</param>
+        /// <param name="description">A text describing this Interaction, to be used in assisted trainning and manuals.</param>
+        /// <param name="estimatedTime">The expected time to perform this interaction.</param>
+        /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
+        /// <param name="target">The Asset which will receive the interaction</param>
+        /// <param name="source">The Asset which will be the source of the interaction</param>
+        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target, IAsset source)
+        {
+            Category = category;
+            Act = act;
+            Description = description;
+            EstimatedTime = estimatedTime;
+            TimeLimit = timeLimit;
+            Target = target;
+            Source = source;
+        }
         /// <summary>
         /// A constructor to create an objectless Interaction. (such as waiting for a period of time)
         /// </summary>
@@ -45,26 +65,7 @@ namespace TEP.Domain.Entities
             TimeLimit = timeLimit;
             Target = target;
         }
-        /// <summary>
-        /// A constructor to create an Interaction with have a source and a target only. (such as inserting a key[source] in a keyhole[target])
-        /// </summary>
-        /// <param name="category">The categories in which this Interaction is classified.</param>
-        /// <param name="act">The act made by the Operator to perform the inteeraction.</param>
-        /// <param name="description">A text describing this Interaction, to be used in assisted trainning and manuals.</param>
-        /// <param name="estimatedTime">The expected time to perform this interaction.</param>
-        /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
-        /// <param name="target">The Asset which will receive the interaction</param>
-        /// <param name="source">The Asset which will be the source of the interaction</param>
-        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target, IAsset source)
-        {
-            Category = category;
-            Act = act;
-            Description = description;
-            EstimatedTime = estimatedTime;
-            TimeLimit = timeLimit;
-            Target = target;
-            Source = source;
-        }
+        
 
         //Properties
         /// <summary>
