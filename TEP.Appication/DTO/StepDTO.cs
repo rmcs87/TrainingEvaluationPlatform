@@ -14,5 +14,6 @@ namespace TEP.Appication.DTO
         public double LimitDuration { get; set; }
         public string Standard { get; set; }
         public StepType StepType { get; set; }
+        public InteractionDTO InteractionDTO { get; set; }
     }
 }

@@ -8,11 +8,14 @@ namespace TEP.Application.Tests
     public class MappingEntitiesTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CanConfigureApplicationMapper()
         {
+            //Arrange
             var configuration = new MapperConfiguration(cfg =>
                 cfg.AddProfile<MappingEntity>());
+            //Act
 
+            //Assert
             configuration.AssertConfigurationIsValid();
         }
     }
