@@ -27,7 +27,7 @@ namespace TEP.Domain.Entities
         /// <summary>
         /// Gets all SubSteps to be performed in this Step.
         /// </summary>
-        private List<Step> SubSteps { get;  set; }
+        public List<Step> SubSteps { get; private set; }
         /// <summary>
         /// Gets the Current subStep being executed in this step.
         /// </summary>

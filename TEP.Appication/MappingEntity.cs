@@ -36,40 +36,61 @@ namespace TEP.Appication
 
             //Operator
             CreateMap<Operator, OperatorDTO>()
-                .ReverseMap();
+                .ReverseMap();            
+
+            //Step
+            CreateMap<Step, StepDTO>()
+                .Include<LeafStep, LeafStepDTO>()
+                .Include<RecursiveStep, RecursiveStepDTO>()
+                .ForMember(dest => dest.ExpectedDuration, act => act.MapFrom(src => src.ExpectedDuration.Seconds))
+                .ForMember(dest => dest.LimitDuration, act => act.MapFrom(src => src.LimitDuration.Seconds))
+                .ForMember(dest => dest.ExecutionTime, act => act.MapFrom(src => src.ExecutionTime.Seconds))
+            .ReverseMap()
+                .Include<LeafStepDTO, LeafStep>()
+                .Include<RecursiveStepDTO, RecursiveStep>()
+                .ForMember(dest => dest.ExpectedDuration, act => act.MapFrom(src => new Duration(src.ExpectedDuration) ))
+                .ForMember(dest => dest.LimitDuration, act => act.MapFrom(src => new Duration(src.LimitDuration)))
+                .ForMember(dest => dest.ExecutionTime, act => act.MapFrom(src => new Duration(src.ExecutionTime)));
+
+            //LeafStep
+            CreateMap<LeafStep, LeafStepDTO>()
+                .ForMember(dest => dest.InteractionDTO, act => act.MapFrom(src => src.Interaction))
+            .ReverseMap()
+                .ForMember(dest => dest.Interaction, act => act.MapFrom(src => src.InteractionDTO));
+
+            //RecursiveStep
+            CreateMap<RecursiveStep, RecursiveStepDTO>()
+                .ForMember(dest => dest.StepDTOs, act => act.MapFrom(src => src.SubSteps))
+            .ReverseMap()
+                .ForMember(dest => dest.SubSteps, act => act.MapFrom(src => src.StepDTOs));
+
             //Procedure
             CreateMap<Procedure, ProcedureDTO>()
                 .ForMember(dest => dest.Expected, act => act.MapFrom(src => src.Expected.Seconds))
                 .ForMember(dest => dest.Execution, act => act.MapFrom(src => src.Execution.Seconds))
-                .ForMember(dest => dest.Limit, act => act.MapFrom(src => src.Limit.Seconds));
-                //.ReverseMap();
-            //Step
-            Dictionary<Type, StepType> typeDict = new Dictionary<Type, StepType>
-            {
-                {typeof(LeafStep),StepType.Leaf},
-                {typeof(RecursiveStep),StepType.Sequential},
-            };
-            CreateMap<Step, StepDTO>()
-                .ForMember(dest => dest.ExpectedDuration, act => act.MapFrom(src => src.ExpectedDuration.Seconds))
-                .ForMember(dest => dest.LimitDuration, act => act.MapFrom(src => src.LimitDuration.Seconds))
-                .ForMember(dest => dest.ExecutionTime, act => act.MapFrom(src => src.ExecutionTime.Seconds))
-                .ForMember(dest => dest.StepType, act => act.MapFrom(src => typeDict[src.GetType()]))
-                .ForMember(dest => dest.InteractionDTO, 
-                    act => act.MapFrom(src => (typeDict[src.GetType()] == StepType.Leaf) ? (src as LeafStep).Interaction : null ));
-            //.ReverseMap();
+                .ForMember(dest => dest.Limit, act => act.MapFrom(src => src.Limit.Seconds))
+                .ForMember(dest => dest.Description, act => act.MapFrom(src => src.Description.Text))
+            .ReverseMap()
+                .ForMember(dest => dest.Expected, act => act.MapFrom(src => new Duration(src.Expected)))
+                .ForMember(dest => dest.Execution, act => act.MapFrom(src => new Duration(src.Execution)))
+                .ForMember(dest => dest.Limit, act => act.MapFrom(src => new Duration(src.Limit)))
+                .ForMember(dest => dest.Description, act => act.MapFrom(src => new Description(src.Description)))
+                .ForCtorParam("description", opt => opt.MapFrom(src => new Description(src.Description) ));
+
             //Supervisor
             CreateMap<Supervisor, SupervisorDTO>()
             .ReverseMap();
+
             //TrainningSession
             CreateMap<TrainningSession, TrainningSessionDTO>()
                 .ForMember(dest => dest.Score, act => act.MapFrom(src => src.Performance.Score))
-                .ForMember(dest => dest.TimeExecution, act => act.MapFrom(src => src.Performance.TimeExecution.Seconds));/*
+                .ForMember(dest => dest.TimeExecution, act => act.MapFrom(src => src.Performance.TimeExecution.Seconds))
                 .ReverseMap()
                 .ForMember(dest => dest.Performance, act => act.MapFrom(src => new Performance()
                 {
                     TimeExecution = new Duration(src.TimeExecution),
                     Score = src.Score
-                })) ;*/
+                })) ;
         }
     }
 }
