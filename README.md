@@ -22,7 +22,7 @@ JSon & Polymorphism
 * https://blog.maartenballiauw.be/post/2020/01/29/deserializing-json-into-polymorphic-classes-with-systemtextjson.html
 * https://docs.microsoft.com/pt-br/dotnet/standard/serialization/system-text-json-how-to
 
-Tools:
+AutoMapper:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
 * AutoMapper Complex Mapping in C#: https://dotnettutorials.net/lesson/automapper-with-nested-types/
@@ -32,3 +32,8 @@ Tools:
 * AutoMapper Ignore Property in C#: https://dotnettutorials.net/lesson/ignore-using-automapper-in-csharp/
 * UseValue ResolveUsing and Null Substitution in AutoMapper: https://dotnettutorials.net/lesson/usevalue-resolveusing-and-null-substitution-using-automapper/
 * 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
+
+EFC:
+* Entity Framework Core: https://docs.microsoft.com/pt-br/ef/core/
+* Criando uma API com ASP.NET Core 3 e EF Core 3 em menos de 15 minutos: https://www.youtube.com/watch?v=but7jqjopKM
+* Entity Framework Core Guide: https://www.learnentityframeworkcore.com/
