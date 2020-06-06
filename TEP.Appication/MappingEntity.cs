@@ -24,7 +24,7 @@ namespace TEP.Appication
                 .ForMember(dest => dest.Source, act => act.MapFrom(src => src.Source.Name))
             .ReverseMap()
                 .ConvertUsing(x => new Interaction(
-                    x.Category.Select(x => (Category)Enum.Parse(typeof(Category), x)),
+                    x.Categories.Select(x => (Category)Enum.Parse(typeof(Category), x)),
                     (Act)Enum.Parse(typeof(Act), x.Act),
                     new Description(x.Description),
                     new Duration(x.EstimatedTime),

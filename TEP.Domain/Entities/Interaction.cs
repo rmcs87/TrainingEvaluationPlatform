@@ -23,7 +23,7 @@ namespace TEP.Domain.Entities
         /// <param name="source">The Asset which will be the source of the interaction</param>
         public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target, IAsset source)
         {
-            Category = category;
+            Categories = category;
             Act = act;
             Description = description;
             EstimatedTime = estimatedTime;
@@ -41,7 +41,7 @@ namespace TEP.Domain.Entities
         /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
         public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit)
         {
-            Category = category;
+            Categories = category;
             Act = act;
             Description = description;
             EstimatedTime = estimatedTime;
@@ -58,7 +58,7 @@ namespace TEP.Domain.Entities
         /// <param name="target">The Asset which will receive the interaction</param>
         public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target)
         {
-            Category = category;
+            Categories = category;
             Act = act;
             Description = description;
             EstimatedTime = estimatedTime;
@@ -71,7 +71,7 @@ namespace TEP.Domain.Entities
         /// <summary>
         /// Gets the Categories related to this Interaction.
         /// </summary>
-        public IEnumerable<Category> Category { get; private set; }
+        public IEnumerable<Category> Categories { get; private set; }
         /// <summary>
         /// Gets the Act related to this Interaction.
         /// </summary>

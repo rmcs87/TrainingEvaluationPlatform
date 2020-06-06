@@ -6,7 +6,7 @@ namespace TEP.Appication.DTO
 {
     public class InteractionDTO : DTOBase
     {
-        public IList<String> Category { get; set; }
+        public IList<String> Categories { get; set; }
         public string Act { get; set; }
         public string Description { get; set; }
         public double EstimatedTime { get; set; }
