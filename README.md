@@ -37,3 +37,8 @@ EFC:
 * Entity Framework Core: https://docs.microsoft.com/pt-br/ef/core/
 * Criando uma API com ASP.NET Core 3 e EF Core 3 em menos de 15 minutos: https://www.youtube.com/watch?v=but7jqjopKM
 * Entity Framework Core Guide: https://www.learnentityframeworkcore.com/
+
+Docker: (future steps)
+* Azure na Prática Gratuito #2 - Docker: https://www.youtube.com/watch?v=AAp1N3gBWOU
+* Docker - Guia de Referência Gratuito:
+ https://medium.com/@renato.groffe/docker-guia-de-refer%C3%AAncia-gratuito-70c14cfd8132
