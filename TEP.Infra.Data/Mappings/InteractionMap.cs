@@ -21,7 +21,8 @@ namespace TEP.Infra.Data.Mappings
             builder.Property(p => p.Source).IsRequired(false).HasColumnName("source_asset");
             builder.Property(p => p.Target).IsRequired(false).HasColumnName("target_asset");
 
-            //Problem Known: should not be a enum, and deal with many-to-many 
+            //Problem Known: should not be a enum, and deal with many-to-many . 
+            // Possible solution: ownsMany: https://docs.microsoft.com/en-us/ef/core/modeling/owned-entities
             builder.Property(p => p.Categories)
                     .IsRequired()
                     .HasColumnName("categories")
