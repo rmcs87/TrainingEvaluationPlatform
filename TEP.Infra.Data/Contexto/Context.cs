@@ -5,7 +5,7 @@ using System.Linq;
 using TEP.Domain.Entities;
 using TEP.Infra.Data.Mappings;
 
-namespace TEP.Infra.Data.Context
+namespace TEP.Infra.Data.Contexto
 {
     public class Context : DbContext
     {

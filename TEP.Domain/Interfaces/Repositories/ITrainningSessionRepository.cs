@@ -2,7 +2,7 @@
 
 namespace TEP.Domain.Interfaces.Repositories
 {
-    public interface ITrainningSession : IBaseRepository<TrainningSession>
+    public interface ITrainningSessionRepository : IBaseRepository<TrainningSession>
     {
     }
 }
