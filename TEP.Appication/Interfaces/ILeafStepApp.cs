@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TEP.Appication.DTO;
+using TEP.Domain.Entities;
 
 namespace TEP.Appication.Interfaces
 {
-    public interface ILeafStepApp : IStepApp
+    public interface ILeafStepApp : IAppBase<LeafStep, LeafStepDTO>
     {
     }
 }
