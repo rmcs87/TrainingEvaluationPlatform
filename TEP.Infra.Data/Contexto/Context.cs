@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Linq;
 using TEP.Domain.Entities;
+using TEP.Domain.Entities.Assets;
 using TEP.Infra.Data.Mappings;
 
 namespace TEP.Infra.Data.Contexto
@@ -10,6 +11,7 @@ namespace TEP.Infra.Data.Contexto
     public class Context : DbContext
     {
         public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<SimpleAsset> SimpleAssets { get; set; }
         public DbSet<Interaction> Interactions { get; set; }
         public DbSet<Operator> Operators { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
@@ -80,6 +82,7 @@ namespace TEP.Infra.Data.Contexto
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new SimpleAssetMap());
             modelBuilder.ApplyConfiguration(new InteractionMap());
             modelBuilder.ApplyConfiguration(new ProcedureMap());
             modelBuilder.ApplyConfiguration(new StepMap());

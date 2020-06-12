@@ -16,10 +16,23 @@ namespace TEP.Servicos.Api
     public class Startup
     {
 
-        public Startup(IConfiguration configuration)
+        /*public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+        }*/
+
+
+        //To load and inject the configuration settings from multiple Configuration Files
+        public Startup(IWebHostEnvironment env)
+        {
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(env.ContentRootPath);
+            builder.AddJsonFile("appsettings.json", false, true);
+            builder.AddJsonFile("privateSettings.json", true, true);
+
+            Configuration = builder.Build();
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -27,10 +40,13 @@ namespace TEP.Servicos.Api
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("Restaurante")));
+
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
+
             DependencyInjector.Register(services);
-            services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));
-            //services.AddMvc();
+            services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));            
             services.AddControllers();
         }
 

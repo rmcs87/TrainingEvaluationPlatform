@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
-using TEP.Shared;
 using TEP.Domain.ValueObjects;
+using TEP.Domain.Entities.Assets;
 
 namespace TEP.Domain.Entities
 {
@@ -11,6 +11,12 @@ namespace TEP.Domain.Entities
     public class Interaction : EntityBase
     {
         //Constructors
+
+        private Interaction()
+        {
+
+        }
+
         /// <summary>
         /// A constructor to create an Interaction with have a source and a target only. (such as inserting a key[source] in a keyhole[target])
         /// </summary>
@@ -21,7 +27,7 @@ namespace TEP.Domain.Entities
         /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
         /// <param name="target">The Asset which will receive the interaction</param>
         /// <param name="source">The Asset which will be the source of the interaction</param>
-        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target, IAsset source)
+        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, SimpleAsset target, SimpleAsset source)
         {
             Categories = category;
             Act = act;
@@ -63,7 +69,7 @@ namespace TEP.Domain.Entities
             Description = description;
             EstimatedTime = estimatedTime;
             TimeLimit = timeLimit;
-            Target = target;
+            Target = (SimpleAsset) target;
         }
         
 
@@ -91,11 +97,11 @@ namespace TEP.Domain.Entities
         /// <summary>
         /// Gets the Target Asset for this Interaction.
         /// </summary>
-        public IAsset Target { get; set; }
+        public SimpleAsset Target { get; set; }
         /// <summary>
         /// Gets the Source Asset for this Interaction.
         /// </summary>
-        public IAsset Source { get; set; }
+        public SimpleAsset Source { get; set; }
         
     }
 }

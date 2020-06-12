@@ -1,7 +1,4 @@
-﻿using System;
-using TEP.Shared.ValueObjects;
-
-namespace TEP.Shared
+﻿namespace TEP.Domain.Entities.Assets
 {
     /// <summary>
     /// An Interface to Represent objects in a Interaction.

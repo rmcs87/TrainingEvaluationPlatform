@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
-using TEP.Shared;
 using System.Linq;
-using TEP.Domain.ValueObjects;
+using TEP.Domain.Entities.Assets;
 
 namespace TEP.Domain.Entities
 {

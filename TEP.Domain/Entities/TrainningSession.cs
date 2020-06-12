@@ -7,6 +7,10 @@ namespace TEP.Domain.Entities
 {
     public class TrainningSession : EntityBase
     {
+        private TrainningSession()
+        {
+
+        }
         /// <summary>
         /// Constructs a new TrainningSession.
         /// </summary>

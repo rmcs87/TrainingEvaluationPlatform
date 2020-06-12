@@ -22,7 +22,13 @@ namespace TEP.Infra.Data.Mappings
                 .WithOne()
                 .HasForeignKey("step_id")
                 .OnDelete(DeleteBehavior.Restrict);*/
-            builder.OwnsOne(p => p.RootStep);
+            //builder.OwnsOne(p => p.RootStep);
+
+
+            builder.HasOne<Step>()
+                .WithMany()
+                .HasForeignKey(c => c.RootStep)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
     }

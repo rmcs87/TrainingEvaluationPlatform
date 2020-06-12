@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TEP.Appication.DTO;
 using TEP.Domain.Entities;
+using TEP.Domain.Entities.Assets;
 using TEP.Domain.ValueObjects;
-using TEP.Shared;
 using TEP.Shared.ValueObjects;
 
 namespace TEP.Appication
@@ -15,6 +13,10 @@ namespace TEP.Appication
     {
         public MappingEntity()
         {
+            //SimpleAsset
+            CreateMap<SimpleAsset, SimpleAssetDTO>()
+                .ReverseMap();            
+                
             //Interaction
             CreateMap<Interaction, InteractionDTO>()
                 .ForMember(dest => dest.EstimatedTime, act => act.MapFrom(src => src.EstimatedTime.Seconds))
