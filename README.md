@@ -1,5 +1,7 @@
 # TrainingEvaluationPlatform
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/91e984d9fad349de82d2888efce791ca)](https://app.codacy.com/manual/rmcs87/TrainingEvaluationPlatform?utm_source=github.com&utm_medium=referral&utm_content=rmcs87/TrainingEvaluationPlatform&utm_campaign=Badge_Grade_Dashboard)
+
 Study References:
 
 DDD:
