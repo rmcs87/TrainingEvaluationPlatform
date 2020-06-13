@@ -7,10 +7,13 @@ namespace TEP.Domain.ValueObjects
     /// <summary>
     /// Categories which an Interaction can be classified.
     /// </summary>
-    public enum Category
+    public class Category
     {
-        Security,
-        Operational,
-        Gear
+        public Category(string name)
+        {
+            this.name = name;
+        }
+
+        public string name { get; private set; }
     }
 }

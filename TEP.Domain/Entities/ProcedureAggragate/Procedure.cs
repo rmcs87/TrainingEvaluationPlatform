@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using System.Linq;
-using TEP.Domain.Entities.Assets;
+using TEP.Domain.Entities;
 
 namespace TEP.Domain.Entities
 {
@@ -97,23 +97,23 @@ namespace TEP.Domain.Entities
         /// Recover all Assets necessary to perform this procedure, removing duplicates.
         /// </summary>
         /// <returns>A set of All required assets to perform this procedure.</returns>
-        public List<IAsset> RequiredAssets()
+        public List<Asset> RequiredAssets()
         {
-            List<IAsset> assets = ExtractIAssetFromStep(RootStep);
+            List<Asset> assets = ExtractAssetFromStep(RootStep);
             //Removes nulls
             assets.RemoveAll(item => item == null);
             //Removes Duplicates
-            return new HashSet<IAsset>(assets).ToList();
+            return new HashSet<Asset>(assets).ToList();
         }
         /// <summary>
         /// Interates through all Steps, reaching all leafs and finding the assets in its interactions.
         /// </summary>
         /// <param name="rootStep"></param>
         /// <returns></returns>
-        private List<IAsset> ExtractIAssetFromStep(Step rootStep)
+        private List<Asset> ExtractAssetFromStep(Step rootStep)
         {
             var leaf = rootStep as LeafStep;
-            var list = new List<IAsset>();
+            var list = new List<Asset>();
 
             if (leaf != null)
             {                
@@ -123,7 +123,7 @@ namespace TEP.Domain.Entities
             else { 
                 foreach (var s in rootStep.GetSubSteps())
                 {
-                    list.AddRange(ExtractIAssetFromStep(s));
+                    list.AddRange(ExtractAssetFromStep(s));
                 }
             }
             return list;

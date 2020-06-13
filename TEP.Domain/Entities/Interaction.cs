@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using TEP.Domain.ValueObjects;
-using TEP.Domain.Entities.Assets;
 
 namespace TEP.Domain.Entities
 {
@@ -11,10 +10,8 @@ namespace TEP.Domain.Entities
     public class Interaction : EntityBase
     {
         //Constructors
-
         private Interaction()
         {
-
         }
 
         /// <summary>
@@ -27,7 +24,7 @@ namespace TEP.Domain.Entities
         /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
         /// <param name="target">The Asset which will receive the interaction</param>
         /// <param name="source">The Asset which will be the source of the interaction</param>
-        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, SimpleAsset target, SimpleAsset source)
+        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, Asset target, Asset source)
         {
             Categories = category;
             Act = act;
@@ -62,14 +59,14 @@ namespace TEP.Domain.Entities
         /// <param name="estimatedTime">The expected time to perform this interaction.</param>
         /// <param name="timeLimit">The maximum acceptable time to perform the Interaction</param>
         /// <param name="target">The Asset which will receive the interaction</param>
-        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, IAsset target)
+        public Interaction(IEnumerable<Category> category, Act act, Description description, Duration estimatedTime, Duration timeLimit, Asset target)
         {
             Categories = category;
             Act = act;
             Description = description;
             EstimatedTime = estimatedTime;
             TimeLimit = timeLimit;
-            Target = (SimpleAsset) target;
+            Target = (Asset) target;
         }
         
 
@@ -97,11 +94,11 @@ namespace TEP.Domain.Entities
         /// <summary>
         /// Gets the Target Asset for this Interaction.
         /// </summary>
-        public SimpleAsset Target { get; set; }
+        public Asset Target { get; set; }
         /// <summary>
         /// Gets the Source Asset for this Interaction.
         /// </summary>
-        public SimpleAsset Source { get; set; }
+        public Asset Source { get; set; }
         
     }
 }

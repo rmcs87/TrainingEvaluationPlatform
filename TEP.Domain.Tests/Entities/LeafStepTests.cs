@@ -15,7 +15,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational") );
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -32,7 +32,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -49,7 +49,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -68,7 +68,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -84,7 +84,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -100,7 +100,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -119,7 +119,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -135,7 +135,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
@@ -152,7 +152,7 @@ namespace TEP.Domain.Tests.Entities
         {
             // Arrange
             List<Category> categories = new List<Category>();
-            categories.Add(Category.Operational);
+            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(20000);
             Duration limit = new Duration(30000);

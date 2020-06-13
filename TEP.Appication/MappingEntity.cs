@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using TEP.Appication.DTO;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.Assets;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
@@ -13,28 +12,35 @@ namespace TEP.Appication
     {
         public MappingEntity()
         {
-            //SimpleAsset
-            CreateMap<SimpleAsset, SimpleAssetDTO>()
-                .ReverseMap();            
-                
+            //Asset
+            CreateMap<Asset, AssetDTO>()
+                .ReverseMap();
+
+            //Category
+            CreateMap<Category, CategoryDTO>()
+                .ReverseMap();
+
             //Interaction
             CreateMap<Interaction, InteractionDTO>()
                 .ForMember(dest => dest.EstimatedTime, act => act.MapFrom(src => src.EstimatedTime.Seconds))
                 .ForMember(dest => dest.TimeLimit, act => act.MapFrom(src => src.TimeLimit.Seconds))
                 .ForMember(dest => dest.Description, act => act.MapFrom(src => src.Description.Text))
-                .ForMember(dest => dest.Target, act => act.MapFrom(src => src.Target.Name))
-                .ForMember(dest => dest.Source, act => act.MapFrom(src => src.Source.Name))
             .ReverseMap()
-                .ConvertUsing(x => new Interaction(
+                .ForMember(dest => dest.EstimatedTime, act => act.MapFrom(src => new Duration(src.EstimatedTime)))
+                .ForMember(dest => dest.TimeLimit, act => act.MapFrom(src => new Duration(src.TimeLimit)))
+                .ForMember(dest => dest.Description, act => act.MapFrom(src => new Description(src.Description)));
+
+
+            /*.ConvertUsing(x => new Interaction(
                     x.Categories.Select(x => (Category)Enum.Parse(typeof(Category), x)),
                     (Act)Enum.Parse(typeof(Act), x.Act),
                     new Description(x.Description),
                     new Duration(x.EstimatedTime),
                     new Duration(x.TimeLimit),
-                    new SimpleAsset(x.Source, ""),
-                    new SimpleAsset(x.Source, "")
+                    new Asset(x.Source, "", ""),
+                    new Asset(x.Source, "", "")
                     )
-                );
+                );*/
 
             //Operator
             CreateMap<Operator, OperatorDTO>()

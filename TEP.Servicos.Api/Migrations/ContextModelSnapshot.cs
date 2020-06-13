@@ -19,7 +19,7 @@ namespace TEP.Servicos.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TEP.Domain.Entities.Assets.SimpleAsset", b =>
+            modelBuilder.Entity("TEP.Domain.Entities.Asset", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -27,15 +27,18 @@ namespace TEP.Servicos.Api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Path")
+                    b.Property<string>("ImgPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("tbl_simple_asset");
+                    b.ToTable("tbl_asset");
                 });
 
             modelBuilder.Entity("TEP.Domain.Entities.Interaction", b =>
@@ -78,14 +81,30 @@ namespace TEP.Servicos.Api.Migrations
                     b.ToTable("tbl_interaction");
                 });
 
+            modelBuilder.Entity("TEP.Domain.ValueObjects.Category", b =>
+                {
+                    b.Property<int>("InteractionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InteractionId", "Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("TEP.Domain.Entities.Interaction", b =>
                 {
-                    b.HasOne("TEP.Domain.Entities.Assets.SimpleAsset", "Source")
+                    b.HasOne("TEP.Domain.Entities.Asset", "Source")
                         .WithMany()
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("TEP.Domain.Entities.Assets.SimpleAsset", "Target")
+                    b.HasOne("TEP.Domain.Entities.Asset", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Restrict);

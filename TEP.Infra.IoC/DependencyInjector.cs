@@ -16,7 +16,7 @@ namespace TEP.Infra.IoC
             //Necessário os Steps aqui, ou apenas o Procedure?
             //Application
             svcCollection.AddScoped(typeof(IAppBase<,>), typeof(ServiceAppBase<,>));
-            svcCollection.AddScoped<ISimpleAssetApp, SimpleAssetApp>();
+            svcCollection.AddScoped<IAssetApp, AssetApp>();
             svcCollection.AddScoped<IInteractionApp, InteractionApp>();
             /*svcCollection.AddScoped<ILeafStepApp, LeafStepApp>();*/
             svcCollection.AddScoped<IOperatorApp, OperatorApp>();
@@ -28,7 +28,7 @@ namespace TEP.Infra.IoC
 
             //Domain
             svcCollection.AddScoped(typeof(IServiceBase<>), typeof(BaseService<>));
-            svcCollection.AddScoped<ISimpleAssetService, SimpleAssetService>();
+            svcCollection.AddScoped<IAssetService, AssetService>();
             svcCollection.AddScoped<IInteractionService, InteractionService>();
             svcCollection.AddScoped<IOperatorService, OperatorService>();
             svcCollection.AddScoped<IProcedureService, ProcedureService>();
@@ -37,7 +37,7 @@ namespace TEP.Infra.IoC
 
             //Repositories
             svcCollection.AddScoped(typeof(IBaseRepository<>), typeof(RepositoryBase<>));
-            svcCollection.AddScoped<ISimpleAssetRepository, SimpleAssetRepository>();
+            svcCollection.AddScoped<IAssetRepository, AssetRepository>();
             svcCollection.AddScoped<IInteractionRepository, InteractionRepository>();
             svcCollection.AddScoped<IOperatorRepository, OperatorRepository>();
             svcCollection.AddScoped<IProcedureRepository, ProcedureRepository>();

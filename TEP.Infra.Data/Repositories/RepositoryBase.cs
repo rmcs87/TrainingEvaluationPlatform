@@ -59,6 +59,7 @@ namespace TEP.Infra.Data.Repositories
 
         public IEnumerable<TEntity> List()
         {
+            //return context.Set<TEntity>().ToList();
             return context.Set<TEntity>().ToList();
         }
     }

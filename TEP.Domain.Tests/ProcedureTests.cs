@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.Assets;
 using TEP.Shared.ValueObjects;
 
 namespace TEP.Domain.Tests
@@ -169,7 +168,7 @@ namespace TEP.Domain.Tests
             //Arrange
             var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
             //Act
-            List<IAsset> assets = procedure.RequiredAssets();
+            List<Asset> assets = procedure.RequiredAssets();
             //Assert
             Assert.AreEqual(3, assets.Count);
         }

@@ -770,7 +770,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 1088,
-											"top": 224,
+											"top": 208,
 											"height": 13
 										},
 										{
@@ -781,10 +781,10 @@
 											},
 											"font": "Arial;13;1",
 											"left": 845,
-											"top": 591,
+											"top": 583,
 											"width": 89.5908203125,
 											"height": 13,
-											"text": "IAsset"
+											"text": "Asset"
 										},
 										{
 											"_type": "LabelView",
@@ -795,7 +795,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 1088,
-											"top": 224,
+											"top": 208,
 											"width": 98.2490234375,
 											"height": 13,
 											"text": "(from Procedure)"
@@ -809,14 +809,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 1088,
-											"top": 224,
+											"top": 208,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 840,
-									"top": 584,
+									"top": 576,
 									"width": 99.5908203125,
 									"height": 25,
 									"stereotypeLabel": {
@@ -854,7 +854,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 445,
-											"top": 614,
+											"top": 598,
 											"width": 89.5908203125,
 											"height": 13,
 											"text": "-Path",
@@ -872,18 +872,69 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 445,
-											"top": 616,
+											"top": 600,
 											"width": 89.5908203125,
 											"height": 13,
 											"text": "-Description",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFyrq394TFnm7Y=",
+											"_parent": {
+												"$ref": "AAAAAAFxxp3G/HZ8E3I="
+											},
+											"model": {
+												"$ref": "AAAAAAFyrq39xDFkLPg="
+											},
+											"font": "Arial;13;0",
+											"left": 845,
+											"top": 608,
+											"width": 89.5908203125,
+											"height": 13,
+											"text": "+FilePath",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFyrq5IajJ8YLo=",
+											"_parent": {
+												"$ref": "AAAAAAFxxp3G/HZ8E3I="
+											},
+											"model": {
+												"$ref": "AAAAAAFyrq5IYTJ5T28="
+											},
+											"font": "Arial;13;0",
+											"left": 845,
+											"top": 623,
+											"width": 89.5908203125,
+											"height": 13,
+											"text": "+Name",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFyrq5kzDORR0A=",
+											"_parent": {
+												"$ref": "AAAAAAFxxp3G/HZ8E3I="
+											},
+											"model": {
+												"$ref": "AAAAAAFyrq5kwzOOKzE="
+											},
+											"font": "Arial;13;0",
+											"left": 845,
+											"top": 638,
+											"width": 89.5908203125,
+											"height": 13,
+											"text": "+ImgPath",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 840,
-									"top": 609,
+									"top": 601,
 									"width": 99.5908203125,
-									"height": 10
+									"height": 55
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -896,7 +947,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 840,
-									"top": 619,
+									"top": 656,
 									"width": 99.5908203125,
 									"height": 10
 								},
@@ -912,7 +963,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 600,
-									"top": 96,
+									"top": 88,
 									"width": 10,
 									"height": 10
 								},
@@ -928,7 +979,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 600,
-									"top": 96,
+									"top": 88,
 									"width": 10,
 									"height": 10
 								}
@@ -936,9 +987,9 @@
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 840,
-							"top": 584,
+							"top": 576,
 							"width": 99.5908203125,
-							"height": 73,
+							"height": 90,
 							"nameCompartment": {
 								"$ref": "AAAAAAFxxp3G+3Z38Vo="
 							},
@@ -6400,7 +6451,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "IAsset",
+					"name": "Asset",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -6450,6 +6501,30 @@
 							"name": "Description",
 							"visibility": "private",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFyrq39xDFkLPg=",
+							"_parent": {
+								"$ref": "AAAAAAFxxp3G+3Z0mlc="
+							},
+							"name": "FilePath"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFyrq5IYTJ5T28=",
+							"_parent": {
+								"$ref": "AAAAAAFxxp3G+3Z0mlc="
+							},
+							"name": "Name"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFyrq5kwzOOKzE=",
+							"_parent": {
+								"$ref": "AAAAAAFxxp3G+3Z0mlc="
+							},
+							"name": "ImgPath"
 						}
 					]
 				},
