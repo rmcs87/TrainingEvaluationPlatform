@@ -10,12 +10,12 @@ namespace TEP.Infra.Data.Contexto
 {
     public class Context : DbContext
     {
-        public DbSet<Procedure> Procedures { get; set; }
+        //public DbSet<Procedure> Procedures { get; set; }
         public DbSet<SimpleAsset> SimpleAssets { get; set; }
         public DbSet<Interaction> Interactions { get; set; }
-        public DbSet<Operator> Operators { get; set; }
-        public DbSet<Supervisor> Supervisors { get; set; }
-        public DbSet<TrainningSession> TrainningSessions { get; set; }
+        //public DbSet<Operator> Operators { get; set; }
+       // public DbSet<Supervisor> Supervisors { get; set; }
+       // public DbSet<TrainningSession> TrainningSessions { get; set; }
 
         public IDbContextTransaction Transaction { get; private set; }
 
@@ -26,11 +26,11 @@ namespace TEP.Infra.Data.Contexto
                 Database.Migrate();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
                 .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
-        }
+        }*/
 
         public IDbContextTransaction InitTransacao()
         {
@@ -84,10 +84,10 @@ namespace TEP.Infra.Data.Contexto
 
             modelBuilder.ApplyConfiguration(new SimpleAssetMap());
             modelBuilder.ApplyConfiguration(new InteractionMap());
-            modelBuilder.ApplyConfiguration(new ProcedureMap());
+            /*modelBuilder.ApplyConfiguration(new ProcedureMap());
             modelBuilder.ApplyConfiguration(new StepMap());
             modelBuilder.ApplyConfiguration(new TrainningSessionMap());
-            modelBuilder.ApplyConfiguration(new WorkerMap());
+            modelBuilder.ApplyConfiguration(new WorkerMap());*/
         }
     }
 }

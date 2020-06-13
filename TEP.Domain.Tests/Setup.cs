@@ -1,8 +1,8 @@
 ﻿using Moq;
 using System.Collections.Generic;
 using TEP.Domain.Entities;
+using TEP.Domain.Entities.Assets;
 using TEP.Domain.ValueObjects;
-using TEP.Shared;
 using TEP.Shared.ValueObjects;
 
 namespace TEP.Domain.Tests
@@ -47,7 +47,7 @@ namespace TEP.Domain.Tests
             Description insertKeyDescription = new Description("Insert key into door.");
             Duration insertKeyExpected = new Duration(1000);
             Duration insertKeyLimit = new Duration(2000);
-            _keyholeInteraction = new Interaction(insertKeyCategories, Act.Grab, insertKeyDescription, insertKeyExpected, insertKeyLimit, keyAssetMock.Object,  doorssetMock.Object);
+            _keyholeInteraction = new Interaction(insertKeyCategories, Act.Grab, insertKeyDescription, insertKeyExpected, insertKeyLimit, (SimpleAsset)keyAssetMock.Object, (SimpleAsset)doorssetMock.Object);
             _insertKeyStep = new LeafStep(Standard.Mandatory, "Insert key.", _keyholeInteraction);
 
             List<Category> openDoorCategories = new List<Category>();

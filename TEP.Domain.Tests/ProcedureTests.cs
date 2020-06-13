@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TEP.Domain.Entities;
-using TEP.Domain.ValueObjects;
-using TEP.Shared;
+using TEP.Domain.Entities.Assets;
 using TEP.Shared.ValueObjects;
 
 namespace TEP.Domain.Tests

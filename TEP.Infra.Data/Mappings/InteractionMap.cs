@@ -25,8 +25,8 @@ namespace TEP.Infra.Data.Mappings
                 .HasConversion(e => e.Seconds, e => new Duration(e));
             //builder.Property(p => p.Source).IsRequired(false).HasColumnName("source_asset");
             // builder.Property(p => p.Target).IsRequired(false).HasColumnName("target_asset");
-            builder.Ignore(p => p.Source);
-            builder.Ignore(p => p.Target);
+            //builder.Ignore(p => p.Source);
+            //builder.Ignore(p => p.Target);
 
             builder.HasOne<SimpleAsset>( p => p.Source)
                 .WithMany()
@@ -39,11 +39,12 @@ namespace TEP.Infra.Data.Mappings
 
             //Problem Known: should not be a enum, and deal with many-to-many . 
             // Possible solution: ownsMany: https://docs.microsoft.com/en-us/ef/core/modeling/owned-entities
-            builder.Property(p => p.Categories)
+            builder.Ignore(i => i.Categories);
+            /*builder.Property(p => p.Categories)
                     .IsRequired()
                     .HasColumnName("categories")
                      .HasConversion(e => e.Cast<Category>().FirstOrDefault().ToString(), // to converter
-                        e => new List<Category> { (Category)Enum.Parse(typeof(Category), e) });// from converter;            
+                        e => new List<Category> { (Category)Enum.Parse(typeof(Category), e) });// from converter;   */         
         }
     }
 }

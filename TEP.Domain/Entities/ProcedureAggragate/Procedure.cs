@@ -9,6 +9,11 @@ namespace TEP.Domain.Entities
     public class Procedure : EntityBase
     {
         //Constructor
+        private Procedure()
+        {
+
+        }
+
         /// <summary>
         /// Constructor for a Procedure, which represents the activity to be performed
         /// in a trainning session.
