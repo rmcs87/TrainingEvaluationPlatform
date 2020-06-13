@@ -21,6 +21,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - AutoMapper
 - FluentValidator *
 - MSTests
+- Coverage *
 - MediatR *
 - Swagger UI with JWT support *
 
