@@ -85,5 +85,5 @@ Besides providing services for storage and edition tools; score processing; and 
 * Como Testar o ASP.NET Core Web API: https://www.infoq.com/br/articles/testing-aspnet-core-web-api/
 
 ###Others:
-
+* Efficient post calls with HttpClient and JSON.NET: https://johnthiriet.com/efficient-post-calls/
 
