@@ -19,7 +19,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - Entity Framework Core 3.1
 - .NET Core Native DI *
 - AutoMapper
-- FluentValidator *
+- FluentValidation
 - MSTests
 - Coverage *
 - MediatR *
