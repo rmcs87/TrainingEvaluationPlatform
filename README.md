@@ -75,6 +75,9 @@ Besides providing services for storage and edition tools; score processing; and 
 ###Good Practices:
 * Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
 
+### Fluent Validation
+* Fluent validation: https://fluentvalidation.net/
+
 ###Interisting Projects:
 * EquinoxProject: https://github.com/EduardoPires/EquinoxProject
 
