@@ -39,6 +39,9 @@ Besides providing services for storage and edition tools; score processing; and 
 
 ## Study References:
 
+###Architecture
+* Advanced Architecture for ASP.NET Core Web API: https://www.infoq.com/articles/advanced-architecture-aspnet-core/
+
 ###AutoMapper:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
@@ -79,6 +82,7 @@ Besides providing services for storage and edition tools; score processing; and 
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
 * Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
 * Moq QuickStart:  https://github.com/Moq/moq4/wiki/Quickstart
+* Como Testar o ASP.NET Core Web API: https://www.infoq.com/br/articles/testing-aspnet-core-web-api/
 
 ###Others:
 
