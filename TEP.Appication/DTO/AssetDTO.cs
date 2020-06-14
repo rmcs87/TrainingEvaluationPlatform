@@ -6,8 +6,8 @@ namespace TEP.Appication.DTO
 {
     public class AssetDTO : DTOBase
     {
-        public string FilePath { get; private set; }
-        public string Name { get; private set; }
-        public string ImgPath { get; private set; }
+        public string FilePath { get; set; }
+        public string Name { get; set; }
+        public string ImgPath { get; set; }
     }
 }

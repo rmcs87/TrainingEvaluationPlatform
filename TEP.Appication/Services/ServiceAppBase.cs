@@ -33,8 +33,8 @@ namespace TEP.Appication.Services
             return _iMapper.Map<TEntityDTO>(_service.GetById(id));
         }
         public int Insert(TEntityDTO entity)
-        {
-            throw new NotImplementedException();
+        {            
+            return _service.Insert(_iMapper.Map<TEntity>(entity));
         }
         public IEnumerable<TEntityDTO> List()
         {

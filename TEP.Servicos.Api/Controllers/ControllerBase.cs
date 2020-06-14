@@ -25,8 +25,12 @@ namespace TEP.Servicos.Api.Controllers
         {
             try
             {
-                var trainnings = _app.List();
-                return new OkObjectResult(trainnings);
+                var result = _app.List();
+
+                if (result == null)
+                    return NotFound($"{nameof(Entity)} Not Found ");
+
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {
@@ -40,8 +44,12 @@ namespace TEP.Servicos.Api.Controllers
         {
             try
             {
-                var trainnings = _app.GetById(id);
-                return new OkObjectResult(trainnings);
+                var result = _app.GetById(id);
+                
+                if (result == null)
+                    return NotFound($"{typeof(Entity).Name} {id} Not Found ");
+
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {
@@ -50,8 +58,11 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Incluir([FromBody] EntityDTO data)
+        public IActionResult Insert([FromBody] EntityDTO data)
         {
+            //Verify data
+
+
             try
             {
                 return new OkObjectResult(_app.Insert(data));
