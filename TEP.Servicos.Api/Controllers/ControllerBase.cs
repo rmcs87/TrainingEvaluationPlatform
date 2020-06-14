@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
+using System.Text.Json;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
+using TEP.Appication.Validators;
 using TEP.Domain.Entities;
 
 namespace TEP.Servicos.Api.Controllers
@@ -60,8 +64,28 @@ namespace TEP.Servicos.Api.Controllers
         [HttpPost]
         public IActionResult Insert([FromBody] EntityDTO data)
         {
-            //Verify data
+            /*BaseDTOValidator<EntityDTO> validator = new BaseDTOValidator<EntityDTO>();
+            ValidationResult results = validator.Validate(data);
 
+            if (!results.IsValid)
+            {
+                string allMessages = results.ToString("~");
+                return BadRequest(allMessages);
+            }*/
+
+
+            if (!ModelState.IsValid)
+            {
+                var json = JsonSerializer.Serialize(
+                    new {
+                        Errors = ModelState.ToDictionary(
+                            kvp => kvp.Key,
+                            kvp => kvp.Value.Errors.Select(e => e.ErrorMessage)
+                        )
+                    }
+                );
+                return BadRequest(json);
+            }
 
             try
             {

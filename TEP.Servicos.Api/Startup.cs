@@ -10,6 +10,9 @@ using TEP.Infra.IoC;
 using TEP.Appication;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation.AspNetCore;
+using System.Reflection;
+using TEP.Appication.Validators;
 
 namespace TEP.Servicos.Api
 {
@@ -51,7 +54,7 @@ namespace TEP.Servicos.Api
             DependencyInjector.Register(services);
 
             services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));            
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AssetDTOValidator>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -69,7 +69,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var request = new HttpRequestMessage(new HttpMethod("POST"), "api/asset");
-            var json = JsonSerializer.Serialize(_assetKey);
+            var json = JsonSerializer.Serialize(_assetKeyValid);
             var content = new StringContent(
               json,
               System.Text.Encoding.UTF8,
@@ -87,15 +87,19 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestInsertAsset_WithInvalidData_ReceivesbadRequest()
         {
             //Arrange
-            int id = 999999;
-            var request = new HttpRequestMessage(new HttpMethod("GET"), $"api/asset/{id}");
-
+            var request = new HttpRequestMessage(new HttpMethod("POST"), "api/asset");
+            var json = JsonSerializer.Serialize(_assetKeyInvalid);
+            var content = new StringContent(
+              json,
+              System.Text.Encoding.UTF8,
+              "application/json"
+            );
+            request.Content = content;
             //Act
             var response = await _client.SendAsync(request);
 
             //Assert
-            Assert.AreEqual(0, 1);
-            //Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
     }
 }
