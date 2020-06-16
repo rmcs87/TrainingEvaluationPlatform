@@ -64,26 +64,10 @@ namespace TEP.Servicos.Api.Controllers
         [HttpPost]
         public IActionResult Insert([FromBody] EntityDTO data)
         {
-            /*BaseDTOValidator<EntityDTO> validator = new BaseDTOValidator<EntityDTO>();
-            ValidationResult results = validator.Validate(data);
-
-            if (!results.IsValid)
-            {
-                string allMessages = results.ToString("~");
-                return BadRequest(allMessages);
-            }*/
-
 
             if (!ModelState.IsValid)
             {
-                var json = JsonSerializer.Serialize(
-                    new {
-                        Errors = ModelState.ToDictionary(
-                            kvp => kvp.Key,
-                            kvp => kvp.Value.Errors.Select(e => e.ErrorMessage)
-                        )
-                    }
-                );
+                string json = GetModelStateErrosAsJson();
                 return BadRequest(json);
             }
 
@@ -100,6 +84,12 @@ namespace TEP.Servicos.Api.Controllers
         [HttpPut]
         public IActionResult Update([FromBody] EntityDTO data)
         {
+            if (!ModelState.IsValid)
+            {
+                string json = GetModelStateErrosAsJson();
+                return BadRequest(json);
+            }
+
             try
             {
                 _app.Update(data);
@@ -124,6 +114,19 @@ namespace TEP.Servicos.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        private string GetModelStateErrosAsJson()
+        {
+            return JsonSerializer.Serialize(
+                new
+                {
+                    Errors = ModelState.ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage)
+                    )
+                }
+            );
         }
     }
 }

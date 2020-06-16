@@ -6,6 +6,9 @@ using TEP.Servicos.Api;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.Json;
+using TEP.Domain.Entities;
+using TEP.Appication.DTO;
+using System;
 
 namespace TEP.IntegrationTest.API
 {    
@@ -28,10 +31,10 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestAssetList_ReceivesOk()
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("GET"), "api/asset");
+            var requestMessage = new HttpRequestMessage(new HttpMethod("GET"), "api/asset");
 
             //Act
-            var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(requestMessage);
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -41,10 +44,10 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             int id = 1; //Database Dependent
-            var request = new HttpRequestMessage(new HttpMethod("GET"), $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(new HttpMethod("GET"), $"api/asset/{id}");
 
             //Act
-            var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(requestMessage);
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -55,10 +58,10 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             int id = -1;
-            var request = new HttpRequestMessage(new HttpMethod("GET"), $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(new HttpMethod("GET"), $"api/asset/{id}");
 
             //Act
-            var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(requestMessage);
 
             //Assert
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
@@ -68,35 +71,69 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestInsertAsset_WithValidData_ReceivesOk()
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("POST"), "api/asset");
             var json = JsonSerializer.Serialize(_assetKeyValid);
-            var content = new StringContent(
-              json,
-              System.Text.Encoding.UTF8,
-              "application/json"
-            );
-            request.Content = content;
+            HttpRequestMessage requestMessage = PrepareHttpRequestMessage("POST", "api/asset", json);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }        
+
+        [TestMethod]
+        public async Task OnRequestInsertAsset_WithInvalidData_ReceivesBadRequest()
+        {
+            //Arrange
+            var json = JsonSerializer.Serialize(_assetKeyInvalid);
+            HttpRequestMessage request = PrepareHttpRequestMessage("POST", "api/asset", json);
+
             //Act
             var response = await _client.SendAsync(request);
 
             //Assert
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        } 
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+        }
         
         [TestMethod]
-        public async Task OnRequestInsertAsset_WithInvalidData_ReceivesbadRequest()
+        public async Task OnRequestUpdateAsset_WithValidData_ReceivesOk()
         {
             //Arrange
-            var request = new HttpRequestMessage(new HttpMethod("POST"), "api/asset");
-            var json = JsonSerializer.Serialize(_assetKeyInvalid);
-            var content = new StringContent(
-              json,
-              System.Text.Encoding.UTF8,
-              "application/json"
-            );
-            request.Content = content;
+            var json = JsonSerializer.Serialize(_assetKeyValid);
+            HttpRequestMessage requestMessage = PrepareHttpRequestMessage("POST", "api/asset", json);
+            
+            var response = await _client.SendAsync(requestMessage);
+            string responseId = await response.Content.ReadAsStringAsync();
+            _assetKeyValid.Id = Convert.ToInt32(responseId);
+
+            _assetKeyValid.Name = "updatedName";
+            json = JsonSerializer.Serialize(_assetKeyValid);
+            requestMessage = PrepareHttpRequestMessage("PUT", "api/asset", json);
+
             //Act
-            var response = await _client.SendAsync(request);
+            response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+        
+        [TestMethod]
+        public async Task OnRequestUpdateAsset_WithInvalidData_ReceivesBadRequest()
+        {
+            //Arrange
+            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var requestMessage = PrepareHttpRequestMessage("POST", "api/asset", json);
+
+            var response = await _client.SendAsync(requestMessage);
+            string responseId = await response.Content.ReadAsStringAsync();
+            _assetKeyInvalid.Id = Convert.ToInt32(responseId);
+
+            _assetKeyValid.Name = "updatedName";
+            json = JsonSerializer.Serialize(_assetKeyInvalid);
+            requestMessage = PrepareHttpRequestMessage("PUT", "api/asset", json);
+
+            //Act
+            response = await _client.SendAsync(requestMessage);
 
             //Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);

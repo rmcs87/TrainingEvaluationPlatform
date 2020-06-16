@@ -47,9 +47,9 @@ namespace TEP.Infra.Data.Repositories
         public int Insert(TEntity entity)
         {
             context.InitTransacao();
-            var id = context.Set<TEntity>().Add(entity).Entity.Id;
+            context.Set<TEntity>().Add(entity);
             context.SendChanges();
-            return id;
+            return entity.Id;
         }
 
         public TEntity GetById(int id)
