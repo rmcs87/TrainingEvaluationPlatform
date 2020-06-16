@@ -35,6 +35,10 @@ namespace TEP.Infra.Data.Repositories
                 context.Set<TEntity>().Remove(entidade);
                 context.SendChanges();
             }
+            else
+            {
+                throw new DbUpdateException($"Entity with ID={id} not Found.");
+            }
         }
 
         public void Delete(TEntity entity)
@@ -59,7 +63,6 @@ namespace TEP.Infra.Data.Repositories
 
         public IEnumerable<TEntity> List()
         {
-            //return context.Set<TEntity>().ToList();
             return context.Set<TEntity>().ToList();
         }
     }

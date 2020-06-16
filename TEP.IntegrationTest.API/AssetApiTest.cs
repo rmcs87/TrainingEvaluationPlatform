@@ -39,6 +39,7 @@ namespace TEP.IntegrationTest.API
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
+       
         [TestMethod]
         public async Task OnRequestGetAssetById_WithValidId_ReceivesOk()
         {
@@ -138,5 +139,43 @@ namespace TEP.IntegrationTest.API
             //Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
+    
+        [TestMethod]
+        public async Task OnRequestDeleteAssetById_WithValidId_ReceivesOk()
+        {
+            //Arrange
+            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var requestMessage = PrepareHttpRequestMessage("POST", "api/asset", json);
+
+            var response = await _client.SendAsync(requestMessage);
+            string responseId = await response.Content.ReadAsStringAsync();
+            var id = Convert.ToInt32(responseId);
+
+            json = JsonSerializer.Serialize(_assetKeyInvalid);
+            requestMessage = PrepareHttpRequestMessage("DELETE", $"api/asset/{id}", json);
+
+            //Act
+            response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task OnRequestDeleteAssetById_WithInvalidId_ReceivesOk()
+        {
+            //Arrange
+            var id = -1;
+
+            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var requestMessage = PrepareHttpRequestMessage("DELETE", $"api/asset/{id}", json);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+    
     }
 }
