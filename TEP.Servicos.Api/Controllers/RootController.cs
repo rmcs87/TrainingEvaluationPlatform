@@ -5,7 +5,7 @@ namespace TEP.Servicos.Api.Controllers
 {
     public class RootController : Controller
     {
-        [HttpPost]
+        [HttpGet]
         [Route("")]
         public IActionResult Test()
         {

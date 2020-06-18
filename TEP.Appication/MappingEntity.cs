@@ -14,7 +14,8 @@ namespace TEP.Appication
         {
             //Asset
             CreateMap<Asset, AssetDTO>()
-                .ReverseMap();
+                .ForMember(x => x.Image, opt => opt.Ignore())
+            .ReverseMap();
 
             //Category
             CreateMap<Category, CategoryDTO>()
