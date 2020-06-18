@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Application.Tests", "TE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infre.Tests", "TEP.Infre.Tests\TEP.Infre.Tests.csproj", "{8F809B51-612E-4CE9-8ECF-31B33EEBE64E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.IntegrationTest.API", "TEP.IntegrationTest.API\TEP.IntegrationTest.API.csproj", "{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.IntegrationTest.API", "TEP.IntegrationTest.API\TEP.IntegrationTest.API.csproj", "{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

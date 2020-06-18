@@ -116,7 +116,7 @@ namespace TEP.Servicos.Api.Controllers
             }
         }
 
-        private string GetModelStateErrosAsJson()
+        protected string GetModelStateErrosAsJson()
         {
             return JsonSerializer.Serialize(
                 new
