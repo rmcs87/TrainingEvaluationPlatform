@@ -15,15 +15,13 @@ Besides providing services for storage and edition tools; score processing; and 
 - ASP.NET Core 3.1 (with .NET Core 3.1)
  - ASP.NET MVC Core 
  - ASP.NET WebApi Core with JWT Bearer Authentication *
- - ASP.NET Identity Core *
 - Entity Framework Core 3.1
 - .NET Core Native DI *
 - AutoMapper
 - FluentValidation
 - MSTests
 - Coverage *
-- MediatR *
-- Swagger UI with JWT support *
+- Swagger *
 
 ## Target Architecture Principles:
 (a lot to be done)
