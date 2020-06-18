@@ -91,4 +91,5 @@ Besides providing services for storage and edition tools; score processing; and 
 
 #### Others:
 * Efficient post calls with HttpClient and JSON.NET: https://johnthiriet.com/efficient-post-calls/
+* Upload files: https://docs.microsoft.com/pt-br/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
 
