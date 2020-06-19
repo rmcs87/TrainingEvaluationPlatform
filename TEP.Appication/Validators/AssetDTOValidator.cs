@@ -16,9 +16,8 @@ namespace TEP.Appication.Validators
             }).Otherwise(() =>
             {
                 RuleFor(asset => asset.ImgPath).NotEmpty();
-                RuleFor(asset => asset.Image).Null();
+                //RuleFor(asset => asset.Image).Null();
             });
-
         }
     }
 }

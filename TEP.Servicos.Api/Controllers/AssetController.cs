@@ -33,7 +33,7 @@ namespace TEP.Servicos.Api.Controllers
                 data.ImgPath = fileName;
 
                 await FileHelper.ProcessAndValidateFile(
-                    data.Image, new string[] { ".jpg", ".jpeg", "png" }, _fileSizeLimit, _filePath, fileName);
+                    data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
 
                 return new OkObjectResult(new { id = _app.Insert(data) });
             }
@@ -43,7 +43,36 @@ namespace TEP.Servicos.Api.Controllers
             }
 
         }
-        
+
+        [HttpPut]
+        [Route("{updateFile}")]
+        public async Task<IActionResult> UpdateWithFile([FromBody] AssetDTO data)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(GetModelStateErrosAsJson());
+
+            try
+            {
+                string fileName = FileHelper.GetNewUniqueName("AssetImage", data.Image.FileName);
+                string oldFileName = data.ImgPath;
+                data.ImgPath = fileName;
+
+                await FileHelper.ProcessAndValidateFile(
+                    data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
+
+                _app.Update(data);
+
+                System.IO.File.Delete( FileHelper.CombinePathAndName(_filePath, oldFileName) );
+
+                return new OkObjectResult(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }
 
