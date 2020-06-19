@@ -1,11 +1,10 @@
-﻿using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
-using TEP.Appication.Validators;
 using TEP.Domain.Entities;
 
 namespace TEP.Servicos.Api.Controllers
@@ -51,7 +50,7 @@ namespace TEP.Servicos.Api.Controllers
                 var result = _app.GetById(id);
                 
                 if (result == null)
-                    return NotFound($"{typeof(Entity).Name} {id} Not Found ");
+                    return NotFound($"{typeof(Entity).Name} with ID = {id} Not Found ");
 
                 return new OkObjectResult(result);
             }
@@ -62,7 +61,7 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert([FromBody] EntityDTO data)
+        public virtual async Task<IActionResult> Insert([FromBody] EntityDTO data)
         {
 
             if (!ModelState.IsValid)
@@ -73,7 +72,7 @@ namespace TEP.Servicos.Api.Controllers
 
             try
             {
-                return new OkObjectResult(_app.Insert(data));
+                return new OkObjectResult(new { id =_app.Insert(data) });
             }
             catch (Exception ex)
             {

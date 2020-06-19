@@ -6,12 +6,10 @@ using TEP.Servicos.Api;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.Json;
-using TEP.Domain.Entities;
-using TEP.Appication.DTO;
 using System;
 
 namespace TEP.IntegrationTest.API
-{    
+{
     [TestClass]
     public class AssetApiTest : Setup
     {
@@ -37,6 +35,7 @@ namespace TEP.IntegrationTest.API
             var response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
        
@@ -51,6 +50,7 @@ namespace TEP.IntegrationTest.API
             var response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
         
@@ -65,29 +65,15 @@ namespace TEP.IntegrationTest.API
             var response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
-        }
-
-        [TestMethod]
-        public async Task SendImageTest()
-        {
-            //Arrange
-            var json = JsonSerializer.Serialize(_assetKeyValid);
-            var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
-
-            //Act
-            var response = await _client.SendAsync(requestMessage);
-
-            //Assert
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        }
+        }      
 
         [TestMethod]
         public async Task OnRequestInsertAsset_WithValidData_ReceivesOk()
         {
             //Arrange
-            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var json = JsonSerializer.Serialize(_newAssetKeyValid);
             var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
             HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
 
@@ -95,6 +81,7 @@ namespace TEP.IntegrationTest.API
             var response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }        
 
@@ -103,43 +90,55 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_assetKeyInvalid);
-            HttpRequestMessage request = PrepareHttpRequestMessageAppJson("POST", "api/asset", json);
+            var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
+            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
 
             //Act
-            var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
         
         [TestMethod]
-        public async Task OnRequestUpdateAsset_WithValidData_ReceivesOk()
+        public async Task OnRequestUpdateInfoOnlyAsset_WithValidData_ReceivesOk()
         {
             //Arrange
-            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var json = JsonSerializer.Serialize(_newAssetKeyValid);
             var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
             HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
 
             var response = await _client.SendAsync(requestMessage);
-            string responseId = await response.Content.ReadAsStringAsync();
-            _assetKeyValid.Id = Convert.ToInt32(responseId);
+            string responseJson = await response.Content.ReadAsStringAsync();
 
-            _assetKeyValid.Name = "updatedName";
-            json = JsonSerializer.Serialize(_assetKeyValid);
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset", json, imgPath);
+            Identificador idObject = JsonSerializer.Deserialize<Identificador>(responseJson);
+
+            _newAssetKeyValid.Id = idObject.id;
+            _newAssetKeyValid.Name = "updatedName";
+            _newAssetKeyValid.ImgPath = "Should be the Path original";
+            json = JsonSerializer.Serialize(_newAssetKeyValid);
+            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithOutFile(HttpMethod.Put, "api/asset", json);
 
             //Act
             response = await _client.SendAsync(requestMessage);
 
             //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
-        
+
+        [TestMethod]
+        public async Task OnRequestUpdateFileAsset_WithValidData_ReceivesOk()
+        {
+
+        }
+
         [TestMethod]
         public async Task OnRequestUpdateAsset_WithInvalidData_ReceivesBadRequest()
         {
             //Arrange
-            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var json = JsonSerializer.Serialize(_newAssetKeyValid);
             var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
             HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
 
@@ -147,7 +146,7 @@ namespace TEP.IntegrationTest.API
             string responseId = await response.Content.ReadAsStringAsync();
             _assetKeyInvalid.Id = Convert.ToInt32(responseId);
 
-            _assetKeyValid.Name = "updatedName";
+            _newAssetKeyValid.Name = "updatedName";
             json = JsonSerializer.Serialize(_assetKeyInvalid);
             requestMessage = PrepareHttpRequestMessageAppJson("PUT", "api/asset", json);
 
@@ -162,7 +161,7 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestDeleteAssetById_WithValidId_ReceivesOk()
         {
             //Arrange
-            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var json = JsonSerializer.Serialize(_newAssetKeyValid);
             var imgPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
             HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, imgPath);
 
@@ -186,7 +185,7 @@ namespace TEP.IntegrationTest.API
             //Arrange
             var id = -1;
 
-            var json = JsonSerializer.Serialize(_assetKeyValid);
+            var json = JsonSerializer.Serialize(_newAssetKeyValid);
             var requestMessage = PrepareHttpRequestMessageAppJson("DELETE", $"api/asset/{id}", json);
 
             //Act
@@ -196,5 +195,10 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
     
+    }
+
+    internal class Identificador
+    {
+        public int id { get; set; }
     }
 }
