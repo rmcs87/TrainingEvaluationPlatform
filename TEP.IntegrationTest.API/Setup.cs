@@ -9,16 +9,21 @@ namespace TEP.IntegrationTest.API
         protected readonly AssetDTO _newAssetKeyValid;
         protected readonly AssetDTO _updateAssetKeyValid;
         protected readonly AssetDTO _assetKeyInvalid;
+        protected readonly string _imgAssetValidPath;
+        protected readonly string _imgAssetValidPath2;
 
         public Setup()
         {
             _newAssetKeyValid = new AssetDTO {Name = "key", FilePath = "key.fbx", ImgPath = "" };
             _assetKeyInvalid = new AssetDTO {Name = "", FilePath = "", ImgPath = "key.jpg" };
+
+            _imgAssetValidPath = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\helmet.jpg";
+            _imgAssetValidPath2 = @"C:\Users\rmcs8\source\repos\TrainingEvaluationPlatform\TEP.IntegrationTest.API\TestFiles\smallHelmet.png";
         }
 
-        protected static HttpRequestMessage PrepareHttpRequestMessageAppJson(string method, string url, string json)
+        protected static HttpRequestMessage PrepareHttpRequestMessageAppJson(HttpMethod method, string url, string json)
         {
-            var request = new HttpRequestMessage(new HttpMethod(method), url);
+            var request = new HttpRequestMessage(method, url);
             var content = new StringContent(
               json,
               System.Text.Encoding.UTF8,
@@ -60,7 +65,6 @@ namespace TEP.IntegrationTest.API
         {            
             var request = new HttpRequestMessage(method, url);
             request.Headers.ExpectContinue = false;
-
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----MyBoundary");
 

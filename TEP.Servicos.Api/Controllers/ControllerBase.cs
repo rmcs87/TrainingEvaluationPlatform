@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
@@ -11,7 +9,7 @@ namespace TEP.Servicos.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class ControllerBase<Entity, EntityDTO> : Controller
+    public abstract class ControllerBase<Entity, EntityDTO> : Controller
        where Entity : EntityBase
        where EntityDTO : DTOBase
     {
@@ -63,12 +61,8 @@ namespace TEP.Servicos.Api.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Insert([FromBody] EntityDTO data)
         {
-
             if (!ModelState.IsValid)
-            {
-                string json = GetModelStateErrosAsJson();
-                return BadRequest(json);
-            }
+                return BadRequest(ModelState);
 
             try
             {
@@ -84,10 +78,7 @@ namespace TEP.Servicos.Api.Controllers
         public IActionResult Update([FromBody] EntityDTO data)
         {
             if (!ModelState.IsValid)
-            {
-                string json = GetModelStateErrosAsJson();
-                return BadRequest(json);
-            }
+                return BadRequest(ModelState);
 
             try
             {
@@ -102,30 +93,17 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(int id)
         {
             try
             {
                 _app.Delete(id);
-                return new OkObjectResult(true);
+                return new OkObjectResult(new { deleted = true });
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        protected string GetModelStateErrosAsJson()
-        {
-            return JsonSerializer.Serialize(
-                new
-                {
-                    Errors = ModelState.ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage)
-                    )
-                }
-            );
         }
     }
 }

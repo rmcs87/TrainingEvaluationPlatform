@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
@@ -25,7 +24,7 @@ namespace TEP.Servicos.Api.Controllers
         public override async Task<IActionResult> Insert([FromBody] AssetDTO data)
         {
             if (!ModelState.IsValid)
-                return BadRequest(GetModelStateErrosAsJson());
+                return BadRequest(ModelState);
 
             try
             {
@@ -45,11 +44,11 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{updateFile}")]
+        [Route("{updatefile}")]
         public async Task<IActionResult> UpdateWithFile([FromBody] AssetDTO data)
         {
             if (!ModelState.IsValid)
-                return BadRequest(GetModelStateErrosAsJson());
+                return BadRequest(ModelState);
 
             try
             {
@@ -60,11 +59,31 @@ namespace TEP.Servicos.Api.Controllers
                 await FileHelper.ProcessAndValidateFile(
                     data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
 
+                System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, oldFileName));
+
                 _app.Update(data);
-
-                System.IO.File.Delete( FileHelper.CombinePathAndName(_filePath, oldFileName) );
-
+                
                 return new OkObjectResult(true);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public override IActionResult Delete(int id)
+        {
+            try
+            {
+                var assetDTO = _app.GetById(id);
+
+                System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, assetDTO.ImgPath));
+
+                _app.Delete(id);                
+
+                return new OkObjectResult(new { deleted = true });
             }
             catch (Exception ex)
             {
