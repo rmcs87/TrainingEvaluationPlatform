@@ -85,6 +85,7 @@ Besides providing services for storage and edition tools; score processing; and 
 * SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
 * What is REST: https://restfulapi.net/
 * Architectural Styles and the Design of Network-based Software Architectures: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
+* JSON:API: https://jsonapi.org/
 
 #### Tests:
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
