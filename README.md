@@ -83,6 +83,7 @@ Besides providing services for storage and edition tools; score processing; and 
 
 #### REST
 * SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
+* What is REST: https://restfulapi.net/
 * Architectural Styles and the Design of Network-based Software Architectures: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
 
 #### Tests:
