@@ -81,6 +81,10 @@ Besides providing services for storage and edition tools; score processing; and 
 #### Interisting Projects:
 * EquinoxProject: https://github.com/EduardoPires/EquinoxProject
 
+#### REST
+* SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
+* Architectural Styles and the Design of Network-based Software Architectures: https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf
+
 #### Tests:
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
 * Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
