@@ -74,6 +74,7 @@ Besides providing services for storage and edition tools; score processing; and 
 
 #### Good Practices:
 * Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
+* Clean Code: https://www.pearson.ch/Informatik/PrenticeHall/EAN/9780132350884/Clean-Code
 
 #### Fluent Validation
 * Fluent validation: https://fluentvalidation.net/
