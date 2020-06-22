@@ -6,6 +6,7 @@ using TEP.Servicos.Api;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.Json;
+using TEP.Shared.Helpers;
 
 namespace TEP.IntegrationTest.API
 {
@@ -73,7 +74,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -88,7 +89,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_assetKeyInvalid);
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -103,7 +104,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
@@ -112,7 +113,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.ImgPath = "OldPath";
 
             json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithOutFile(HttpMethod.Put, "api/asset", json);
+            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json);
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -127,7 +128,7 @@ namespace TEP.IntegrationTest.API
         {            
             //Arrange
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
@@ -135,7 +136,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.Name = "updatedName";
             _newAssetKeyValid.ImgPath = "OldPath";
             json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
+            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
             
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -150,7 +151,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_newAssetKeyValid);            
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
@@ -158,7 +159,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.Name = "updatedName";
             _newAssetKeyValid.ImgPath = "OldPath";
             json = JsonSerializer.Serialize(_assetKeyInvalid);            
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
+            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
             
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -173,7 +174,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_newAssetKeyValid);            
-            HttpRequestMessage requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
@@ -182,7 +183,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.Id = id;
 
             json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
+            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -199,7 +200,7 @@ namespace TEP.IntegrationTest.API
             var id = -1;
 
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            var requestMessage = PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
+            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
 
             //Act
             var response = await _client.SendAsync(requestMessage);

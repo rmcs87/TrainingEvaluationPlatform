@@ -46,7 +46,12 @@ namespace TEP.Servicos.Api.Controllers
                 return BadRequest(insertEntityError.Message);
             }
         }
-        
+
+        /// <summary>
+        /// Updates Entity Asset. Must resceive a MultipartFormData.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPut]
         public override async Task<IActionResult> Update([FromBody] AssetDTO data)
         {
