@@ -87,5 +87,22 @@ namespace TEP.Shared.Helpers
             return Path.Combine(filePath, fileName); ;
         }
 
+        /// <summary>
+        /// Deletes a File.
+        /// </summary>
+        /// <param name="filePath">The path to the file to be deleted.</param>
+        public static void DeleteFromDisk(string filePath)
+        {
+            try
+            {
+                System.IO.File.Delete(filePath);
+            }
+            catch (Exception)
+            {
+                throw new IOException("File Could not be deleted");
+            }
+
+        }
+
     }
 }

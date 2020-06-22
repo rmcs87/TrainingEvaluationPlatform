@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
@@ -13,11 +14,15 @@ namespace TEP.Servicos.Api.Controllers
     {
         private readonly long _fileSizeLimit;
         private readonly string _filePath;
+        private readonly string[] _supportedFilesExtension;
+        private readonly string _fileNameSalt;
 
         public AssetController(IAppBase<Asset, AssetDTO> app, IConfiguration config) : base(app)
         {
             _fileSizeLimit = config.GetValue<long>("AssetImageSizeLimit");
             _filePath = config.GetValue<string>("AssetImageFilesPath");
+            _supportedFilesExtension = new string[] { ".jpg", ".jpeg", ".png" };
+            _fileNameSalt = "AssetImage";
         }
 
         [HttpPost]
@@ -28,21 +33,20 @@ namespace TEP.Servicos.Api.Controllers
 
             try
             {
-                string fileName = FileHelper.GetNewUniqueName("AssetImage", data.Image.FileName);
-                data.ImgPath = fileName;
-
-                await FileHelper.ProcessAndValidateFile(
-                    data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
-
+                await SaveInDiskAssetImage(data);
                 return new OkObjectResult(new { id = _app.Insert(data) });
             }
-            catch (Exception ex)
+            catch (IOException fileCreationError)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(fileCreationError.Message);
             }
-
+            catch (Exception insertEntityError)
+            {
+                FileHelper.DeleteFromDisk(FileHelper.CombinePathAndName(_filePath, data.Image.FileName));
+                return BadRequest(insertEntityError.Message);
+            }
         }
-
+        
         [HttpPut]
         public override async Task<IActionResult> Update([FromBody] AssetDTO data)
         {
@@ -51,26 +55,28 @@ namespace TEP.Servicos.Api.Controllers
 
             try
             {
-                if(data.Image != null) { 
-                    string fileName = FileHelper.GetNewUniqueName("AssetImage", data.Image.FileName);
+                //Update changing image file
+                if(data.Image != null)
+                {
                     string oldFileName = data.ImgPath;
-                    data.ImgPath = fileName;
-
-                    await FileHelper.ProcessAndValidateFile(
-                        data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
-
-                    System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, oldFileName));
+                    await SaveInDiskAssetImage(data);
+                    FileHelper.DeleteFromDisk(FileHelper.CombinePathAndName(_filePath, oldFileName));
                 }
 
                 _app.Update(data);
                 
                 return new OkObjectResult(true);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+            catch (IOException fileCreationError)
+            {                
+                return BadRequest(fileCreationError.Message);
             }
-        }
+            catch (Exception updateEntityError)
+            {
+                FileHelper.DeleteFromDisk(FileHelper.CombinePathAndName(_filePath, data.Image.FileName));
+                return BadRequest(updateEntityError.Message);
+            }
+        }        
 
         [HttpDelete]
         [Route("{id}")]
@@ -79,20 +85,37 @@ namespace TEP.Servicos.Api.Controllers
             try
             {
                 var assetDTO = _app.GetById(id);
-
-                System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, assetDTO.ImgPath));
-
+                FileHelper.DeleteFromDisk(FileHelper.CombinePathAndName(_filePath, assetDTO.ImgPath));
                 _app.Delete(id);                
 
                 return new OkObjectResult(new { deleted = true });
             }
-            catch (Exception ex)
+            catch (IOException deleteFileError)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(deleteFileError.Message);
+            }
+            catch (Exception deleteEntityError)
+            {
+                var message = deleteEntityError.Message + " Corresponding Image may have been corrupted.";
+                return BadRequest(message);
             }
         }
 
+        private async Task SaveInDiskAssetImage(AssetDTO data)
+        {
+            try
+            {
+                string fileName = FileHelper.GetNewUniqueName(_fileNameSalt, data.Image.FileName);
+                data.ImgPath = fileName;
 
+                await FileHelper.ProcessAndValidateFile(
+                    data.Image, _supportedFilesExtension, _fileSizeLimit, _filePath, fileName);
+            }
+            catch (IOException ioe)
+            {
+                throw ioe;
+            }            
+        }
     }
 }
 
