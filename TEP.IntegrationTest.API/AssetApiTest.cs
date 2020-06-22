@@ -135,7 +135,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.Name = "updatedName";
             _newAssetKeyValid.ImgPath = "OldPath";
             json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset/updateFile", json, _imgAssetValidPath2);
+            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
             
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -158,7 +158,7 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid.Name = "updatedName";
             _newAssetKeyValid.ImgPath = "OldPath";
             json = JsonSerializer.Serialize(_assetKeyInvalid);            
-            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset/updatefile", json, _imgAssetValidPath2);
+            requestMessage = PrepareHttpRequestMessageMultipartFormDataWithSmallFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
             
             //Act
             response = await _client.SendAsync(requestMessage);

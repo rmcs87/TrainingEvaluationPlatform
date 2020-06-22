@@ -44,22 +44,23 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{updatefile}")]
-        public async Task<IActionResult> UpdateWithFile([FromBody] AssetDTO data)
+        public override async Task<IActionResult> Update([FromBody] AssetDTO data)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                string fileName = FileHelper.GetNewUniqueName("AssetImage", data.Image.FileName);
-                string oldFileName = data.ImgPath;
-                data.ImgPath = fileName;
+                if(data.Image != null) { 
+                    string fileName = FileHelper.GetNewUniqueName("AssetImage", data.Image.FileName);
+                    string oldFileName = data.ImgPath;
+                    data.ImgPath = fileName;
 
-                await FileHelper.ProcessAndValidateFile(
-                    data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
+                    await FileHelper.ProcessAndValidateFile(
+                        data.Image, new string[] { ".jpg", ".jpeg", ".png" }, _fileSizeLimit, _filePath, fileName);
 
-                System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, oldFileName));
+                    System.IO.File.Delete(FileHelper.CombinePathAndName(_filePath, oldFileName));
+                }
 
                 _app.Update(data);
                 

@@ -75,7 +75,7 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] EntityDTO data)
+        public virtual async Task<IActionResult> Update([FromBody] EntityDTO data)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
