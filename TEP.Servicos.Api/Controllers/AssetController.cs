@@ -50,7 +50,7 @@ namespace TEP.Servicos.Api.Controllers
         /// <summary>
         /// Updates Entity Asset. Must resceive a MultipartFormData.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Asset Model to be updated, with or without file</param>
         /// <returns></returns>
         [HttpPut]
         public override async Task<IActionResult> Update([FromBody] AssetDTO data)

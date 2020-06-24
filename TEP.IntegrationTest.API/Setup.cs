@@ -17,9 +17,9 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid = new AssetDTO {Name = "key", FilePath = "key.fbx", ImgPath = "" };
             _assetKeyInvalid = new AssetDTO {Name = "", FilePath = "", ImgPath = "key.jpg" };
 
-            var baseTestProjetDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
-            _imgAssetValidPath = $"{baseTestProjetDirectory}\\TestFiles\\helmet.jpg";
-            _imgAssetValidPath2 = $"{baseTestProjetDirectory}\\TestFiles\\smallHelmet.png";            
+            var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
+            _imgAssetValidPath = $"{baseTestProjectDirectory}\\TestFiles\\helmet.jpg";
+            _imgAssetValidPath2 = $"{baseTestProjectDirectory}\\TestFiles\\smallHelmet.png";            
         }            
     }
 }

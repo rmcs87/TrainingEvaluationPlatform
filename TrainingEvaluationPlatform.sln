@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infre.Tests", "TEP.Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.IntegrationTest.API", "TEP.IntegrationTest.API\TEP.IntegrationTest.API.csproj", "{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Services.AuthProvider", "TEP.Services.AuthProvider\TEP.Services.AuthProvider.csproj", "{807D66DF-9861-4646-8A14-2BE0895A0DB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{807D66DF-9861-4646-8A14-2BE0895A0DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{807D66DF-9861-4646-8A14-2BE0895A0DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{807D66DF-9861-4646-8A14-2BE0895A0DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{807D66DF-9861-4646-8A14-2BE0895A0DB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{0F90770D-FD3B-4448-8952-CA5FE270A08D} = {DA3E4145-33E0-4926-AC4E-49C51A8BB207}
 		{8F809B51-612E-4CE9-8ECF-31B33EEBE64E} = {DA3E4145-33E0-4926-AC4E-49C51A8BB207}
 		{BE6F2AFF-E1BE-4DF4-AC19-B3EA63A6D46D} = {DA3E4145-33E0-4926-AC4E-49C51A8BB207}
+		{807D66DF-9861-4646-8A14-2BE0895A0DB3} = {76455AFB-AC5A-4F06-A6AC-A79C97D87D1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66D034E1-58B9-4DA6-B9C3-C564BF4425F9}
