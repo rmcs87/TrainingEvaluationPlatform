@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TEP.Appication\TEP.Appication.csproj" />
     <ProjectReference Include="..\TEP.Infra.IoC\TEP.Infra.IoC.csproj" />
+    <ProjectReference Include="..\TEP.Services.AuthProvider\TEP.Services.AuthProvider.csproj" />
   </ItemGroup>
 
 </Project>

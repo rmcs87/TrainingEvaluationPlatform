@@ -1,11 +1,9 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using TEP.Services.AuthProvider.Models;
 
@@ -13,7 +11,7 @@ namespace TEP.Services.AuthProvider.Services
 {
     public static class TokenService
     {
-        private static RandomNumberGenerator Rng = RandomNumberGenerator.Create();
+        private static readonly RandomNumberGenerator Rng = RandomNumberGenerator.Create();
         private static readonly string MyJwkLocation = Path.Combine(Environment.CurrentDirectory, "myssecretkey.json");
 
         public static string GenerateToken(User user)
@@ -36,7 +34,7 @@ namespace TEP.Services.AuthProvider.Services
             return tokenHandler.WriteToken(token);
         }
 
-        private static SecurityKey Loadkey()
+        public static SecurityKey Loadkey()
         {
             if (File.Exists(MyJwkLocation))
                 JsonSerializer.Deserialize<JsonWebKey>(File.ReadAllText(MyJwkLocation));

@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using TEP.Appication.Validators;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using TEP.Services.AuthProvider.Services;
 
 namespace TEP.Servicos.Api
 {
@@ -49,12 +52,33 @@ namespace TEP.Servicos.Api
             //services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
             //Change the migrations assembly, because when working with a DbContext that is in a separate project from your web app project it is necessary            
             var connectionString = Configuration.GetValue<string>("ConnectionStrings:teps");
-            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Servicos.Api")));
+            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Servicos.Api")));            
 
             DependencyInjector.Register(services);
 
             services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));            
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AssetDTOValidator>());
+
+
+            var key = TokenService.Loadkey();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,10 +93,13 @@ namespace TEP.Servicos.Api
 
             app.UseCors(a => a.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            });            
         }
     }
 }
