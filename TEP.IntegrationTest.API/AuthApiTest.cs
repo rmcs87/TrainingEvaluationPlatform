@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TEP.Services.AuthProvider.Models;
 using TEP.Servicos.Api;
 using TEP.Shared.Helpers;
 
@@ -73,5 +75,24 @@ namespace TEP.IntegrationTest.API
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode);
         }
+        
+        [TestMethod]
+        public async Task OnAccessRestrictedEndPoint_WithToken_ReturnsOk()
+        {
+            //Arrange   
+            var token = await GetAccessTokenAsync(_client, _validUser);
+
+            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
     }
+    
 }
+

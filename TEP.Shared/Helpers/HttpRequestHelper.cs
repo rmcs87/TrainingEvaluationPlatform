@@ -55,6 +55,6 @@ namespace TEP.Shared.Helpers
             request.Content = multiPartContent;
 
             return request;
-        }        
+        }   
     }
 }

@@ -42,8 +42,8 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpGet]
         [Route("auth_test")]
-        [Authorize(Roles = "employee,manager")]
-        public async Task<IActionResult> TestPermissions([FromBody]User data)
+        [Authorize(Roles = "admin,manager")]
+        public async Task<IActionResult> TestPermissions()
         {
             return new OkResult();        
         }

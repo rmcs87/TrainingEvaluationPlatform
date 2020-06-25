@@ -11,8 +11,8 @@ namespace TEP.Services.AuthProvider.Repositories
         {
             var users = new List<User>
             {
-                new User { Id = 1, Username = "batman", Password = "batman", Role = "manager" },
-                new User { Id = 2, Username = "robin", Password = "robin", Role = "employee" }
+                new User { Id = 1, Username = "rico", Password = "r1c0", Role = "admin" },
+                new User { Id = 2, Username = "tom", Password = "mot", Role = "manager" }
             };
             return users.Where(x => x.Username.ToLower() == username.ToLower() && x.Password == password.ToLower() ).FirstOrDefault();
         }
