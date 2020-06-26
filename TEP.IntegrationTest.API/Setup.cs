@@ -17,7 +17,8 @@ namespace TEP.IntegrationTest.API
         protected readonly string _imgAssetValidPath;
         protected readonly string _imgAssetValidPath2;
 
-        protected readonly User _validUser;
+        protected readonly User _validManagerUser;
+        protected readonly User _validOperatorUser;
         protected readonly User _invalidUser;
 
         public Setup()
@@ -25,7 +26,8 @@ namespace TEP.IntegrationTest.API
             _newAssetKeyValid = new AssetDTO { Name = "key", FilePath = "key.fbx", ImgPath = "" };
             _assetKeyInvalid = new AssetDTO { Name = "", FilePath = "", ImgPath = "key.jpg" };
 
-            _validUser = new User { Username = "rico", Password = "r1c0" };
+            _validManagerUser = new User { Username = "rico", Password = "r1c0" };
+            _validOperatorUser = new User { Username = "joao", Password = "jonh" };
             _invalidUser = new User { Username = "rico", Password = "12345" };
 
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));

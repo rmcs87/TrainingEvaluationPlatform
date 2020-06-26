@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using TEP.Services.AuthProvider.Models;
 using TEP.Services.AuthProvider.Repositories;
 using TEP.Services.AuthProvider.Services;
+using TEP.Servicos.Api.Controllers.Authorizers;
 using TEP.Shared;
 
 namespace TEP.Servicos.Api.Controllers
@@ -39,8 +40,8 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpGet]
-        [Route("auth_test")]
-        [AuthorizeRoles(UserRoles.Admin, UserRoles.Manager)]
+        [Route("auth_test")]        
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public async Task<IActionResult> TestPermissions()
         {
             return new OkResult();        

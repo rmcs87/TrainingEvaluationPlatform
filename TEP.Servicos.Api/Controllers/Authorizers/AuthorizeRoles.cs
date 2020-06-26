@@ -2,7 +2,7 @@
 using System.Linq;
 using TEP.Shared;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Servicos.Api.Controllers.Authorizers
 {
     public class AuthorizeRoles : AuthorizeAttribute
     {

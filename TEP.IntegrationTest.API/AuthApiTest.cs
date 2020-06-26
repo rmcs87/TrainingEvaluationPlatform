@@ -34,7 +34,7 @@ namespace TEP.IntegrationTest.API
         public async Task OnLogin_WithValidCredential_ReturnsToken()
         {
             //Arrange
-            var json = JsonSerializer.Serialize(_validUser);
+            var json = JsonSerializer.Serialize(_validManagerUser);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
 
             //Act
@@ -60,7 +60,6 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
         } 
         
-
         [TestMethod]
         public async Task OnAccessRestrictedEndPoint_WithoutToken_ReturnsNotAuthorized()
         {
@@ -77,10 +76,10 @@ namespace TEP.IntegrationTest.API
         }
         
         [TestMethod]
-        public async Task OnAccessRestrictedEndPoint_WithToken_ReturnsOk()
+        public async Task OnAccessRestrictedEndPoint_WithTokenAndRight_ReturnsOk()
         {
             //Arrange   
-            var token = await GetAccessTokenAsync(_client, _validUser);
+            var token = await GetAccessTokenAsync(_client, _validManagerUser);
 
             var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -91,6 +90,23 @@ namespace TEP.IntegrationTest.API
             //Assert
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+        
+        [TestMethod]
+        public async Task OnAccessRestrictedEndPoint_WithTokenButNoRight_ReturnsForbidden()
+        {
+            //Arrange   
+            var token = await GetAccessTokenAsync(_client, _validOperatorUser);
+
+            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.Forbidden, response.StatusCode);
         }
     }
     

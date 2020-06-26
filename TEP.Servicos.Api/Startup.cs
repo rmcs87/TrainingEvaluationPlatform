@@ -16,6 +16,7 @@ using TEP.Appication.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TEP.Services.AuthProvider.Services;
+using TEP.Shared;
 
 namespace TEP.Servicos.Api
 {
@@ -52,13 +53,25 @@ namespace TEP.Servicos.Api
             //services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
             //Change the migrations assembly, because when working with a DbContext that is in a separate project from your web app project it is necessary            
             var connectionString = Configuration.GetValue<string>("ConnectionStrings:teps");
-            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Servicos.Api")));            
+            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Servicos.Api")));
 
             DependencyInjector.Register(services);
 
-            services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));            
+            services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AssetDTOValidator>());
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(UserPolicies.AdministratorRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString()));
+                options.AddPolicy(UserPolicies.ManagerRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString(), 
+                                                  UserRoles.Manager.ToString()));
+                options.AddPolicy(UserPolicies.SupervisorRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString(), 
+                                                  UserRoles.Manager.ToString(), 
+                                                  UserRoles.Supervisor.ToString()));
+            });
 
             var key = TokenService.Loadkey();
             services.AddAuthentication(x =>
@@ -99,7 +112,7 @@ namespace TEP.Servicos.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });            
+            });
         }
     }
 }
