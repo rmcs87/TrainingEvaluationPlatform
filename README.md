@@ -45,8 +45,11 @@ Besides providing services for storage and edition tools; score processing; and 
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
 * 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
 
-#### Caching
+#### Caching:
 * Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
+
+#### Compression:
+* Compression in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/response-compression?view=aspnetcore-3.1
 
 #### DDD:
 * Arquitetura em camadas com DDD: https://medium.com/@ericandrade_24404/parte-01-criando-arquitetura-em-camadas-com-ddd-inje%C3%A7%C3%A3o-de-dep-ef-60b851c88461
