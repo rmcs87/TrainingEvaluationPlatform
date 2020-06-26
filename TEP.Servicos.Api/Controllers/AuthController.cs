@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TEP.Services.AuthProvider.Models;
 using TEP.Services.AuthProvider.Repositories;
 using TEP.Services.AuthProvider.Services;
+using TEP.Shared;
 
 namespace TEP.Servicos.Api.Controllers
 {
@@ -42,7 +40,7 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpGet]
         [Route("auth_test")]
-        [Authorize(Roles = "admin,manager")]
+        [AuthorizeRoles(UserRoles.Admin, UserRoles.Manager)]
         public async Task<IActionResult> TestPermissions()
         {
             return new OkResult();        
