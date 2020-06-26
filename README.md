@@ -91,6 +91,7 @@ Besides providing services for storage and edition tools; score processing; and 
 #### Security
 * Autenticação e Autorização com Bearer e JWT: https://balta.io/blog/aspnetcore-3-autenticacao-autorizacao-bearer-jwt?rdst_srcid=2132416
 * JWT com chave simétrica: https://www.brunobrito.net.br/jwt-com-chave-assimetrica/?fbclid=IwAR3B2xknd8cH3XULDsYYCAMhRq6SBQs6ON3shemPIUoXPDbUZpPXyduQld0
+* Policy based role checks: https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
 
 #### Tests:
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
