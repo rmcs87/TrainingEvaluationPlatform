@@ -1,4 +1,4 @@
-What is the TEP - Training Evaluation Platform
+What is TEP - Training Evaluation Platform
 =====================
 TEP is a open-source project written in .NET Core for BackEnding VR Trainning Aplications.
 
