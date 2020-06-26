@@ -11,40 +11,30 @@ namespace TEP.Servicos.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/login")]
-    [Authorize]    
+    [Authorize]
     public class AuthController : Controller
     {
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authenticate([FromBody]User data)
+        public async Task<ActionResult> Authenticate([FromBody]User data)
         {
-            // Recupera o usuário
             var user = UserRepository.Get(data.Username, data.Password);
 
-            // Verifica se o usuário existe
             if (user == null)
                 return NotFound(new { message = "Usuário ou senha inválidos" });
 
-            // Gera o Token
             var token = TokenService.GenerateToken(user);
-
-            // Oculta a senha
             user.Password = "";
 
-            // Retorna os dados (o proprio usuario, sem a senha !!!!!)
-            return new
-            {
-                user = user,
-                token = token
-            };
+            return new OkObjectResult(new { user, token });
         }
 
         [HttpGet]
-        [Route("auth_test")]        
+        [Route("auth_test")]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
         public async Task<IActionResult> TestPermissions()
         {
-            return new OkResult();        
+            return new OkResult();
         }
 
     }

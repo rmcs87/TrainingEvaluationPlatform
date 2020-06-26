@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
+using TEP.Servicos.Api.Controllers.Authorizers;
+using TEP.Shared;
 using TEP.Shared.Helpers;
 
 namespace TEP.Servicos.Api.Controllers
@@ -26,6 +28,7 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPost]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public override async Task<IActionResult> Insert([FromBody] AssetDTO data)
         {
             if (!ModelState.IsValid)
@@ -33,7 +36,7 @@ namespace TEP.Servicos.Api.Controllers
 
             try
             {
-                await SaveInDiskAssetImage(data);
+                await SaveAssetImageInDisk(data);
                 return new OkObjectResult(new { id = _app.Insert(data) });
             }
             catch (IOException fileCreationError)
@@ -53,6 +56,7 @@ namespace TEP.Servicos.Api.Controllers
         /// <param name="data">Asset Model to be updated, with or without file</param>
         /// <returns></returns>
         [HttpPut]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public override async Task<IActionResult> Update([FromBody] AssetDTO data)
         {
             if (!ModelState.IsValid)
@@ -64,7 +68,7 @@ namespace TEP.Servicos.Api.Controllers
                 if(data.Image != null)
                 {
                     string oldFileName = data.ImgPath;
-                    await SaveInDiskAssetImage(data);
+                    await SaveAssetImageInDisk(data);
                     FileHelper.DeleteFromDisk(FileHelper.CombinePathAndName(_filePath, oldFileName));
                 }
 
@@ -85,6 +89,7 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public override IActionResult Delete(int id)
         {
             try
@@ -106,7 +111,7 @@ namespace TEP.Servicos.Api.Controllers
             }
         }
 
-        private async Task SaveInDiskAssetImage(AssetDTO data)
+        private async Task SaveAssetImageInDisk(AssetDTO data)
         {
             try
             {

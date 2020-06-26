@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
@@ -35,7 +36,7 @@ namespace TEP.IntegrationTest.API
             _imgAssetValidPath2 = $"{baseTestProjectDirectory}\\TestFiles\\smallHelmet.png";
         }
 
-        protected async Task<string> GetAccessTokenAsync(HttpClient client, User user)
+        protected async Task AuthorizeClient(HttpClient client, User user)
         {
             var json = JsonSerializer.Serialize(user);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
@@ -45,7 +46,7 @@ namespace TEP.IntegrationTest.API
             var token = JsonSerializer.Deserialize<JsonElement>(responseContent)
                 .GetProperty(propertyName)
                 .GetString();
-            return token;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
     }

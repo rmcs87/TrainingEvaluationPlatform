@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
+using TEP.Servicos.Api.Controllers.Authorizers;
+using TEP.Shared;
 
 namespace TEP.Servicos.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize]
     public abstract class ControllerBase<Entity, EntityDTO> : Controller
        where Entity : EntityBase
        where EntityDTO : DTOBase
@@ -22,6 +26,7 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpGet]
         [Route("")]
+        [AuthorizePolicy(UserPolicies.SupervisorRights)]
         public IActionResult List()
         {
             try
@@ -41,6 +46,7 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [AuthorizePolicy(UserPolicies.SupervisorRights)]
         public IActionResult GetById(int id)
         {
             try
@@ -59,6 +65,7 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPost]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public virtual async Task<IActionResult> Insert([FromBody] EntityDTO data)
         {
             if (!ModelState.IsValid)
@@ -75,6 +82,7 @@ namespace TEP.Servicos.Api.Controllers
         }
 
         [HttpPut]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public virtual async Task<IActionResult> Update([FromBody] EntityDTO data)
         {
             if (!ModelState.IsValid)
@@ -93,6 +101,7 @@ namespace TEP.Servicos.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
         public virtual IActionResult Delete(int id)
         {
             try

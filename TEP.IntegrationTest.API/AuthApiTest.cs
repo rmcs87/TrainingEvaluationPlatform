@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TEP.Services.AuthProvider.Models;
 using TEP.Servicos.Api;
 using TEP.Shared.Helpers;
 
@@ -76,13 +71,12 @@ namespace TEP.IntegrationTest.API
         }
         
         [TestMethod]
-        public async Task OnAccessRestrictedEndPoint_WithTokenAndRight_ReturnsOk()
+        public async Task OnAccessRestrictedEndPoint_WithTokenAndRights_ReturnsOk()
         {
             //Arrange   
-            var token = await GetAccessTokenAsync(_client, _validManagerUser);
+            await AuthorizeClient(_client, _validManagerUser);
 
             var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -93,13 +87,12 @@ namespace TEP.IntegrationTest.API
         }
         
         [TestMethod]
-        public async Task OnAccessRestrictedEndPoint_WithTokenButNoRight_ReturnsForbidden()
+        public async Task OnAccessRestrictedEndPoint_WithTokenButNoRights_ReturnsForbidden()
         {
             //Arrange   
-            var token = await GetAccessTokenAsync(_client, _validOperatorUser);
-
+            await AuthorizeClient(_client, _validOperatorUser);
             var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
 
             //Act
             var response = await _client.SendAsync(requestMessage);

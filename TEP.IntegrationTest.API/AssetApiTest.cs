@@ -29,6 +29,7 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestAssetList_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/asset");
 
             //Act
@@ -43,6 +44,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestGetAssetById_WithValidId_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             int id = 1; //Database Dependent
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
 
@@ -58,6 +61,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestGetAssetById_WithInalidId_ReceivesNotFound()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             int id = -1;
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
 
@@ -73,6 +78,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestInsertAsset_WithValidData_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
 
@@ -88,6 +95,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestInsertAsset_WithInvalidData_ReceivesBadRequest()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_assetKeyInvalid);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
 
@@ -103,6 +112,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestUpdateInfoOnlyAsset_WithValidData_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
@@ -125,8 +136,10 @@ namespace TEP.IntegrationTest.API
 
         [TestMethod]
         public async Task OnRequestUpdateFileAsset_WithValidData_ReceivesOk()
-        {            
+        {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
@@ -150,6 +163,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestUpdateAsset_WithInvalidData_ReceivesBadRequest()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_newAssetKeyValid);            
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
@@ -173,6 +188,8 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestDeleteAssetById_WithValidId_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
             var json = JsonSerializer.Serialize(_newAssetKeyValid);            
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
@@ -197,6 +214,7 @@ namespace TEP.IntegrationTest.API
         public async Task OnRequestDeleteAssetById_WithInvalidId_ReceivesOk()
         {
             //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
             var id = -1;
 
             var json = JsonSerializer.Serialize(_newAssetKeyValid);
