@@ -10,23 +10,21 @@ Besides providing services for storage and edition tools; score processing; and 
 - You will need the latest Visual Studio 2019 and the latest .NET Core SDK.
 - The latest SDK and tools can be downloaded from https://dot.net/core.
 
-## Target Technologies :
-(* 2 be done)
+## Technologies being Studied:
 - ASP.NET Core 3.1 (with .NET Core 3.1)
- - ASP.NET MVC Core 
- - ASP.NET WebApi Core with JWT Bearer Authentication *
+- ASP.NET MVC Core 
+- ASP.NET WebApi Core with JWT Bearer Authentication
 - Entity Framework Core 3.1
-- .NET Core Native DI *
+- .NET Core Native DI
 - AutoMapper
 - FluentValidation
 - MSTests
-- Coverage *
-- Swagger *
+- Coverage
+- Swagger
 
-## Target Architecture Principles:
-(a lot to be done)
+## Architecture Principles being Studied:
 - Full architecture with responsibility separation concerns, SOLID and Clean Code
-- Domain Driven Design (Layers and Domain Model Pattern)
+- Domain Driven Design
 - Domain Events
 - Domain Notification
 - Domain Validations
@@ -45,19 +43,10 @@ Besides providing services for storage and edition tools; score processing; and 
 #### AutoMapper:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
-* AutoMapper Complex Mapping in C#: https://dotnettutorials.net/lesson/automapper-with-nested-types/
-* Mapping Complex type to Primitive Type using AutoMapper in C#: https://dotnettutorials.net/lesson/mapping-complex-type-to-primitive-type-using-automapper/
-* Reverse Mapping Using AutoMapper in C#: https://dotnettutorials.net/lesson/reverse-mapping-using-automapper/
-* AutoMapper Conditional Mapping in C#: https://dotnettutorials.net/lesson/automapper-conditional-mapping-dotnet/
-* AutoMapper Ignore Property in C#: https://dotnettutorials.net/lesson/ignore-using-automapper-in-csharp/
-* UseValue ResolveUsing and Null Substitution in AutoMapper: https://dotnettutorials.net/lesson/usevalue-resolveusing-and-null-substitution-using-automapper/
 * 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
 
-#### EFC:
-* Entity Framework Core: https://docs.microsoft.com/pt-br/ef/core/
-* Criando uma API com ASP.NET Core 3 e EF Core 3 em menos de 15 minutos: https://www.youtube.com/watch?v=but7jqjopKM
-* Entity Framework Core Guide: https://www.learnentityframeworkcore.com/
-* Migrations: https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
+#### Caching
+* Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
 
 #### DDD:
 * Arquitetura em camadas com DDD: https://medium.com/@ericandrade_24404/parte-01-criando-arquitetura-em-camadas-com-ddd-inje%C3%A7%C3%A3o-de-dep-ef-60b851c88461
@@ -66,6 +55,12 @@ Besides providing services for storage and edition tools; score processing; and 
 * DDD: Repository Implementation Patterns: https://lostechies.com/jimmybogard/2009/09/03/ddd-repository-implementation-patterns/
 * Domain-Driven Design: Atacando as Complexidades no Coração do Software: https://www.amazon.com.br/Domain-Driven-Design-Eric-Evans/dp/8550800651
 * Services in Domain-Driven Design (DDD): http://gorodinski.com/blog/2012/04/14/services-in-domain-driven-design-ddd/
+
+#### EFC:
+* Entity Framework Core: https://docs.microsoft.com/pt-br/ef/core/
+* Criando uma API com ASP.NET Core 3 e EF Core 3 em menos de 15 minutos: https://www.youtube.com/watch?v=but7jqjopKM
+* Entity Framework Core Guide: https://www.learnentityframeworkcore.com/
+* Migrations: https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
 
 #### Docker: (future steps)
 * Azure na Prática Gratuito #2 - Docker: https://www.youtube.com/watch?v=AAp1N3gBWOU
