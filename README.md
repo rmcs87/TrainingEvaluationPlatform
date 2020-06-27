@@ -37,8 +37,11 @@ Besides providing services for storage and edition tools; score processing; and 
 
 #### Architecture
 * Advanced Architecture for ASP.NET Core Web API: https://www.infoq.com/articles/advanced-architecture-aspnet-core/
+* Common web application architectures: https://docs.microsoft.com/pt-br/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures
 * Fundamentos de Arquitetura de Software: https://www.youtube.com/watch?v=jUH5lKfpWE0
 * Modelo C4 de documentação: https://www.infoq.com/br/articles/C4-architecture-model/
+* Services: https://pt.stackoverflow.com/questions/365350/domain-driven-design-qual-a-diferen%C3%A7a-entre-domain-services-infrastructure-ser
+* A Brief Intro to Clean Architecture, Clean DDD, and CQRS: https://medium.com/software-alchemy/a-brief-intro-to-clean-architecture-clean-ddd-and-cqrs-23243c3f31b3
 
 #### AutoMapper:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
