@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TEP.Servicos.Api\TEP.Servicos.Api.csproj" />
+    <ProjectReference Include="..\TEP.Presentation.Api\TEP.Presentation.Api.csproj" />
   </ItemGroup>
 
 </Project>

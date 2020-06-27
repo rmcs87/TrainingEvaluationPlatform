@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TEP.Services.AuthProvider.Models;
+using TEP.Presentation.AuthProvider.Models;
 using TEP.Shared;
 
-namespace TEP.Services.AuthProvider.Repositories
+namespace TEP.Presentation.AuthProvider.Repositories
 {
     public static class UserRepository
     {

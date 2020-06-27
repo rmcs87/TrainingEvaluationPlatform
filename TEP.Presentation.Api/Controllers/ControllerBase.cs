@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
-using TEP.Servicos.Api.Controllers.Authorizers;
+using TEP.Presentation.Api.Controllers.Authorizers;
 using TEP.Shared;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Presentation.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

@@ -5,9 +5,9 @@ using System.IO;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json;
-using TEP.Services.AuthProvider.Models;
+using TEP.Presentation.AuthProvider.Models;
 
-namespace TEP.Services.AuthProvider.Services
+namespace TEP.Presentation.AuthProvider.Services
 {
     public static class TokenService
     {

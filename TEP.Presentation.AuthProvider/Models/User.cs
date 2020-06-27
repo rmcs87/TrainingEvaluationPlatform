@@ -1,6 +1,6 @@
 ﻿using TEP.Shared;
 
-namespace TEP.Services.AuthProvider.Models
+namespace TEP.Presentation.AuthProvider.Models
 {
     public class User
     {

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TEP.Services.AuthProvider.Models;
-using TEP.Services.AuthProvider.Repositories;
-using TEP.Services.AuthProvider.Services;
-using TEP.Servicos.Api.Controllers.Authorizers;
+using TEP.Presentation.Api.Controllers.Authorizers;
+using TEP.Presentation.AuthProvider.Models;
+using TEP.Presentation.AuthProvider.Repositories;
+using TEP.Presentation.AuthProvider.Services;
 using TEP.Shared;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Presentation.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/login")]

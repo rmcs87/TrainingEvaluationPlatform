@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TEP.Servicos.Api.Migrations
+namespace TEP.Presentation.Api.Migrations
 {
     public partial class db1 : Migration
     {

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,16 +8,14 @@ using TEP.Infra.Data.Contexto;
 using TEP.Infra.IoC;
 using TEP.Appication;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using FluentValidation.AspNetCore;
-using System.Reflection;
 using TEP.Appication.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using TEP.Services.AuthProvider.Services;
+using TEP.Presentation.AuthProvider.Services;
 using TEP.Shared;
 
-namespace TEP.Servicos.Api
+namespace TEP.Presentation.Api
 {
     public class Startup
     {
@@ -53,7 +50,7 @@ namespace TEP.Servicos.Api
             //services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
             //Change the migrations assembly, because when working with a DbContext that is in a separate project from your web app project it is necessary            
             var connectionString = Configuration.GetValue<string>("ConnectionStrings:teps");
-            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Servicos.Api")));
+            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Presentation.Api")));
 
             DependencyInjector.Register(services);
 

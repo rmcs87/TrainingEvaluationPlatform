@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
-using TEP.Servicos.Api.Controllers.Authorizers;
+using TEP.Presentation.Api.Controllers.Authorizers;
 using TEP.Shared;
 using TEP.Shared.Helpers;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Presentation.Api.Controllers
 {
     public class AssetController : ControllerBase<Asset, AssetDTO>
     {

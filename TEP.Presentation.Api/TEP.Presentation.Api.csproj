@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TEP.Appication\TEP.Appication.csproj" />
     <ProjectReference Include="..\TEP.Infra.IoC\TEP.Infra.IoC.csproj" />
-    <ProjectReference Include="..\TEP.Services.AuthProvider\TEP.Services.AuthProvider.csproj" />
+    <ProjectReference Include="..\TEP.Presentation.AuthProvider\TEP.Presentation.AuthProvider.csproj" />
   </ItemGroup>
 
 </Project>

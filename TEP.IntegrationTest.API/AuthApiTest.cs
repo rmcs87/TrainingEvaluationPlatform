@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TEP.Servicos.Api;
+using TEP.Presentation.Api;
 using TEP.Shared.Helpers;
 
 namespace TEP.IntegrationTest.API

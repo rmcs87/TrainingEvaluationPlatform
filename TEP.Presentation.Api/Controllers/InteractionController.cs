@@ -2,7 +2,7 @@
 using TEP.Appication.Interfaces;
 using TEP.Domain.Entities;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Presentation.Api.Controllers
 {
     public class InteractionController : ControllerBase<Interaction, InteractionDTO>
     {

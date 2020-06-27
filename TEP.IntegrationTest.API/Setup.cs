@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
-using TEP.Services.AuthProvider.Models;
+using TEP.Presentation.AuthProvider.Models;
 using TEP.Shared.Helpers;
 
 namespace TEP.IntegrationTest.API

@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
-using TEP.Servicos.Api;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text.Json;
 using TEP.Shared.Helpers;
+using TEP.Presentation.Api;
 
 namespace TEP.IntegrationTest.API
 {

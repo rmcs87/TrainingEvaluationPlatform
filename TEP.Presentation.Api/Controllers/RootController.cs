@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace TEP.Servicos.Api.Controllers
+namespace TEP.Presentation.Api.Controllers
 {
     public class RootController : Controller
     {
