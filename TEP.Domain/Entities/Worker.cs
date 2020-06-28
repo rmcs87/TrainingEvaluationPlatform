@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TEP.Domain.Common;
 
 namespace TEP.Domain.Entities
 {
-    public abstract class Worker:EntityBase
+    public abstract class Worker : AuditableEntity
     {
+        public int Id { get; private set; }
         public string Name { get; private set; }
         public int Registry { get; private set; }
     }

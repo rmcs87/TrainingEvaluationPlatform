@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using TEP.Domain.Common;
 using TEP.Domain.ValueObjects;
 using TEP.Shared.ValueObjects;
 
@@ -9,7 +9,7 @@ namespace TEP.Domain.Entities
     /// <summary>
     /// A Step is part of procedure that may be contitued of several sequential or parallel substeps.
     /// </summary>
-    public abstract class Step : EntityBase
+    public abstract class Step : AuditableEntity
     {
         //Constructors
         /// <summary>
@@ -29,6 +29,7 @@ namespace TEP.Domain.Entities
         protected Duration _limitDuration;
 
         //Properties
+        public int Id { get; private set; }
         /// <summary>
         /// Gets if this Step is being executed
         /// </summary>

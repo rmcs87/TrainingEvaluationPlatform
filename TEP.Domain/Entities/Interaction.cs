@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using TEP.Domain.ValueObjects;
+using TEP.Domain.Common;
 
 namespace TEP.Domain.Entities
 {
     /// <summary>
     /// Class that represents an Interaction made by the Operator in a procedure. 
     /// </summary>
-    public class Interaction : EntityBase
+    public class Interaction : AuditableEntity
     {
         //Constructors
         private Interaction()
@@ -68,9 +69,10 @@ namespace TEP.Domain.Entities
             TimeLimit = timeLimit;
             Target = (Asset) target;
         }
-        
+
 
         //Properties
+        public int Id { get; private set; }
         /// <summary>
         /// Gets the Categories related to this Interaction.
         /// </summary>

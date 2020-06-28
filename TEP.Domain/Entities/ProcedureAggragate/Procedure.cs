@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using System.Linq;
-using TEP.Domain.Entities;
+using TEP.Domain.Common;
 
 namespace TEP.Domain.Entities
 {
-    public class Procedure : EntityBase
+    public class Procedure : AuditableEntity
     {
         //Constructor
         private Procedure()
@@ -32,6 +32,8 @@ namespace TEP.Domain.Entities
         private Interaction _currentInteraction;
 
         //Properties
+        public int Id { get; private set; }
+
         /// <summary>
         /// Gets this procedure's description.
         /// </summary>

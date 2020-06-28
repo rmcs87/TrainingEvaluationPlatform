@@ -1,11 +1,10 @@
 ﻿using System;
-using TEP.Domain.Interfaces;
+using TEP.Domain.Common;
 using TEP.Domain.ValueObjects;
-using TEP.GraphProcessor;
 
 namespace TEP.Domain.Entities
 {
-    public class TrainningSession : EntityBase
+    public class TrainningSession : AuditableEntity
     {
         private TrainningSession()
         {
@@ -20,7 +19,7 @@ namespace TEP.Domain.Entities
         /// <param name="operator">The person who is performing the trainning session.</param>
         /// <param name="supervisor">The person who is surpevising the trainning session.</param>
         /// <param name="performance">The results of the trainning.</param>
-        public TrainningSession(Procedure targetProcedure, Procedure executedProcedure, DateTime date, Operator @operator, Supervisor supervisor, Performance performance, IGraphProcessor graphProcessor)
+        public TrainningSession(Procedure targetProcedure, Procedure executedProcedure, DateTime date, Operator @operator, Supervisor supervisor, Performance performance)
         {
             TargetProcedure = targetProcedure;
             ExecutedProcedure = executedProcedure;
@@ -28,16 +27,13 @@ namespace TEP.Domain.Entities
             Operator = @operator;
             Supervisor = supervisor;
             Performance = performance;
-            _graphProcessor = graphProcessor;
         }
-
-        //private
-        private IGraphProcessor _graphProcessor;
 
         //Properties
         /// <summary>
         /// Gets the procedure executed in this trainning.
         /// </summary>
+        public int Id { get; private set; }
         public Procedure TargetProcedure { get; private set; }
         /// <summary>
         /// Gets the procedure executed in this trainning.
