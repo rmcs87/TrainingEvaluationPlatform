@@ -18,6 +18,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - .NET Core Native DI
 - AutoMapper
 - FluentValidation
+- MediatR
 - MSTests
 - Coverage
 - Swagger
