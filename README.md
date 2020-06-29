@@ -29,7 +29,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - Domain Events
 - Domain Notification
 - Domain Validations
-- CQRS (Imediate Consistency)
+- CQRS
 - Event Sourcing
 - Unit of Work
 - Repository
@@ -81,8 +81,10 @@ Besides providing services for storage and edition tools; score processing; and 
 #### Fluent Validation
 * Fluent validation: https://fluentvalidation.net/
 
-#### Interisting Projects:
-* EquinoxProject: https://github.com/EduardoPires/EquinoxProject
+#### MediatR
+* Mediator Pattern com MediatR no ASP.NET Core: https://www.treinaweb.com.br/blog/mediator-pattern-com-mediatr-no-asp-net-core/
+* Clean ASP.NET Core API using MediatR and CQRS: https://www.youtube.com/watch?v=YzOBrVlthMk
+* Validation using MediatR's Pipeline Behaviors and FluentValidation: https://www.youtube.com/watch?v=2JzQuIvxIqk
 
 #### REST
 * SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
