@@ -86,6 +86,9 @@ Besides providing services for storage and edition tools; score processing; and 
 * Clean ASP.NET Core API using MediatR and CQRS: https://www.youtube.com/watch?v=YzOBrVlthMk
 * Validation using MediatR's Pipeline Behaviors and FluentValidation: https://www.youtube.com/watch?v=2JzQuIvxIqk
 
+### Logging
+* Logging in .NET Core 3.0 and Beyond: https://www.youtube.com/watch?v=oXNslgIXIbQ
+
 #### REST
 * SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
 * What is REST: https://restfulapi.net/
