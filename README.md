@@ -49,6 +49,10 @@ Besides providing services for storage and edition tools; score processing; and 
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
 * 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
 
+#### Await/Async
+* C# Async / Await: https://www.youtube.com/watch?v=2moh18sh5p4
+* C# Advanced Async: https://www.youtube.com/watch?v=ZTKGRJy5P2M
+
 #### Caching:
 * Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
 
@@ -74,19 +78,19 @@ Besides providing services for storage and edition tools; score processing; and 
 * Docker - Guia de Referência Gratuito:
 [Docker Guide](https://medium.com/@renato.groffe/docker-guia-de-refer%C3%AAncia-gratuito-70c14cfd8132 "Docker Guide")
 
-#### Good Practices:
-* Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
-* Clean Code: https://www.pearson.ch/Informatik/PrenticeHall/EAN/9780132350884/Clean-Code
-
 #### Fluent Validation
 * Fluent validation: https://fluentvalidation.net/
+
+#### Good Practices
+* Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
+* Clean Code: https://www.pearson.ch/Informatik/PrenticeHall/EAN/9780132350884/Clean-Code
 
 #### MediatR
 * Mediator Pattern com MediatR no ASP.NET Core: https://www.treinaweb.com.br/blog/mediator-pattern-com-mediatr-no-asp-net-core/
 * Clean ASP.NET Core API using MediatR and CQRS: https://www.youtube.com/watch?v=YzOBrVlthMk
 * Validation using MediatR's Pipeline Behaviors and FluentValidation: https://www.youtube.com/watch?v=2JzQuIvxIqk
 
-### Logging
+#### Logging
 * Logging in .NET Core 3.0 and Beyond: https://www.youtube.com/watch?v=oXNslgIXIbQ
 
 #### REST
