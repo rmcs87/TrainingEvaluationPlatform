@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using TEP.Appication.Interfaces;
-using TEP.Appication.Services;
+using TEP.Application.Interfaces;
+using TEP.Application.Services;
 using TEP.Domain.Interfaces.Repositories;
 using TEP.Domain.Interfaces.Services;
 using TEP.Domain.Services;

@@ -4,9 +4,8 @@ namespace TEP.Domain.Entities
 {
     public class Asset : AuditableEntity
     {
-        private Asset()
+        public Asset()
         {
-
         }
 
         public Asset(string filePath, string name, string imgPath)
@@ -18,10 +17,10 @@ namespace TEP.Domain.Entities
 
         public int Id { get; private set; }
 
-        public string FilePath { get; private set; }
+        public string FilePath { get; set; }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public string ImgPath { get; private set; }
+        public string ImgPath { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TEP.Appication;
+using TEP.Application;
 
 namespace TEP.Application.Tests
 {
