@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace TEP.Application.Common.Mappings
 {
-    public class MappingProfile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
@@ -24,7 +23,8 @@ namespace TEP.Application.Common.Mappings
             {
                 var instance = Activator.CreateInstance(type);
 
-                var methodInfo = type.GetMethod("Mapping") ?? type.GetInterface("IMapFrom").GetMethod("Mapping");
+                //Why `1 ? -> https://docs.microsoft.com/pt-br/dotnet/api/system.type.getinterface?view=netcore-3.1
+                var methodInfo = type.GetMethod("Mapping") ?? type.GetInterface("IMapFrom`1").GetMethod("Mapping");
 
                 methodInfo?.Invoke(instance, new object[] { this });
             }
