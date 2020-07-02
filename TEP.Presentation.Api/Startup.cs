@@ -19,13 +19,13 @@ namespace TEP.Presentation.Api
 {
     public class Startup
     {
-
+        https://docs.microsoft.com/pt-br/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#secret-manager
         /*public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }*/
 
-
+            https://docs.microsoft.com/pt-br/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#secret-manager
         //To load and inject the configuration settings from multiple Configuration Files
         public Startup(IWebHostEnvironment env)
         {
