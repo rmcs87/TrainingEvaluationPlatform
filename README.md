@@ -18,6 +18,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - .NET Core Native DI
 - AutoMapper
 - FluentValidation
+- MediatR
 - MSTests
 - Coverage
 - Swagger
@@ -28,7 +29,7 @@ Besides providing services for storage and edition tools; score processing; and 
 - Domain Events
 - Domain Notification
 - Domain Validations
-- CQRS (Imediate Consistency)
+- CQRS
 - Event Sourcing
 - Unit of Work
 - Repository
@@ -47,6 +48,10 @@ Besides providing services for storage and edition tools; score processing; and 
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
 * AutoMapper in C#: https://dotnettutorials.net/lesson/automapper-in-c-sharp/
 * 5 AutoMapper tips and tricks: https://www.codeproject.com/articles/814869/automapper-tips-and-tricks
+
+#### Await/Async
+* C# Async / Await: https://www.youtube.com/watch?v=2moh18sh5p4
+* C# Advanced Async: https://www.youtube.com/watch?v=ZTKGRJy5P2M
 
 #### Caching:
 * Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
@@ -73,15 +78,20 @@ Besides providing services for storage and edition tools; score processing; and 
 * Docker - Guia de Referência Gratuito:
 [Docker Guide](https://medium.com/@renato.groffe/docker-guia-de-refer%C3%AAncia-gratuito-70c14cfd8132 "Docker Guide")
 
-#### Good Practices:
-* Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
-* Clean Code: https://www.pearson.ch/Informatik/PrenticeHall/EAN/9780132350884/Clean-Code
-
 #### Fluent Validation
 * Fluent validation: https://fluentvalidation.net/
 
-#### Interisting Projects:
-* EquinoxProject: https://github.com/EduardoPires/EquinoxProject
+#### Good Practices
+* Documentando o código no Visual Studio: https://www.devmedia.com.br/documentando-o-codigo-no-visual-studio/28927
+* Clean Code: https://www.pearson.ch/Informatik/PrenticeHall/EAN/9780132350884/Clean-Code
+
+#### MediatR
+* Mediator Pattern com MediatR no ASP.NET Core: https://www.treinaweb.com.br/blog/mediator-pattern-com-mediatr-no-asp-net-core/
+* Clean ASP.NET Core API using MediatR and CQRS: https://www.youtube.com/watch?v=YzOBrVlthMk
+* Validation using MediatR's Pipeline Behaviors and FluentValidation: https://www.youtube.com/watch?v=2JzQuIvxIqk
+
+#### Logging
+* Logging in .NET Core 3.0 and Beyond: https://www.youtube.com/watch?v=oXNslgIXIbQ
 
 #### REST
 * SOAP vs REST vs JSON: https://raygun.com/blog/soap-vs-rest-vs-json/
@@ -99,9 +109,11 @@ Besides providing services for storage and edition tools; score processing; and 
 * Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
 * Moq QuickStart:  https://github.com/Moq/moq4/wiki/Quickstart
 * Como Testar o ASP.NET Core Web API: https://www.infoq.com/br/articles/testing-aspnet-core-web-api/
+* MSTest Cheat Sheet: https://www.automatetheplanet.com/wp-content/uploads/2018/05/mstest-cheat-sheet-automatetheplanet.pdf || https://www.automatetheplanet.com/mstest-cheat-sheet/
 
 #### Others:
 * Efficient post calls with HttpClient and JSON.NET: https://johnthiriet.com/efficient-post-calls/
 * Upload files: https://docs.microsoft.com/pt-br/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
 * multipart requests with JSON and file: https://thomaslevesque.com/2018/09/04/handling-multipart-requests-with-json-and-file-uploads-in-asp-net-core/
+* Dependency injection: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
 
