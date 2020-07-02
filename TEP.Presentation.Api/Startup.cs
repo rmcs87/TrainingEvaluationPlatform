@@ -49,8 +49,8 @@ namespace TEP.Presentation.Api
 
             //services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
             //Change the migrations assembly, because when working with a DbContext that is in a separate project from your web app project it is necessary            
-            var connectionString = Configuration.GetValue<string>("ConnectionStrings:teps");
-            services.AddDbContext<Context>(o => o.UseSqlServer(connectionString, b => b.MigrationsAssembly("TEP.Presentation.Api")));
+            
+            
 
             DependencyInjector.Register(services);
 
