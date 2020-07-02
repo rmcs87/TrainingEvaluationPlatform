@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Application", "TEP.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.Persistence", "TEP.Infra.Persistence\TEP.Infra.Persistence.csproj", "{8E6415D7-1578-4B14-9340-D4969E67DC43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Infra.AuthProvider", "TEP.Infra.AuthProvider\TEP.Infra.AuthProvider.csproj", "{964528F2-D25C-4BDB-9C1F-39F114F41209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{8E6415D7-1578-4B14-9340-D4969E67DC43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E6415D7-1578-4B14-9340-D4969E67DC43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E6415D7-1578-4B14-9340-D4969E67DC43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964528F2-D25C-4BDB-9C1F-39F114F41209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964528F2-D25C-4BDB-9C1F-39F114F41209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964528F2-D25C-4BDB-9C1F-39F114F41209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964528F2-D25C-4BDB-9C1F-39F114F41209}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{D46B2A6F-3E4C-4678-BB8E-5F53C7BF04FB} = {C5FF4ADC-8E4B-4DA4-9901-0D6EA135BCC4}
 		{BE355800-0C49-46D8-949F-7E32F5360F13} = {7FB3EEE1-E7AF-4BE8-B46C-C9A3053DF3B0}
 		{8E6415D7-1578-4B14-9340-D4969E67DC43} = {C5FF4ADC-8E4B-4DA4-9901-0D6EA135BCC4}
+		{964528F2-D25C-4BDB-9C1F-39F114F41209} = {C5FF4ADC-8E4B-4DA4-9901-0D6EA135BCC4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66D034E1-58B9-4DA6-B9C3-C564BF4425F9}

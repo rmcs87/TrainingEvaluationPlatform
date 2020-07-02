@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TEP.Domain.Entities;
 
-namespace TEP.Infra.Data.Configurations
+namespace TEP.Infra.Persistence.Configurations
 {
     public class AssetConfiguration : IEntityTypeConfiguration<Asset>
     {

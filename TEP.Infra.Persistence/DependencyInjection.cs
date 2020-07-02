@@ -2,9 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TEP.Application.Common.Interfaces;
-using TEP.Infra.Data.Contexto;
 
-namespace TEP.Infra.Data
+namespace TEP.Infra.Persistence
 {
     public static class DependencyInjection
     {

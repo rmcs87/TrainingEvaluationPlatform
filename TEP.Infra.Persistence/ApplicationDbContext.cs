@@ -6,7 +6,7 @@ using TEP.Application.Common.Interfaces;
 using TEP.Domain.Common;
 using TEP.Domain.Entities;
 
-namespace TEP.Infra.Data.Contexto
+namespace TEP.Infra.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
