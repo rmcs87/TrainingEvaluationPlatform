@@ -10,9 +10,9 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetComamndtHandler : IRequestHandler<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileService _fileHandler;
 
-        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileHandler fileHandler)
+        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileService fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

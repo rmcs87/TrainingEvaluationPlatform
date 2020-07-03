@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TEP.Application\TEP.Application.csproj" />
+  </ItemGroup>
+
 </Project>

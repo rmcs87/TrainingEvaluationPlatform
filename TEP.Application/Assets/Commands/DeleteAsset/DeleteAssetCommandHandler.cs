@@ -13,9 +13,9 @@ namespace TEP.Application.Assets.Commands.DeleteAsset
     public class DeleteAssetCommandHandler : IRequestHandler<DeleteAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileService _fileHandler;
 
-        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileHandler fileHandler)
+        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileService fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

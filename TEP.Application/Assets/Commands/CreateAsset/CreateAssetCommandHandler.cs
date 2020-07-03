@@ -9,9 +9,9 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, int>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileService _fileHandler;
 
-        public CreateAssetCommandHandler(IApplicationDbContext context, IFileHandler fileHandler)
+        public CreateAssetCommandHandler(IApplicationDbContext context, IFileService fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

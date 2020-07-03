@@ -12,9 +12,9 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandValidator : AbstractValidator<CreateAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileService _fileHandler;
 
-        public CreateAssetCommandValidator(IApplicationDbContext context, IFileHandler fileHandler)
+        public CreateAssetCommandValidator(IApplicationDbContext context, IFileService fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

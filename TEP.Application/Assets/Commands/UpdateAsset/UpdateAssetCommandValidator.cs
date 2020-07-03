@@ -9,9 +9,9 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetCommandValidator : AbstractValidator<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileHandler _fileHandler;
+        private readonly IFileService _fileHandler;
 
-        public UpdateAssetCommandValidator(IApplicationDbContext context, IFileHandler fileHandler)
+        public UpdateAssetCommandValidator(IApplicationDbContext context, IFileService fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;
