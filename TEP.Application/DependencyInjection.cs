@@ -1,5 +1,4 @@
-﻿u
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;

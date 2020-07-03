@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Commands.CreateAsset
@@ -9,9 +10,9 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, int>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public CreateAssetCommandHandler(IApplicationDbContext context, IFileService fileHandler)
+        public CreateAssetCommandHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

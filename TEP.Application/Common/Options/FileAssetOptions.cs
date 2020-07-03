@@ -10,6 +10,6 @@ namespace TEP.Application.Common.Options
 
         public string NameSalt => "AssetFile";
 
-        public string[] SupportedFilesExtension => new string[] { ".jpg", ".jpeg", ".png" };
+        public string[] SupportedFilesExtension => new string[] { ".jpg" };
     }
 }

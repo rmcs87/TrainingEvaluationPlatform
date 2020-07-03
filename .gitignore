@@ -5,6 +5,7 @@
 
 #configuration files
 **/privateSettings.json
+
 **/fileStorage/*.jpg
 **/fileStorage/*.jpeg
 **/fileStorage/*.png

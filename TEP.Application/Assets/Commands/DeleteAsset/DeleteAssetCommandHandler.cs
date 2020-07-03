@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Commands.DeleteAsset
@@ -13,9 +14,9 @@ namespace TEP.Application.Assets.Commands.DeleteAsset
     public class DeleteAssetCommandHandler : IRequestHandler<DeleteAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileService fileHandler)
+        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

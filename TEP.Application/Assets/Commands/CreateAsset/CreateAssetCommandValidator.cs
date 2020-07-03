@@ -6,15 +6,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 
 namespace TEP.Application.Assets.Commands.CreateAsset
 {
     public class CreateAssetCommandValidator : AbstractValidator<CreateAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public CreateAssetCommandValidator(IApplicationDbContext context, IFileService fileHandler)
+        public CreateAssetCommandValidator(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

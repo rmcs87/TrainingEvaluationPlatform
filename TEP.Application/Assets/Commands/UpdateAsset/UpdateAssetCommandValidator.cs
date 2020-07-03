@@ -3,15 +3,16 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 
 namespace TEP.Application.Assets.Commands.UpdateAsset
 {
     public class UpdateAssetCommandValidator : AbstractValidator<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public UpdateAssetCommandValidator(IApplicationDbContext context, IFileService fileHandler)
+        public UpdateAssetCommandValidator(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;

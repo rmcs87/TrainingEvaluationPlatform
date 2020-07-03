@@ -17,8 +17,11 @@ namespace TEP.Infra.Files
 
             try
             {
-                using var stream = File.Create(filePath);
-                await data.CopyToAsync(stream);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    await data.CopyToAsync(stream);
+                }
+
             }
             catch (Exception ex)
             {

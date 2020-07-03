@@ -38,9 +38,9 @@ namespace TEP.Infra.Files
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "File Removal: {FileName} {BasePath}", fileName, _options.BasePath);
+                _logger.LogError(ex, "File Retrieval: {FileName} {BasePath}", fileName, _options.BasePath);
 
-                throw new FileRemovalException("File Could not be deleted");
+                throw new FileRetrievalException("File Could not be recovered.");
             }
         }
 

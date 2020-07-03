@@ -6,5 +6,8 @@ namespace TEP.Infra.Files.Exceptions
 {
     public class FileRetrievalException : Exception
     {
+        public FileRetrievalException(string message) : base(message)
+        {
+        }
     }
 }

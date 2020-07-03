@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Commands.UpdateAsset
@@ -10,9 +11,9 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetComamndtHandler : IRequestHandler<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileService fileHandler)
+        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
             _fileHandler = fileHandler;
