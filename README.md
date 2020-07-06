@@ -105,6 +105,7 @@ Besides providing services for storage and edition tools; score processing; and 
 * Policy based role checks: https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
 
 #### Tests:
+* Test-Driven Development: https://tdd.caelum.com.br/
 * Unit test your code: https://docs.microsoft.com/pt-br/visualstudio/test/unit-test-your-code?view=vs-2019
 * Mocking em testes unitários com o framework Moq: https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724
 * Moq QuickStart:  https://github.com/Moq/moq4/wiki/Quickstart
