@@ -13,12 +13,10 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandValidator : AbstractValidator<CreateAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public CreateAssetCommandValidator(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
+        public CreateAssetCommandValidator(IApplicationDbContext context)
         {
             _context = context;
-            _fileHandler = fileHandler;
 
             RuleFor(a => a.Name)
                 .NotEmpty().WithMessage("Title is required.")
@@ -29,7 +27,7 @@ namespace TEP.Application.Assets.Commands.CreateAsset
                 .NotEmpty().WithMessage("File Path is required.");
 
             RuleFor(a => a.Image)
-                .NotNull().WithMessage("Image File Path is required.");
+                .NotNull().WithMessage("Image File is required.");
         }
 
         private async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)

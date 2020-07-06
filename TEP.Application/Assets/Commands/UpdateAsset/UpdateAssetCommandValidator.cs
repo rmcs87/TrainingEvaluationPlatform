@@ -10,12 +10,10 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetCommandValidator : AbstractValidator<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileHandler;
 
-        public UpdateAssetCommandValidator(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
+        public UpdateAssetCommandValidator(IApplicationDbContext context)
         {
             _context = context;
-            _fileHandler = fileHandler;
 
             RuleFor(a => a.Name)
                 .NotEmpty().WithMessage("Title is required.")

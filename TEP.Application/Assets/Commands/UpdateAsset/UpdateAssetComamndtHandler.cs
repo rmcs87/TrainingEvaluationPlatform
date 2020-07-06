@@ -11,25 +11,33 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetComamndtHandler : IRequestHandler<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileHandler;
+        private readonly IFileService<FileAssetOptions> _fileService;
 
         public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
         {
             _context = context;
-            _fileHandler = fileHandler;
+            _fileService = fileHandler;
         }
 
         public async Task<Unit> Handle(UpdateAssetComamnd request, CancellationToken cancellationToken)
         {
+            string newImgPath = "";
             var asset = await _context.Assets.FindAsync(request.Id);
-
+            
             if (asset == null)
                 throw new NotFoundException(nameof(Asset), request.Id);
 
+            if(request.Image != null)
+            {
+                newImgPath = await _fileService.SaveFile(request.Image);
+                _fileService.RemoveFile(asset.ImgPath);
+            }
+
             asset.Name = request.Name;
-            asset.ImgPath = "updated image path"; //Vai depender aqui se houve mudança no arquivo....
+            asset.ImgPath = newImgPath;
             asset.FilePath = request.FilePath;
 
+            await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
