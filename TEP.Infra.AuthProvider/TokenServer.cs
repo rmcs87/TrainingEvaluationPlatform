@@ -12,10 +12,7 @@ using TEP.Application.Common.Interfaces;
 namespace TEP.Infra.AuthProvider
 {
     public class TokenServer : ITokenService
-    {
-        private readonly RandomNumberGenerator Rng = RandomNumberGenerator.Create();
-        private readonly string MyJwkLocation = Path.Combine(Environment.CurrentDirectory, "myssecretkey.json");
-
+    {        
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _configuration;
 
@@ -31,7 +28,9 @@ namespace TEP.Infra.AuthProvider
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Loadkey();
+            var keyLocation = Path.Combine(Environment.CurrentDirectory, _configuration["keyFileName"]);
+
+            var key = KeyGenerator.Loadkey(keyLocation);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -47,30 +46,7 @@ namespace TEP.Infra.AuthProvider
             return tokenHandler.WriteToken(token);
         }
 
-        public SecurityKey Loadkey()
-        {
-            if (File.Exists(MyJwkLocation))
-                return JsonSerializer.Deserialize<JsonWebKey>(File.ReadAllText(MyJwkLocation));
-
-            var newKey = CreateJWK();
-            File.WriteAllText(MyJwkLocation, JsonSerializer.Serialize(newKey));
-            return newKey;
-        }
-
-        private JsonWebKey CreateJWK()
-        {
-            var symetricKey = new HMACSHA256(GenerateKey(64));
-            var jwk = JsonWebKeyConverter.ConvertFromSymmetricSecurityKey(new SymmetricSecurityKey(symetricKey.Key));
-            jwk.KeyId = Base64UrlEncoder.Encode(GenerateKey(16));
-            return jwk;
-        }
-
-        private byte[] GenerateKey(int bytes)
-        {
-            var data = new byte[bytes];
-            Rng.GetBytes(data);
-            return data;
-        }
+        
 
     }
 }

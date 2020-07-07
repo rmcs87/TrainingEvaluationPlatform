@@ -10,6 +10,7 @@ namespace TEP.Infra.AuthProvider
         public static IServiceCollection AddAuthProvider(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IIdentityService, IdentityServer>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<ITokenService, TokenServer>();
 
             return services;

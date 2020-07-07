@@ -10,12 +10,12 @@ using TEP.Infra.Files.Exceptions;
 
 namespace TEP.Infra.Files
 {
-    public class FileServer : IFileService<IFileOptions>
+    public class FileServer : IFileService<FileAssetOptions>
     {
         private readonly IFileOptions _options;
         private readonly ILogger _logger;
 
-        public FileServer(IOptionsMonitor<IFileOptions> optionsAccessor, ILogger logger)
+        public FileServer(IOptionsMonitor<FileAssetOptions> optionsAccessor, ILogger logger)
         {
             _options = optionsAccessor.CurrentValue;
             _logger = logger;

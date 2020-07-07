@@ -9,7 +9,7 @@ namespace TEP.Infra.Persistence
     {
         public static IServiceCollection AddInfraPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetValue<string>("ConnectionStrings:teps");
+            var connectionString = configuration["ConnectionStrings:teps"];
             services.AddDbContext<ApplicationDbContext>(o =>
                 o.UseSqlServer(connectionString,
                                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));

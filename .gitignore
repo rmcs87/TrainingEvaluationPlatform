@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #configuration files
-**/privateSettings.json
+**/myssecretkey.json
 
 **/fileStorage/*.jpg
 **/fileStorage/*.jpeg

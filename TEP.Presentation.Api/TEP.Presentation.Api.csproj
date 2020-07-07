@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>58874dd7-9c8b-44fe-9809-8b95b72f97be</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,25 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TEP.Application\TEP.Application.csproj" />
+    <ProjectReference Include="..\TEP.Infra.AuthProvider\TEP.Infra.AuthProvider.csproj" />
+    <ProjectReference Include="..\TEP.Infra.DateTimeService\TEP.Infra.DateTimeService.csproj" />
+    <ProjectReference Include="..\TEP.Infra.Files\TEP.Infra.Files.csproj" />
+    <ProjectReference Include="..\TEP.Infra.Persistence\TEP.Infra.Persistence.csproj" />
+    <ProjectReference Include="..\TEP.Shared\TEP.Shared.csproj" />
   </ItemGroup>
 
 </Project>

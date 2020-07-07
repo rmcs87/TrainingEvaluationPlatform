@@ -1,107 +1,97 @@
-//using Microsoft.AspNetCore.Builder;
-//using Microsoft.AspNetCore.Hosting;
-//using Microsoft.Extensions.Configuration;
-//using Microsoft.Extensions.DependencyInjection;
-//using Microsoft.Extensions.Hosting;
-//using AutoMapper;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using TEP.Shared;
+using TEP.Application;
+using TEP.Infra.AuthProvider;
+using TEP.Infra.Files;
+using TEP.Infra.Persistence;
+using System.IO;
+using System;
+using TEP.Infra.DateTimeService;
 
-//namespace TEP.Presentation.Api
-//{
-//    public class Startup
-//    {
-//        //https://docs.microsoft.com/pt-br/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#secret-manager
-//        /*public Startup(IConfiguration configuration)
-//        {
-//            Configuration = configuration;
-//        }*/
+namespace TEP.Presentation.Api
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-//            //https://docs.microsoft.com/pt-br/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows#secret-manager
-//        //To load and inject the configuration settings from multiple Configuration Files
-//        public Startup(IWebHostEnvironment env)
-//        {
-//            var builder = new ConfigurationBuilder();
-//            builder.SetBasePath(env.ContentRootPath);
-//            builder.AddJsonFile("appsettings.json", false, true);
-//            builder.AddJsonFile("privateSettings.json", true, true);
+        public IConfiguration Configuration { get; }
 
-//            Configuration = builder.Build();
-//        }
+        public void ConfigureServices(IServiceCollection services)
+        {         
+            services.AddControllers();
+            services.AddHttpContextAccessor();
+
+            services.AddFileService();
+            services.AddInfraPersistence(Configuration);
+            services.AddAuthProvider(Configuration);
+            services.AddApplication(Configuration);
+            services.AddDateTime();
 
 
-//        public IConfiguration Configuration { get; }
 
-//        // This method gets called by the runtime. Use this method to add services to the container.
-//        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-//        public void ConfigureServices(IServiceCollection services)
-//        {
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(UserPolicies.AdministratorRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString()));
+                options.AddPolicy(UserPolicies.ManagerRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString(),
+                                                  UserRoles.Manager.ToString()));
+                options.AddPolicy(UserPolicies.SupervisorRights.ToString(),
+                     policy => policy.RequireRole(UserRoles.Admin.ToString(),
+                                                  UserRoles.Manager.ToString(),
+                                                  UserRoles.Supervisor.ToString()));
+            });
 
-//            services.AddSingleton<IConfiguration>(Configuration);
+            var keyLocation = Path.Combine(Environment.CurrentDirectory, Configuration["keyFileName"]);
+            var key = KeyGenerator.Loadkey(keyLocation);
 
-//            //services.AddDbContext<Context>(o => o.UseSqlServer(Configuration.GetConnectionString("teps")));
-//            //Change the migrations assembly, because when working with a DbContext that is in a separate project from your web app project it is necessary            
-            
-            
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
-//            DependencyInjector.Register(services);
+        }
 
-//            services.AddAutoMapper(x => x.AddProfile(new MappingEntity()), typeof(Startup));
-//            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AssetDTOValidator>());
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
-//            services.AddAuthorization(options =>
-//            {
-//                options.AddPolicy(UserPolicies.AdministratorRights.ToString(),
-//                     policy => policy.RequireRole(UserRoles.Admin.ToString()));
-//                options.AddPolicy(UserPolicies.ManagerRights.ToString(),
-//                     policy => policy.RequireRole(UserRoles.Admin.ToString(), 
-//                                                  UserRoles.Manager.ToString()));
-//                options.AddPolicy(UserPolicies.SupervisorRights.ToString(),
-//                     policy => policy.RequireRole(UserRoles.Admin.ToString(), 
-//                                                  UserRoles.Manager.ToString(), 
-//                                                  UserRoles.Supervisor.ToString()));
-//            });
+            app.UseRouting();
 
-//            var key = TokenService.Loadkey();
-//            services.AddAuthentication(x =>
-//            {
-//                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//            })
-//                .AddJwtBearer(x =>
-//                {
-//                    x.RequireHttpsMetadata = false;
-//                    x.SaveToken = true;
-//                    x.TokenValidationParameters = new TokenValidationParameters
-//                    {
-//                        ValidateIssuerSigningKey = true,
-//                        IssuerSigningKey = key,
-//                        ValidateIssuer = false,
-//                        ValidateAudience = false
-//                    };
-//                });
+            app.UseCors(a => a.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-//        }
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-//        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-//        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-//        {
-//            if (env.IsDevelopment())
-//            {
-//                app.UseDeveloperExceptionPage();
-//            }
-
-//            app.UseRouting();
-
-//            app.UseCors(a => a.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-
-//            app.UseAuthentication();
-//            app.UseAuthorization();
-
-//            app.UseEndpoints(endpoints =>
-//            {
-//                endpoints.MapControllers();
-//            });
-//        }
-//    }
-//}
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
+}

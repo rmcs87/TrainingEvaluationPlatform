@@ -10,7 +10,5 @@ namespace TEP.Appication.DTO
         public string FilePath { get; set; }
         public string Name { get; set; }
         public string ImgPath { get; set; }
-        //public IFormFile Image { get; set; }
-
     }
 }

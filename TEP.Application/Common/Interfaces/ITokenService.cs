@@ -6,6 +6,5 @@ namespace TEP.Application.Common.Interfaces
     public interface ITokenService
     {
         Task<string> GenerateTokenAsync(string userId);
-        SecurityKey Loadkey();
     }
 }
