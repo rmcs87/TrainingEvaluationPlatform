@@ -12,5 +12,6 @@ namespace TEP.Application.Common.Interfaces
         Task<ApplicationUser> GetUserAsync(string userId);
         Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password);
         Task<Result> DeleteUserAsync(string userId);
+        ApplicationUser ValidateLogin(string userName, string password);
     }
 }

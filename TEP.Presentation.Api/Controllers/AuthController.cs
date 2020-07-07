@@ -1,41 +1,50 @@
-﻿//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Mvc;
-//using System.Threading.Tasks;
-//using TEP.Presentation.Api.Controllers.Authorizers;
-//using TEP.Presentation.AuthProvider.Models;
-//using TEP.Presentation.AuthProvider.Repositories;
-//using TEP.Presentation.AuthProvider.Services;
-//using TEP.Shared;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using TEP.Application.Assets.Commands.CreateAsset;
+using TEP.Application.Auth.Commands;
+using TEP.Presentation.Api.Controllers.Authorizers;
+using TEP.Shared;
 
-//namespace TEP.Presentation.Api.Controllers
-//{
-//    [Produces("application/json")]
-//    [Route("api/login")]
-//    [Authorize]
-//    public class AuthController : Controller
-//    {
-//        [HttpPost]
-//        [AllowAnonymous]
-//        public async Task<ActionResult> Authenticate([FromBody]User data)
-//        {
-//            var user = UserRepository.Get(data.Username, data.Password);
+namespace TEP.Presentation.Api.Controllers
+{    
 
-//            if (user == null)
-//                return NotFound(new { message = "Usuário ou senha inválidos" });
+    [Produces("application/json")]
+    [Route("api/login")]
+    [Authorize]
+    public class AuthController : ControllerBase
+    {
+        private readonly IMediator _mediator;
+        public AuthController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-//            var token = TokenService.GenerateToken(user);
-//            user.Password = "";
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Authenticate([FromBody]AuthenticateCommand command)
+        {
+            try
+            {
+                var token = await _mediator.Send(command);
+                return new OkObjectResult(token);
+            }
+            catch (Exception e)
+            {
 
-//            return new OkObjectResult(new { user, token });
-//        }
+                return new UnauthorizedObjectResult(e.Message);
+            }
+        }
 
-//        [HttpGet]
-//        [Route("auth_test")]
-//        [AuthorizePolicy(UserPolicies.ManagerRights)]
-//        public async Task<IActionResult> TestPermissions()
-//        {
-//            return new OkResult();
-//        }
+        [HttpGet]
+        [Route("auth_test")]
+        [AuthorizePolicy(UserPolicies.ManagerRights)]
+        public async Task<IActionResult> TestPermissions()
+        {
+            return new OkResult();
+        }
 
-//    }
-//}
+    }
+}
