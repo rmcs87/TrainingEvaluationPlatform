@@ -103,6 +103,7 @@ Besides providing services for storage and edition tools; score processing; and 
 * Autenticação e Autorização com Bearer e JWT: https://balta.io/blog/aspnetcore-3-autenticacao-autorizacao-bearer-jwt?rdst_srcid=2132416
 * JWT com chave simétrica: https://www.brunobrito.net.br/jwt-com-chave-assimetrica/?fbclid=IwAR3B2xknd8cH3XULDsYYCAMhRq6SBQs6ON3shemPIUoXPDbUZpPXyduQld0
 * Policy based role checks: https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-3.1
+* Safe storage of app secrets in development in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows
 
 #### Tests:
 * Test-Driven Development: https://tdd.caelum.com.br/
