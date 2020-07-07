@@ -117,4 +117,5 @@ Besides providing services for storage and edition tools; score processing; and 
 * Upload files: https://docs.microsoft.com/pt-br/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
 * multipart requests with JSON and file: https://thomaslevesque.com/2018/09/04/handling-multipart-requests-with-json-and-file-uploads-in-asp-net-core/
 * Dependency injection: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
+* Generating realistic fake data in .NET using Bogus: https://www.youtube.com/watch?v=T9pwE1GAr_U
 
