@@ -24,15 +24,15 @@ Besides providing services for storage and edition tools; score processing; and 
 - Swagger
 
 ## Architecture Principles being Studied:
-- Full architecture with responsibility separation concerns, SOLID and Clean Code
+- Full architecture with responsibility separation concerns, SOLID and Clean Code*
 - Domain Driven Design
-- Domain Events
-- Domain Notification
-- Domain Validations
+- Domain Events*
+- Domain Notification*
+- Domain Validations*
 - CQRS
-- Event Sourcing
-- Unit of Work
-- Repository
+- Event Sourcing*
+- Unit of Work*
+- Repository*
 
 ## Study References:
 
@@ -43,6 +43,11 @@ Besides providing services for storage and edition tools; score processing; and 
 * Services: https://pt.stackoverflow.com/questions/365350/domain-driven-design-qual-a-diferen%C3%A7a-entre-domain-services-infrastructure-ser
 * Clean Architecture with ASP.NET Core 3.0: https://www.youtube.com/watch?v=dK4Yb6-LxAk
 * A Brief Intro to Clean Architecture, Clean DDD, and CQRS: https://medium.com/software-alchemy/a-brief-intro-to-clean-architecture-clean-ddd-and-cqrs-23243c3f31b3
+
+#### ASP.NET Core
+* IActionResult and ActionResult: https://exceptionnotfound.net/asp-net-core-demystified-action-results/
+* Create web APIs with ASP.NET Core: https://docs.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-3.0#apicontroller-attribute
+* Model Binding in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1
 
 #### AutoMapper:
 * AutoMapper: https://docs.automapper.org/en/latest/Getting-started.html
