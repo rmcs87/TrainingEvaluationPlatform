@@ -21,6 +21,7 @@ namespace TEP.IntegrationTest.API
         protected readonly ApplicationUser _validManagerUser;
         protected readonly ApplicationUser _validOperatorUser;
         protected readonly ApplicationUser _invalidUser;
+        protected readonly ApplicationUser _erroFormatUser;
 
         public Setup()
         {
@@ -30,6 +31,7 @@ namespace TEP.IntegrationTest.API
             _validManagerUser = new ApplicationUser { Username = "rico", Password = "r1c0" };
             _validOperatorUser = new ApplicationUser { Username = "joao", Password = "jonh" };
             _invalidUser = new ApplicationUser { Username = "rico", Password = "12345" };
+            _erroFormatUser = new ApplicationUser { Username = "", Password = "12345" };
 
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\"));
             _imgAssetValidPath = $"{baseTestProjectDirectory}\\TestFiles\\helmet.jpg";

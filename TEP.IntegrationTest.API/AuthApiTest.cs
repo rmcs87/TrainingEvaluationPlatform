@@ -32,6 +32,21 @@ namespace TEP.IntegrationTest.API
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
+        
+        [TestMethod]
+        public async Task OnLogin_WithEmptyUsername_ReturnsBadRequest()
+        {
+            //Arrange
+            var json = JsonSerializer.Serialize(_erroFormatUser);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+        }
 
         [TestMethod]
         public async Task OnLogin_WithInvalidCredential_ReturnsNotFoud()
@@ -85,7 +100,6 @@ namespace TEP.IntegrationTest.API
             //Arrange   
             await AuthorizeClient(_client, _validOperatorUser);
             var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
-
 
             //Act
             var response = await _client.SendAsync(requestMessage);

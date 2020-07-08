@@ -20,15 +20,8 @@ namespace TEP.Application.Auth.Commands
 
         public Task<string> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
-            try
-            {
-                var user = _identityService.ValidateLogin(request.UserName, request.Password);
-                return _tokenService.GenerateTokenAsync(user.Id.ToString());
-            }
-            catch (Exception ie)
-            {
-                throw new AuthenticateCommandExcpetion(ie.Message);
-            }
+            var user = _identityService.ValidateLogin(request.UserName, request.Password);
+            return _tokenService.GenerateTokenAsync(user.Id.ToString());
         }
     }
 }

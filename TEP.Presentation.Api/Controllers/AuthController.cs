@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TEP.Application.Auth.Commands;
+using TEP.Application.Common.Exceptions;
 using TEP.Infra.AuthProvider.Exceptions;
 using TEP.Presentation.Api.Controllers.Authorizers;
 using TEP.Shared;
@@ -34,9 +35,13 @@ namespace TEP.Presentation.Api.Controllers
             {
                 return new UnauthorizedObjectResult(new { errorMessage = iue.Message });
             }
-            catch
+            catch(ValidationException ve)
             {
-                return new UnauthorizedObjectResult(new { errorMessage = "Unknown Error Happened." });
+                return new BadRequestObjectResult(new { errorMessage = ve.Message, errorList = ve.Errors });
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(500);
             }
         }
 
