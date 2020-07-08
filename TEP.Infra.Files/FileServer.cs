@@ -13,9 +13,9 @@ namespace TEP.Infra.Files
     public class FileServer : IFileService<FileAssetOptions>
     {
         private readonly IFileOptions _options;
-        private readonly ILogger _logger;
+        private readonly ILogger<FileServer> _logger;
 
-        public FileServer(IOptionsMonitor<FileAssetOptions> optionsAccessor, ILogger logger)
+        public FileServer(IOptionsMonitor<FileAssetOptions> optionsAccessor, ILogger<FileServer> logger)
         {
             _options = optionsAccessor.CurrentValue;
             _logger = logger;

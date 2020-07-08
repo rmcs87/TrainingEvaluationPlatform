@@ -23,7 +23,16 @@ namespace TEP.Infra.AuthProvider
 
         public async Task<ApplicationUser> GetUserAsync(string userId)
         {
-            throw new NotImplementedException();
+            var id = Int32.Parse(userId);
+
+            var users = new List<ApplicationUser>
+            {
+                new ApplicationUser { Id = 1, Username = "rico", Password = "r1c0", Role = UserRoles.Manager },
+                new ApplicationUser { Id = 2, Username = "tom", Password = "mot", Role = UserRoles.Admin },
+                new ApplicationUser { Id = 3, Username = "joao", Password = "jonh", Role = UserRoles.Operator }
+            };
+
+            return users.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public async Task<string> GetUserNameAsync(string userId)
@@ -49,7 +58,7 @@ namespace TEP.Infra.AuthProvider
                 new ApplicationUser { Id = 3, Username = "joao", Password = "jonh", Role = UserRoles.Operator }
             };
 
-            if (users.Where(x => x.Username == userName && x.Password == password).Any())
+            if (!users.Where(x => x.Username == userName && x.Password == password).Any())
                 throw new InvalidUserException("Invalid Username and/or password.");
 
             return users.Where(x => x.Username == userName && x.Password == password).FirstOrDefault();

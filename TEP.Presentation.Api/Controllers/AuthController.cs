@@ -3,18 +3,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Auth.Commands;
+using TEP.Infra.AuthProvider.Exceptions;
 using TEP.Presentation.Api.Controllers.Authorizers;
 using TEP.Shared;
 
 namespace TEP.Presentation.Api.Controllers
-{    
-
+{
     [Produces("application/json")]
     [Route("api/login")]
     [Authorize]
-    public class AuthController : ControllerBase
+    public class AuthController : TEPControllerBase
     {
         private readonly IMediator _mediator;
         public AuthController(IMediator mediator)
@@ -29,12 +28,15 @@ namespace TEP.Presentation.Api.Controllers
             try
             {
                 var token = await _mediator.Send(command);
-                return new OkObjectResult(token);
+                return new OkObjectResult(new { accessToken = token });
             }
-            catch (Exception e)
+            catch (InvalidUserException iue)
             {
-
-                return new UnauthorizedObjectResult(e.Message);
+                return new UnauthorizedObjectResult(new { errorMessage = iue.Message });
+            }
+            catch
+            {
+                return new UnauthorizedObjectResult(new { errorMessage = "Unknown Error Happened." });
             }
         }
 

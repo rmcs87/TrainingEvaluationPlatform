@@ -12,7 +12,7 @@ namespace TEP.Application.Common.PipelineBehaviours
         private ICurrentUserService _currentUserService;
         private IIdentityService _identityService;
 
-        public LoggingBehavior(ILogger logger, ICurrentUserService currentUserService, IIdentityService identityService)
+        public LoggingBehavior(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
         {
             _logger = logger;
             _currentUserService = currentUserService;
