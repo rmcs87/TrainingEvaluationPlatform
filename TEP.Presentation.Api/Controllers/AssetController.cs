@@ -2,11 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using TEP.Appication.DTO;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
+using TEP.Application.Assets.Queries.GetAsset;
+using TEP.Application.Assets.Queries.ListAssets;
 using TEP.Application.Common.Exceptions;
 using TEP.Presentation.Api.Controllers.Authorizers;
 using TEP.Shared;
@@ -23,6 +27,41 @@ namespace TEP.Presentation.Api.Controllers
         public AssetController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        [AuthorizePolicy(UserPolicies.SupervisorRights)]
+        public async Task<ActionResult> List()
+        {
+            try
+            {
+                var assets = await _mediator.Send(new ListAssetsQuery());
+                return new OkObjectResult(new { assets });
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [AuthorizePolicy(UserPolicies.SupervisorRights)]
+        public async Task<ActionResult> GetById(int id)
+        {
+            try
+            {
+                var asset = await _mediator.Send(new GetAssetQuery { Id = id });
+                return new OkObjectResult(new { asset });
+            }
+            catch (NotFoundException nf)
+            {
+                return new NotFoundObjectResult(new { errorMessage = nf.Message });
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         [HttpPost]
@@ -73,9 +112,9 @@ namespace TEP.Presentation.Api.Controllers
                 await _mediator.Send(new DeleteAssetCommand { Id = id });
                 return new OkResult();
             }
-            catch (NotFoundException ve)
+            catch (NotFoundException nf)
             {
-                return new BadRequestObjectResult(new { errorMessage = ve.Message });
+                return new NotFoundObjectResult(new { errorMessage = nf.Message });
             }
             catch (Exception)
             {
