@@ -14,12 +14,14 @@ namespace TEP.Application.Assets.Commands.DeleteAsset
     public class DeleteAssetCommandHandler : IRequestHandler<DeleteAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileService;
+        private readonly IFileServiceFactory _fileServiceFactory;
+        private readonly IFileService _fileService;
 
-        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
+        public DeleteAssetCommandHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
         {
             _context = context;
-            _fileService = fileHandler;
+            _fileServiceFactory = fileFactory;
+            _fileService = _fileServiceFactory.Create(FileProfile.AssetImage);
         }
 
         public async Task<Unit> Handle(DeleteAssetCommand request, CancellationToken cancellationToken)

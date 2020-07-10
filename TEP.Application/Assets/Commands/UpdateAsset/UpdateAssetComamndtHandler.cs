@@ -11,12 +11,14 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetComamndtHandler : IRequestHandler<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileService;
+        private readonly IFileServiceFactory _fileServiceFactory;
+        private readonly IFileService _fileService;
 
-        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
+        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
         {
             _context = context;
-            _fileService = fileHandler;
+            _fileServiceFactory = fileFactory;
+            _fileService = _fileServiceFactory.Create(FileProfile.AssetImage);
         }
 
         public async Task<Unit> Handle(UpdateAssetComamnd request, CancellationToken cancellationToken)

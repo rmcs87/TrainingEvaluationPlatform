@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace TEP.Application.Common.Options
 {
@@ -6,10 +7,16 @@ namespace TEP.Application.Common.Options
     {
         public int SizeLimit => 64000;
 
-        public string BasePath => "C:\\Users\\rmcs8\\source\\repos\\TrainingEvaluationPlatform\\fileStorage";
+        public string BasePath => GetPath();
 
         public string NameSalt => "AssetFile";
 
         public string[] SupportedFilesExtension => new string[] { ".jpg" };
+
+        private string GetPath()
+        {
+            var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
+            return $"{baseTestProjectDirectory}fileStorage";
+        } 
     }
 }

@@ -11,12 +11,14 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, int>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileService<FileAssetOptions> _fileService;
+        private readonly IFileServiceFactory _fileServiceFactory;
+        private readonly IFileService _fileService;
 
-        public CreateAssetCommandHandler(IApplicationDbContext context, IFileService<FileAssetOptions> fileHandler)
+        public CreateAssetCommandHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
         {
             _context = context;
-            _fileService = fileHandler;
+            _fileServiceFactory = fileFactory;
+            _fileService = _fileServiceFactory.Create(FileProfile.AssetImage);
         }
 
         public async Task<int> Handle(CreateAssetCommand request, CancellationToken cancellationToken)

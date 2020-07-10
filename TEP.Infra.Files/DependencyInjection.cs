@@ -8,7 +8,8 @@ namespace TEP.Infra.Files
     {
         public static IServiceCollection AddFileService(this IServiceCollection services)
         {
-            services.AddTransient<IFileService<FileAssetOptions>, FileServer>();
+            services.AddTransient<IFileService, FileServer>();
+            services.AddTransient<IFileServiceFactory, FileServerFactory>();
 
             return services;
         }
