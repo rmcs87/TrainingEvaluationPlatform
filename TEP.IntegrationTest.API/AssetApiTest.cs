@@ -207,24 +207,23 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        /*
+        
         [TestMethod]
         public async Task OnRequestDeleteAssetById_WithValidId_ReceivesOk()
         {
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
 
-            var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
+
             string responseJson = await response.Content.ReadAsStringAsync();
 
+            var id = JsonSerializer.Deserialize<Identifier>(responseJson).id;;
 
-            var id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
-            _newAssetKeyValid.Id = id;
-
-            json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
+            requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/asset/{id}");
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -234,6 +233,7 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
+        
         [TestMethod]
         public async Task OnRequestDeleteAssetById_WithInvalidId_ReceivesBadRequest()
         {
@@ -241,16 +241,15 @@ namespace TEP.IntegrationTest.API
             await AuthorizeClient(_client, _validManagerUser);
             var id = -1;
 
-            var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Delete, $"api/asset/{id}", json);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/asset/{id}");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
 
             //Assert
             var responseContent = await response.Content.ReadAsStringAsync();
-            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
-        }*/
+            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+        }
 
     }
 

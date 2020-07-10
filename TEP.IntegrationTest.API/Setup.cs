@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
 using TEP.Application.Assets.Commands.CreateAsset;
+using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
 using TEP.Application.Common.Models;
 using TEP.Shared.Helpers;
@@ -16,11 +17,13 @@ namespace TEP.IntegrationTest.API
 {
     public class Setup
     {
-        protected readonly CreateAssetCommand _createAssetKeyValid;        
+        protected readonly CreateAssetCommand _createAssetKeyValid;
         protected readonly CreateAssetCommand _createAssetKeyInvalid;
 
         protected readonly UpdateAssetComamnd _updateAssetKeyValid;
         protected readonly UpdateAssetComamnd _updateAssetKeyInvalid;
+
+        protected readonly DeleteAssetCommand _deletAssetKey;
 
         protected readonly string _imgAssetValidPath;
         protected readonly string _imgAssetValidPath2;
@@ -37,6 +40,8 @@ namespace TEP.IntegrationTest.API
 
             _updateAssetKeyValid = new UpdateAssetComamnd { Name = Guid.NewGuid().ToString(), FilePath = "key.fbx" };
             _updateAssetKeyInvalid = new UpdateAssetComamnd { Name = "", FilePath = "" };
+
+            _deletAssetKey = new DeleteAssetCommand();
 
             _validManagerUser = new ApplicationUser { Username = "rico", Password = "r1c0" };
             _validOperatorUser = new ApplicationUser { Username = "joao", Password = "jonh" };
