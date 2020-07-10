@@ -21,7 +21,6 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
 
         public async Task<Unit> Handle(UpdateAssetComamnd request, CancellationToken cancellationToken)
         {
-            string newImgPath = "";
             var asset = await _context.Assets.FindAsync(request.Id);
             
             if (asset == null)
@@ -29,12 +28,12 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
 
             if(request.Image != null)
             {
-                newImgPath = await _fileService.SaveFile(request.Image);
+                var newImgPath = await _fileService.SaveFile(request.Image);
                 _fileService.RemoveFile(asset.ImgPath);
+                asset.ImgPath = newImgPath;
             }
 
-            asset.Name = request.Name;
-            asset.ImgPath = newImgPath;
+            asset.Name = request.Name;            
             asset.FilePath = request.FilePath;
 
             await _context.SaveChangesAsync(cancellationToken);

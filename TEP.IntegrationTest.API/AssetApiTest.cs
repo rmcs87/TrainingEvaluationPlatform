@@ -124,22 +124,25 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public async Task OnRequestUpdateInfoOnlyAsset_WithValidData_ReceivesOk()
         {
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
 
-            var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
+            
             string responseJson = await response.Content.ReadAsStringAsync();
 
-            _newAssetKeyValid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
-            _newAssetKeyValid.Name = "updatedName";
+            _updateAssetKeyValid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
+            _updateAssetKeyValid.Name += "updatedName";
 
-            json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json);
+            stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyValid);
+            requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary);            
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -155,16 +158,19 @@ namespace TEP.IntegrationTest.API
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
 
-            var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
+
             string responseJson = await response.Content.ReadAsStringAsync();
 
-            _newAssetKeyValid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
-            _newAssetKeyValid.Name = "updatedName";
-            _newAssetKeyValid.ImgPath = "OldPath";
-            json = JsonSerializer.Serialize(_newAssetKeyValid);
-            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
+            _updateAssetKeyValid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
+            _updateAssetKeyValid.Name += "updatedName";
+
+            stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyValid);
+            requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary, _imgAssetValidPath2);
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -180,16 +186,18 @@ namespace TEP.IntegrationTest.API
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
 
-            var json = JsonSerializer.Serialize(_newAssetKeyValid);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Post, "api/asset", json, _imgAssetValidPath);
+            var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
+
             string responseJson = await response.Content.ReadAsStringAsync();
 
-            _newAssetKeyValid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
-            _newAssetKeyValid.Name = "updatedName";
-            _newAssetKeyValid.ImgPath = "OldPath";
-            json = JsonSerializer.Serialize(_assetKeyInvalid);
-            requestMessage = HttpRequestHelper.PrepareHttpRequestMessageMultipartFormDataJsonAndFile(HttpMethod.Put, "api/asset", json, _imgAssetValidPath2);
+            _updateAssetKeyInvalid.Id = JsonSerializer.Deserialize<Identifier>(responseJson).id;
+
+            stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyInvalid);
+            requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary, _imgAssetValidPath2);
 
             //Act
             response = await _client.SendAsync(requestMessage);
@@ -199,6 +207,7 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
+        /*
         [TestMethod]
         public async Task OnRequestDeleteAssetById_WithValidId_ReceivesOk()
         {

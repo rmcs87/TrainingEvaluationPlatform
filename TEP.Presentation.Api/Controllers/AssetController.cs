@@ -68,9 +68,6 @@ namespace TEP.Presentation.Api.Controllers
         [AuthorizePolicy(UserPolicies.ManagerRights)]
         public async Task<ActionResult> Insert([FromForm] CreateAssetCommand command)
         {
-
-            //tem que lidar com o multipart form
-
             try
             {
                 var id = await _mediator.Send(command);
@@ -88,7 +85,7 @@ namespace TEP.Presentation.Api.Controllers
 
         [HttpPut]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
-        public async Task<ActionResult> Update([FromBody] UpdateAssetComamnd command)
+        public async Task<ActionResult> Update([FromForm] UpdateAssetComamnd command)
         {
             try
             {
@@ -99,7 +96,7 @@ namespace TEP.Presentation.Api.Controllers
             {
                 return new BadRequestObjectResult(new { errorMessage = ve.Message, errorList = ve.Errors });
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new StatusCodeResult(500);
             }
