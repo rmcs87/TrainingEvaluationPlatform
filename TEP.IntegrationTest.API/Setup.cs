@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TEP.Appication.DTO;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
@@ -64,6 +63,18 @@ namespace TEP.IntegrationTest.API
                 .GetProperty(propertyName)
                 .GetString();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+
+        protected async Task<int> AddAsset(CreateAssetCommand createAssetKeyValid, HttpClient _client)
+        {
+            var stringContentsDictionary = ObjectAttributesToDicionary(createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
+            var response = await _client.SendAsync(requestMessage);
+
+            string responseJson = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<Identifier>(responseJson).id;
         }
 
         protected Dictionary<string, string> ObjectAttributesToDicionary(object obj)
