@@ -1,5 +1,4 @@
 ﻿using TEP.Application.Common.Interfaces;
-using TEP.Infra.Files.Options;
 
 namespace TEP.Infra.Files
 {
@@ -12,14 +11,10 @@ namespace TEP.Infra.Files
             _fileService = fileService;
         }
 
-        public IFileService Create(FileProfile profile)
+        public IFileService Create<T>()
+            where T : IFileOptions ,new()
         {
-            switch (profile)
-            {
-                case FileProfile.AssetImage:
-                    _fileService.Options = new FileAssetOptions();
-                    break;
-            }
+            _fileService.Options = new T();
 
             return _fileService;
         }

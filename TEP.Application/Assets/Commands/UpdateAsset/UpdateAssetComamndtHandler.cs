@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Commands.UpdateAsset
@@ -17,7 +18,7 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
         {
             _context = context;
             _fileServiceFactory = fileFactory;
-            _fileService = _fileServiceFactory.Create(FileProfile.AssetImage);
+            _fileService = _fileServiceFactory.Create<FileAssetOptions>();
         }
 
         public async Task<Unit> Handle(UpdateAssetComamnd request, CancellationToken cancellationToken)

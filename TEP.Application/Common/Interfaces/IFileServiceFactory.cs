@@ -3,10 +3,6 @@ namespace TEP.Application.Common.Interfaces
 {
     public interface IFileServiceFactory
     {
-        IFileService Create(FileProfile profile);
-    }
-
-    public enum FileProfile{
-        AssetImage
+        IFileService Create<FileOption>() where FileOption : IFileOptions, new();
     }
 }

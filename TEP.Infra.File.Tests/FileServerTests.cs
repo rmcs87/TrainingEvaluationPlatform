@@ -5,9 +5,9 @@ using Moq;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using TEP.Application.Common.Options;
 using TEP.Infra.Files;
 using TEP.Infra.Files.Exceptions;
-using TEP.Infra.Files.Options;
 
 namespace TEP.Infra.File.Tests
 {
