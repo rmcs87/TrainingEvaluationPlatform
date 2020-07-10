@@ -21,6 +21,7 @@ namespace TEP.Application.Assets.Commands.CreateAsset
             RuleFor(a => a.Name)
                 .NotEmpty().WithMessage("Title is required.")
                 .MaximumLength(200).WithMessage("Title must not exceed 200 characters.")
+                .MinimumLength(5).WithMessage("Title must be ata least 5 characters.")
                 .MustAsync(BeUniqueName).WithMessage("The specified name already exists.");
 
             RuleFor(a => a.FilePath)

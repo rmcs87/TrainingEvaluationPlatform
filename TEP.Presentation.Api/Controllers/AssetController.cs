@@ -66,8 +66,11 @@ namespace TEP.Presentation.Api.Controllers
 
         [HttpPost]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
-        public async Task<ActionResult> Insert([FromBody] CreateAssetCommand command)
+        public async Task<ActionResult> Insert([FromForm] CreateAssetCommand command)
         {
+
+            //tem que lidar com o multipart form
+
             try
             {
                 var id = await _mediator.Send(command);

@@ -1,10 +1,38 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 
 namespace TEP.Shared.Helpers
 {
     public static class HttpRequestHelper
     {
+        //Files UpTo 64KB
+        public static HttpRequestMessage PrepareMultipartFormWithFile(
+            HttpMethod method, string url, Dictionary<string, string> stringContents, string filePath = null)
+        {
+            MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----MyBoundary");
+
+            foreach (var content in stringContents)
+            {
+                multiPartContent.Add(CreateJsonContent(content.Value), content.Key);
+            }
+
+
+            if (filePath != null)
+            {
+                ByteArrayContent byteArrayContent;
+                CreateFileContent(filePath, out string fileName, out byteArrayContent);
+
+                multiPartContent.Add(byteArrayContent, "Image", fileName);
+            }
+
+            var request = new HttpRequestMessage(method, url);
+            request.Headers.ExpectContinue = false;
+            request.Content = multiPartContent;
+
+            return request;
+        }
+
         private static StringContent CreateJsonContent(string json)
         {
             return new StringContent(
@@ -34,27 +62,5 @@ namespace TEP.Shared.Helpers
             byteArrayContent.Headers.Add("Content-Type", "application/octet-stream");
         }
 
-        //Files UpTo 64KB
-        public static HttpRequestMessage PrepareHttpRequestMessageMultipartFormDataJsonAndFile(
-            HttpMethod method, string url, string json, string filePath = null)
-        {
-            MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----MyBoundary");
-
-            multiPartContent.Add(CreateJsonContent(json), "json");
-
-            if (filePath != null)
-            {
-                ByteArrayContent byteArrayContent;
-                CreateFileContent(filePath, out string fileName, out byteArrayContent);
-
-                multiPartContent.Add(byteArrayContent, "Image", fileName);
-            }
-
-            var request = new HttpRequestMessage(method, url);
-            request.Headers.ExpectContinue = false;
-            request.Content = multiPartContent;
-
-            return request;
-        }   
     }
 }
