@@ -1,5 +1,5 @@
 ﻿using System;
-using TEP.Application.Common.Options;
+using TEP.Application.Common.Interfaces;
 
 namespace TEP.Infra.Files
 {

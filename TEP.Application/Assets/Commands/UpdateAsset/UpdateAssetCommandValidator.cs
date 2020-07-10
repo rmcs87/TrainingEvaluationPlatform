@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
-using TEP.Application.Common.Options;
 
 namespace TEP.Application.Assets.Commands.UpdateAsset
 {

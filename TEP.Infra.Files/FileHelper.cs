@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TEP.Application.Common.Options;
+using TEP.Application.Common.Interfaces;
 using TEP.Infra.Files.Exceptions;
 
 namespace TEP.Infra.Files

@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
-using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Commands.DeleteAsset

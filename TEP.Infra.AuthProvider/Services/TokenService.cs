@@ -11,12 +11,12 @@ using TEP.Application.Common.Interfaces;
 
 namespace TEP.Infra.AuthProvider
 {
-    public class TokenServer : ITokenService
+    public class TokenService : ITokenService
     {        
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _configuration;
 
-        public TokenServer(IIdentityService identityService, IConfiguration configuration)
+        public TokenService(IIdentityService identityService, IConfiguration configuration)
         {
             _identityService = identityService;
             _configuration = configuration;

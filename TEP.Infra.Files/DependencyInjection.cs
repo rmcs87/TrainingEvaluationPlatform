@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TEP.Application.Common.Interfaces;
-using TEP.Application.Common.Options;
 
 namespace TEP.Infra.Files
 {
@@ -8,8 +7,8 @@ namespace TEP.Infra.Files
     {
         public static IServiceCollection AddFileService(this IServiceCollection services)
         {
-            services.AddTransient<IFileService, FileServer>();
-            services.AddTransient<IFileServiceFactory, FileServerFactory>();
+            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IFileServiceFactory, FileServiceFactory>();
 
             return services;
         }

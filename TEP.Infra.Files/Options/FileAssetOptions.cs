@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO;
+using TEP.Application.Common.Interfaces;
 
-namespace TEP.Application.Common.Options
+namespace TEP.Infra.Files.Options
 {
     public class FileAssetOptions : IFileOptions
     {

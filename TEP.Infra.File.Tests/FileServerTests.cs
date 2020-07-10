@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using TEP.Application.Common.Options;
 using TEP.Infra.Files;
 using TEP.Infra.Files.Exceptions;
+using TEP.Infra.Files.Options;
 
 namespace TEP.Infra.File.Tests
 {
@@ -16,13 +15,13 @@ namespace TEP.Infra.File.Tests
     public class FileServerTests
     {
         private readonly FileAssetOptions _options;
-        private readonly Mock<ILogger<FileServer>> _logger;
+        private readonly Mock<ILogger<FileService>> _logger;
         private readonly string _imgAssetValidPath;
         private readonly string _invalidImgAssetValidPath;
 
         public FileServerTests()
         {
-            _logger = new Mock<ILogger<FileServer>>();
+            _logger = new Mock<ILogger<FileService>>();
 
             _options = new FileAssetOptions();
 
@@ -35,7 +34,7 @@ namespace TEP.Infra.File.Tests
         public async Task OnCreateFile_WithValidData_CreatesAndReturnsPath()
         {
             //arrange
-            var fileServer = new FileServer(_logger.Object);
+            var fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
             string imgName;
             FormFile file;
@@ -61,7 +60,7 @@ namespace TEP.Infra.File.Tests
         public void OnCreateFile_WithInvalidDataTooBig_ThrowsFileCreationException()
         {
             //arrange
-            var fileServer = new FileServer( _logger.Object);
+            var fileServer = new FileService( _logger.Object);
             fileServer.Options = _options;
             FormFile file;
 
@@ -84,7 +83,7 @@ namespace TEP.Infra.File.Tests
         {
             //arrange
             var name = await CreateFile(_imgAssetValidPath);
-            FileServer fileServer = new FileServer(_logger.Object);
+            FileService fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
 
             //act
@@ -99,7 +98,7 @@ namespace TEP.Infra.File.Tests
         public void OnCreateFile_WithInvalidPath_ThrowsFileCreationException()
         {
             //arrange
-            FileServer fileServer = new FileServer(_logger.Object);
+            FileService fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
 
             //act/assert
@@ -110,7 +109,7 @@ namespace TEP.Infra.File.Tests
         public async Task OnGetFile_WithValidPath_Removes()
         {
             //arrange
-            var fileServer = new FileServer(_logger.Object);
+            var fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
             FormFile file;
             string name;
@@ -137,7 +136,7 @@ namespace TEP.Infra.File.Tests
         public void OnGetFile_WithInvalidPatha_ThrowsFileRetrievalException()
         {
             //arrange
-            FileServer fileServer = new FileServer(_logger.Object);
+            FileService fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
 
             //act/assert
@@ -147,7 +146,7 @@ namespace TEP.Infra.File.Tests
 
         private async Task<string> CreateFile(string path)
         {
-            var fileServer = new FileServer(_logger.Object);
+            var fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
             FormFile file;
             string name;

@@ -9,7 +9,7 @@ using TEP.Shared;
 
 namespace TEP.Infra.AuthProvider
 {
-    public class IdentityServer : IIdentityService
+    public class IdentityService : IIdentityService
     {
         public Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
         {

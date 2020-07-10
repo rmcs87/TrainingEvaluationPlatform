@@ -1,12 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
-using TEP.Application.Common.Options;
 
 namespace TEP.Application.Assets.Commands.CreateAsset
 {

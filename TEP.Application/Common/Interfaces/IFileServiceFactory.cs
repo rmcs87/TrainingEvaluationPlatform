@@ -1,5 +1,4 @@
-﻿using TEP.Application.Common.Options;
-
+﻿
 namespace TEP.Application.Common.Interfaces
 {
     public interface IFileServiceFactory

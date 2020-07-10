@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using TEP.Application.Common.Options;
 
 namespace TEP.Application.Common.Interfaces
 {

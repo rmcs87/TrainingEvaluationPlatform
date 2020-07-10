@@ -4,17 +4,16 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
-using TEP.Application.Common.Options;
 using TEP.Infra.Files.Exceptions;
 
 namespace TEP.Infra.Files
 {
-    public class FileServer : IFileService
+    public class FileService : IFileService
     {
         
-        private readonly ILogger<FileServer> _logger;
+        private readonly ILogger<FileService> _logger;
 
-        public FileServer(ILogger<FileServer> logger)
+        public FileService(ILogger<FileService> logger)
         {
             _logger = logger;
             Options = new DefaultOptions();
