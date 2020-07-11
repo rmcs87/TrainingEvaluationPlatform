@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using System.Collections.Generic;
-using TEP.Appication.DTO;
+using TEP.Application.Assets.Queries.GetAsset;
 
 namespace TEP.Application.Assets.Queries.ListAssets
 {

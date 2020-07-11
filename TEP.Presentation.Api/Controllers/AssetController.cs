@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using TEP.Appication.DTO;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
 using TEP.Application.Assets.Queries.GetAsset;
+using TEP.Application.Assets.Queries.GetAssetImg;
 using TEP.Application.Assets.Queries.ListAssets;
 using TEP.Application.Common.Exceptions;
 using TEP.Presentation.Api.Controllers.Authorizers;
@@ -23,7 +24,7 @@ namespace TEP.Presentation.Api.Controllers
     public class AssetController : TEPControllerBase
     {
         private readonly IMediator _mediator;
-
+        
         public AssetController(IMediator mediator)
         {
             _mediator = mediator;
@@ -52,11 +53,31 @@ namespace TEP.Presentation.Api.Controllers
             try
             {
                 var asset = await _mediator.Send(new GetAssetQuery { Id = id });
-                return new OkObjectResult(new { asset });
+                return new OkObjectResult(asset);
             }
             catch (NotFoundException nf)
             {
-                return new NotFoundObjectResult(new { errorMessage = nf.Message });
+                return new NotFoundObjectResult(new { errorMessage = "Asset not found." });
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
+        [Route("image/{fileName}")]
+        [AuthorizePolicy(UserPolicies.SupervisorRights)]
+        public async Task<ActionResult> GetImage(string fileName)
+        {
+            try
+            {
+                var file = await _mediator.Send(new GetAssetImgQuery { ImgName = fileName });
+                return new PhysicalFileResult(file.FilePath, file.MimeType);
+            }
+            catch (NotFoundException nf)
+            {
+                return new NotFoundObjectResult(new { errorMessage = "File not found." });
             }
             catch (Exception)
             {

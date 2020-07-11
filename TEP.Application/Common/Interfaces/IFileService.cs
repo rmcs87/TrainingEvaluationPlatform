@@ -8,7 +8,7 @@ namespace TEP.Application.Common.Interfaces
         Task<string> SaveFile(IFormFile data);
         void RemoveFile(string path);
         Task<byte[]> GetFileBytes(string path);
-
+        Task<string> GetFilePath(string fileName);
         public IFileOptions Options { get; set; }
     }
 }

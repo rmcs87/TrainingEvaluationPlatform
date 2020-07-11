@@ -43,6 +43,22 @@ namespace TEP.Infra.Files
                 throw new FileRetrievalException("File Could not be recovered.");
             }
         }
+        
+        public async Task<string> GetFilePath(string fileName)
+        {
+            try
+            {
+                var filePath = FileHelper.CombinePathAndName(Options.BasePath, fileName);               
+
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "File Retrieval: {FileName} {BasePath}", fileName, Options.BasePath);
+
+                throw new FileRetrievalException("File Could not be recovered.");
+            }
+        }
 
         public void RemoveFile(string fileName)
         {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
@@ -28,6 +29,8 @@ namespace TEP.Application.Assets.Queries.GetAsset
                 throw new NotFoundException(nameof(Asset), request.Id);
 
             var dto = _mapper.Map<AssetDTO>(asset);
+
+            dto.ImgPath = $"api/asset/image/{asset.ImgPath}";
 
             return dto;
         }

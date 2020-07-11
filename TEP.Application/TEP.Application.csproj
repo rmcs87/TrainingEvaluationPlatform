@@ -27,8 +27,4 @@
     <ProjectReference Include="..\TEP.Domain\TEP.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Assets\Queries\GetAssetImg\" />
-  </ItemGroup>
-
 </Project>

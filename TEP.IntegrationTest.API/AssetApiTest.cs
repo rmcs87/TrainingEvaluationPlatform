@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net;
 using TEP.Shared.Helpers;
+using System.Text.Json;
 
 namespace TEP.IntegrationTest.API
 {
@@ -213,10 +214,54 @@ namespace TEP.IntegrationTest.API
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
         }
 
+        [TestMethod]
+        public async Task OnRequestAssetImage_WithValidURL_ReceivesImg()
+        {
+            //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+            var id = await AddAsset(_createAssetKeyValid, _client);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
+            var response = await _client.SendAsync(requestMessage);
+            string responseJson = await response.Content.ReadAsStringAsync();
+
+            string url = JsonSerializer.Deserialize<Asset>(responseJson).imgPath;
+
+            //Act
+            requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+            response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task OnRequestAssetImage_WithInvalidURL_ReceivesBadRequest()
+        {
+            //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
+            //Act
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/image/nops");
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+        }
     }
 
     internal class Identifier
     {
         public int id { get; set; }
     }
+
+    internal class Asset
+    {
+        public int id { get; set; }
+        public string filePath { get; set; }
+        public string name { get; set; }
+        public string imgPath { get; set; }
+    }
+
 }

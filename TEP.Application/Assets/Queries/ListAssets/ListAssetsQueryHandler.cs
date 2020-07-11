@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TEP.Appication.DTO;
+using TEP.Application.Assets.Queries.GetAsset;
 using TEP.Application.Common.Interfaces;
 
 namespace TEP.Application.Assets.Queries.ListAssets

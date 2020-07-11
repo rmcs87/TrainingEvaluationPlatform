@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using TEP.Application.Assets.Queries.GetAsset;
 
 namespace TEP.Appication.DTO
 {

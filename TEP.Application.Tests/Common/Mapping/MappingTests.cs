@@ -1,8 +1,7 @@
 using AutoMapper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using TEP.Appication.DTO;
-using TEP.Application;
+using TEP.Application.Assets.Queries.GetAsset;
 using TEP.Application.Common.Mappings;
 using TEP.Domain.Entities;
 

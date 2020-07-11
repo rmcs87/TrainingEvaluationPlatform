@@ -49,7 +49,7 @@ namespace TEP.IntegrationTest.API
 
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
             _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\helmet.jpg";
-            _imgAssetValidPath2 = $"{baseTestProjectDirectory}\\TestFiles\\gloves2.jpg";
+            _imgAssetValidPath2 = $"{baseTestProjectDirectory}TestFiles\\gloves2.jpg";
         }
 
         protected async Task AuthorizeClient(HttpClient client, ApplicationUser user)

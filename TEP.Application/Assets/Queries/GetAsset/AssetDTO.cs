@@ -2,7 +2,7 @@
 using TEP.Application.Common.Mappings;
 using TEP.Domain.Entities;
 
-namespace TEP.Appication.DTO
+namespace TEP.Application.Assets.Queries.GetAsset
 {
     public class AssetDTO : IMapFrom<Asset>
     {

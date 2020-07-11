@@ -80,6 +80,11 @@ namespace TEP.Presentation.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseRouting();
 
