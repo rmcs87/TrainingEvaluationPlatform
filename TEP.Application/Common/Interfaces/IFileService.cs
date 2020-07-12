@@ -9,6 +9,7 @@ namespace TEP.Application.Common.Interfaces
         void RemoveFile(string path);
         Task<byte[]> GetFileBytes(string path);
         Task<string> GetFilePath(string fileName);
+        bool FileExists(string filePath);
         public IFileOptions Options { get; set; }
     }
 }

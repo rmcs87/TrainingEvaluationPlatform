@@ -54,7 +54,7 @@ namespace TEP.IntegrationTest.API
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
 
-            int id = 2; //Database Dependent
+            var id = await AddAsset(_createAssetKeyValid, _client);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
 
             //Act

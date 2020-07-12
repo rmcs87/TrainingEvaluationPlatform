@@ -21,6 +21,11 @@ namespace TEP.Infra.Files
 
         public IFileOptions Options { get; set; }
 
+        public bool FileExists(string filePath)
+        {
+            return File.Exists(filePath);
+        }
+
         public async Task<byte[]> GetFileBytes(string fileName)
         {
             try

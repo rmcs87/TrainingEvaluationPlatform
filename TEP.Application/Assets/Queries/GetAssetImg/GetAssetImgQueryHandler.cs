@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
@@ -30,7 +29,7 @@ namespace TEP.Application.Assets.Queries.GetAssetImg
                     MimeType = GetMimeType(request.ImgName)
                 };
 
-                if (!File.Exists(img.FilePath))
+                if (!_fileService.FileExists(img.FilePath))
                     throw new Exception();
 
                 return img;
