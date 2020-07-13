@@ -12,7 +12,7 @@ namespace TEP.Application.Common.Options
 
         public string NameSalt => "AssetFile";
 
-        public string[] SupportedFilesExtension => new string[] { ".jpg" };
+        public string[] SupportedFilesExtension => new string[] { ".jpg", ".png" };
 
         private string GetPath()
         {

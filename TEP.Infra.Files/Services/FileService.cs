@@ -80,12 +80,17 @@ namespace TEP.Infra.Files
             }
         }
 
+        public void ValidateFile(IFormFile data)
+        {
+            FileHelper.ValidateFile(data, Options);
+        }
+
         public async Task<string> SaveFile(IFormFile data)
         {
             try
             {
                 string fileName = FileHelper.GetUniqueName(Options.NameSalt, data.FileName);
-                FileHelper.ValidateFile(data, Options);
+                //FileHelper.ValidateFile(data, Options);
 
                 await FileHelper.ProcessFile(data, Options, fileName);
 

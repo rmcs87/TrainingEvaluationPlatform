@@ -98,7 +98,7 @@ namespace TEP.Presentation.Api.Controllers
             {
                 return new BadRequestObjectResult(new { errorMessage = ve.Message, errorList = ve.Errors });
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new StatusCodeResult(500);
             }

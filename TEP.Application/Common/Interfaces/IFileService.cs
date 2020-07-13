@@ -10,6 +10,7 @@ namespace TEP.Application.Common.Interfaces
         Task<byte[]> GetFileBytes(string path);
         Task<string> GetFilePath(string fileName);
         bool FileExists(string filePath);
+        void ValidateFile(IFormFile data);
         public IFileOptions Options { get; set; }
     }
 }

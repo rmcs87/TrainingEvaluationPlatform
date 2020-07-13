@@ -26,6 +26,8 @@ namespace TEP.IntegrationTest.API
 
         protected readonly string _imgAssetValidPath;
         protected readonly string _imgAssetValidPath2;
+        protected readonly string _imgAssetValidPath3PNG;
+        protected readonly string _imgAssetInvalidFileTXT;
 
         protected readonly ApplicationUser _validManagerUser;
         protected readonly ApplicationUser _validOperatorUser;
@@ -50,6 +52,8 @@ namespace TEP.IntegrationTest.API
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
             _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\helmet.jpg";
             _imgAssetValidPath2 = $"{baseTestProjectDirectory}TestFiles\\gloves2.jpg";
+            _imgAssetValidPath3PNG = $"{baseTestProjectDirectory}TestFiles\\helmet.png";
+            _imgAssetInvalidFileTXT = $"{baseTestProjectDirectory}TestFiles\\texto.txt";
         }
 
         protected async Task AuthorizeClient(HttpClient client, ApplicationUser user)

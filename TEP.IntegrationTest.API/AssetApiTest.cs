@@ -90,7 +90,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
             HttpRequestMessage requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath3PNG);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -111,6 +111,24 @@ namespace TEP.IntegrationTest.API
             var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyInvalid);
             HttpRequestMessage requestMessage =
                 HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
+
+            //Act
+            var response = await _client.SendAsync(requestMessage);
+
+            //Assert
+            var responseContent = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [TestMethod]
+        public async Task OnRequestInsertAsset_WithValidDataAndInvalidFile_ReceivesBadRequest()
+        {
+            //Arrange
+            await AuthorizeClient(_client, _validManagerUser);
+
+            var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
+            HttpRequestMessage requestMessage =
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetInvalidFileTXT);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
