@@ -31,12 +31,12 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
             if(request.Image != null)
             {
                 var newImgPath = await _fileService.SaveFile(request.Image);
-                _fileService.RemoveFile(asset.ImgPath);
-                asset.ImgPath = newImgPath;
+                _fileService.RemoveFile(asset.IconPath);
+                asset.UpdateIcon(newImgPath);
             }
 
-            asset.Name = request.Name;            
-            asset.FilePath = request.FilePath;
+            asset.ChangeName(request.Name); 
+            asset.UpdateFileURI(request.FilePath);
 
             await _context.SaveChangesAsync(cancellationToken);
 

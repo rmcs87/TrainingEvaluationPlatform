@@ -32,7 +32,7 @@ namespace TEP.Application.Assets.Commands.CreateAsset
                 imgPath = await _fileService.SaveFile(request.Image);
 
                 var asset = _mapper.Map<Asset>(request);
-                asset.ImgPath = imgPath;    //Problem
+                asset.UpdateIcon(imgPath);
 
                 _context.Assets.Add(asset);
 

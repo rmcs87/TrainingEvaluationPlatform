@@ -18,7 +18,7 @@ namespace TEP.Application.Assets.Commands.CreateAsset
             RuleFor(a => a.Name)
                 .AssetNameValidation();
 
-            RuleFor(a => a.FilePath)
+            RuleFor(a => a.FileURI)
                 .FilePathValidation();
 
             RuleFor(a => a.Image)

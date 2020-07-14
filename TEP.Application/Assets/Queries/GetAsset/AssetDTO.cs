@@ -7,8 +7,8 @@ namespace TEP.Application.Assets.Queries.GetAsset
     public class AssetDTO : IMapFrom<Asset>
     {
         public int Id { get; set; }
-        public string FilePath { get; set; }
+        public string FileURI { get; set; }
         public string Name { get; set; }
-        public string ImgPath { get; set; }
+        public string IconPath { get; set; }
     }
 }

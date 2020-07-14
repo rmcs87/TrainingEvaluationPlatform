@@ -32,7 +32,7 @@ namespace TEP.Application.Assets.Commands.DeleteAsset
             if (asset == null)
                 throw new NotFoundException(nameof(Asset), request.Id);
 
-            imgName = asset.ImgPath;
+            imgName = asset.IconPath;
 
             _context.Assets.Remove(asset);
             await _context.SaveChangesAsync(cancellationToken);

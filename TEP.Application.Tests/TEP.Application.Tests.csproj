@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TEP.Application\TEP.Application.csproj" />
+    <ProjectReference Include="..\TEP.Test.Utils\TEP.Test.Utils.csproj" />
   </ItemGroup>
 
 </Project>

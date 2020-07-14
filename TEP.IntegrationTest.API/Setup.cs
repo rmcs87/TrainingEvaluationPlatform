@@ -36,8 +36,8 @@ namespace TEP.IntegrationTest.API
 
         public Setup()
         {
-            _createAssetKeyValid = new CreateAssetCommand { Name = Guid.NewGuid().ToString(), FilePath = "key.fbx" };
-            _createAssetKeyInvalid = new CreateAssetCommand { Name = "", FilePath = "" };
+            _createAssetKeyValid = new CreateAssetCommand { Name = Guid.NewGuid().ToString(), FileURI = "key.fbx" };
+            _createAssetKeyInvalid = new CreateAssetCommand { Name = "", FileURI = "" };
 
             _updateAssetKeyValid = new UpdateAssetComamnd { Name = Guid.NewGuid().ToString(), FilePath = "key.fbx" };
             _updateAssetKeyInvalid = new UpdateAssetComamnd { Name = "", FilePath = "" };

@@ -7,20 +7,30 @@ namespace TEP.Domain.Entities
         public Asset()
         {
         }
-
-        public Asset(string filePath, string name, string imgPath)
+        public Asset(string fileURI, string name, string iconPath)
         {
-            FilePath = filePath;
+            FileURI = fileURI;
             Name = name;
-            ImgPath = imgPath;
+            IconPath = iconPath;
+        }
+        public int Id { get; private set; }
+        public string FileURI { get; private set; }
+        public string Name { get; private set; }
+        public string IconPath { get; private set; }
+
+        public void ChangeName(string newName)
+        {
+            Name = newName;
         }
 
-        public int Id { get; private set; }
+        public void UpdateFileURI(string uri)
+        {
+            FileURI = uri;
+        }
 
-        public string FilePath { get; set; }
-
-        public string Name { get; set; }
-
-        public string ImgPath { get; set; }
+        public void UpdateIcon(string iconPath)
+        {
+            IconPath = iconPath;
+        }
     }
 }
