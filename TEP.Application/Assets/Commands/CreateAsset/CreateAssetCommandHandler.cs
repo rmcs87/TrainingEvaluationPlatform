@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,14 +12,16 @@ namespace TEP.Application.Assets.Commands.CreateAsset
     public class CreateAssetCommandHandler : IRequestHandler<CreateAssetCommand, int>
     {
         private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
         private readonly IFileServiceFactory _fileServiceFactory;
         private readonly IFileService _fileService;
 
-        public CreateAssetCommandHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
+        public CreateAssetCommandHandler(IApplicationDbContext context, IFileServiceFactory fileFactory, IMapper mapper)
         {
             _context = context;
             _fileServiceFactory = fileFactory;
             _fileService = _fileServiceFactory.Create<FileAssetOptions>();
+            _mapper = mapper;
         }
 
         public async Task<int> Handle(CreateAssetCommand request, CancellationToken cancellationToken)
@@ -28,7 +31,8 @@ namespace TEP.Application.Assets.Commands.CreateAsset
             {
                 imgPath = await _fileService.SaveFile(request.Image);
 
-                var asset = new Asset(request.FilePath, request.Name, imgPath);
+                var asset = _mapper.Map<Asset>(request);
+                asset.ImgPath = imgPath;    //Problem
 
                 _context.Assets.Add(asset);
 
@@ -41,7 +45,7 @@ namespace TEP.Application.Assets.Commands.CreateAsset
                 if(!string.IsNullOrEmpty(imgPath))
                     _fileService.RemoveFile(imgPath);
 
-                throw new CreateAssetCommandException("Sorry we had an unknown problem while Creating your Asset.", e);
+                throw new CreateAssetCommandException("Sorry, we had an unknown problem while Creating your Asset.", e);
             }
         }
     }
