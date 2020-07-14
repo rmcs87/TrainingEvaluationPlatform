@@ -128,4 +128,5 @@ Besides providing services for storage and edition tools; score processing; and 
 * Dependency injection: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
 * Generating realistic fake data in .NET using Bogus: https://www.youtube.com/watch?v=T9pwE1GAr_U
 * Background tasks with hosted services in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.1&tabs=visual-studio
+* No need for repositories and unit of work with Entity Framework Core: https://gunnarpeipman.com/ef-core-repository-unit-of-work/
 
