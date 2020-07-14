@@ -23,17 +23,20 @@ namespace TEP.Application.Common.Mappings
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);
-                MethodInfo methodInfo = GetMappingMethod(type);
-
-                methodInfo?.Invoke(instance, new object[] { this });
+                InvokeMappings(instance, type, this);
             }
         }
         
-        private static MethodInfo GetMappingMethod(Type type)
-        {            
-            return type.GetMethod("Mapping") 
-                        ?? type.GetInterface("IMapFrom`1").GetMethod("Mapping")
-                        ?? type.GetInterface("IMapTo`1").GetMethod("Mapping");
+        private static void InvokeMappings(Object instance, Type type, MappingProfile mappingProfile)
+        {
+            MethodInfo methodInfo = type.GetMethod("Mapping");
+            if (type.GetMethod("Mapping") != null)
+                methodInfo.Invoke(instance, new object[] { mappingProfile });
+            else
+            {
+                type.GetInterface("IMapFrom`1")?.GetMethod("Mapping").Invoke(instance, new object[] { mappingProfile });
+                type.GetInterface("IMapTo`1")?.GetMethod("Mapping").Invoke(instance, new object[] { mappingProfile });
+            }
         }
     }
 }
