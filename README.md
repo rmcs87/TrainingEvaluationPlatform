@@ -95,6 +95,9 @@ Besides providing services for storage and edition tools; score processing; and 
 * Clean ASP.NET Core API using MediatR and CQRS: https://www.youtube.com/watch?v=YzOBrVlthMk
 * Validation using MediatR's Pipeline Behaviors and FluentValidation: https://www.youtube.com/watch?v=2JzQuIvxIqk
 
+#### Microservices
+* Monolith Decomposition Patterns: https://www.infoq.com/presentations/microservices-principles-patterns/
+
 #### Logging
 * Logging in .NET Core 3.0 and Beyond: https://www.youtube.com/watch?v=oXNslgIXIbQ
 
@@ -124,4 +127,6 @@ Besides providing services for storage and edition tools; score processing; and 
 * multipart requests with JSON and file: https://thomaslevesque.com/2018/09/04/handling-multipart-requests-with-json-and-file-uploads-in-asp-net-core/
 * Dependency injection: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1
 * Generating realistic fake data in .NET using Bogus: https://www.youtube.com/watch?v=T9pwE1GAr_U
+* Background tasks with hosted services in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.1&tabs=visual-studio
+* No need for repositories and unit of work with Entity Framework Core: https://gunnarpeipman.com/ef-core-repository-unit-of-work/
 
