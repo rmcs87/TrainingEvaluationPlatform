@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TEP.Appication.Categories;
 using TEP.Application.Assets.Queries.GetAsset;
 
 namespace TEP.Appication.DTO

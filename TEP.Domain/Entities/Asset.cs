@@ -9,7 +9,7 @@ namespace TEP.Domain.Entities
     {
         public Asset()
         {
-            Categories = new List<Category>();
+            AssetCategories = new List<AssetCategory>();
         }
         public Asset(string fileURI, string name, string iconPath) : this()
         {
@@ -21,14 +21,7 @@ namespace TEP.Domain.Entities
         public string FileURI { get; private set; }
         public string Name { get; private set; }
         public string IconPath { get; private set; }
-        public ICollection<AssetCategory> AssetCategories { get; set; }
-        public IEnumerable<Category> Categories {
-            get => AssetCategories.Select(r => r.Category);
-            set => AssetCategories = value.Select(v => new AssetCategory()
-            {
-                CategoryId = v.Id
-            }).ToList();
-        }
+        public IEnumerable<AssetCategory> AssetCategories { get; set; }
 
         public void ChangeName(string newName)
         {

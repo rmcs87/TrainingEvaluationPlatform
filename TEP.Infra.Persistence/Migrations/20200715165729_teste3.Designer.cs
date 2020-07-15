@@ -10,7 +10,7 @@ using TEP.Infra.Persistence;
 namespace TEP.Infra.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200715134923_teste3")]
+    [Migration("20200715165729_teste3")]
     partial class teste3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,8 @@ namespace TEP.Infra.Persistence.Migrations
 
                     b.HasKey("AssetId", "CategoryId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("AssetCategory");
                 });
 
@@ -112,7 +114,7 @@ namespace TEP.Infra.Persistence.Migrations
 
                     b.HasOne("TEP.Domain.Entities.Category", "Category")
                         .WithMany("AssetCategories")
-                        .HasForeignKey("AssetId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

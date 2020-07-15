@@ -26,7 +26,7 @@ namespace TEP.Presentation.Api
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {         
+        {
             services.AddControllers();
             services.AddHttpContextAccessor();
 
@@ -35,8 +35,6 @@ namespace TEP.Presentation.Api
             services.AddAuthProvider(Configuration);
             services.AddApplication(Configuration);
             services.AddDateTime();
-
-
 
             services.AddAuthorization(options =>
             {

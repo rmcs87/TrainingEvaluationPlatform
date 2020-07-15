@@ -18,7 +18,6 @@ namespace TEP.Application.Assets.Commands.CreateAsset
                 CreateMap<CreateAssetCommand, Asset>()
                     
                     .ForMember(a => a.AssetCategories, opt => opt.Ignore())
-                    .ForMember(a => a.Categories, opt => opt.Ignore())
                     
                     .ForMember(a => a.Id, opt => opt.Ignore())
                     .ForMember(a => a.IconPath, opt => opt.Ignore())

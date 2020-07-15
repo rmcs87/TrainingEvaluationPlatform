@@ -21,7 +21,7 @@ namespace TEP.Domain.Entities
         public int Id { get; private set; }
         public string Name { get; private set; }
         public string Code { get; private set; }
-        public ICollection<AssetCategory> AssetCategories { get; private set; }
+        public IEnumerable<AssetCategory> AssetCategories { get; private set; }
 
         public void UpdateName(string name)
         {

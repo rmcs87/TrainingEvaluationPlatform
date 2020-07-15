@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Assets.Queries.GetAsset;
 using TEP.Application.Common.Interfaces;
+using TEP.Domain.Entities;
 
 namespace TEP.Application.Assets.Queries.ListAssets
 {
@@ -24,10 +25,15 @@ namespace TEP.Application.Assets.Queries.ListAssets
 
         public async Task<IEnumerable<AssetDTO>> Handle(ListAssetsQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Assets.
-                 ProjectTo<AssetDTO>(_mapper.ConfigurationProvider)
-                 .OrderBy(a => a.Name)
-                 .ToListAsync();
+            var assets = await _context.Assets
+                .AsNoTracking()
+                .Include(a => a.AssetCategories).ThenInclude(c => c.Category)
+                .OrderBy(a => a.Name)
+                .ToListAsync();
+
+            var assetDTOs = _mapper.Map<List<AssetDTO>>(assets);
+
+            return assetDTOs;
         }
     }
 }

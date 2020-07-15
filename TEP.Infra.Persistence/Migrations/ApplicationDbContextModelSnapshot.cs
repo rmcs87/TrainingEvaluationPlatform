@@ -97,6 +97,8 @@ namespace TEP.Infra.Persistence.Migrations
 
                     b.HasKey("AssetId", "CategoryId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("AssetCategory");
                 });
 
@@ -110,7 +112,7 @@ namespace TEP.Infra.Persistence.Migrations
 
                     b.HasOne("TEP.Domain.Entities.Category", "Category")
                         .WithMany("AssetCategories")
-                        .HasForeignKey("AssetId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

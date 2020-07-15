@@ -36,7 +36,7 @@ namespace TEP.Presentation.Api.Controllers
                 var assets = await _mediator.Send(new ListAssetsQuery());
                 return new OkObjectResult(new { assets });
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return new StatusCodeResult(500);
             }

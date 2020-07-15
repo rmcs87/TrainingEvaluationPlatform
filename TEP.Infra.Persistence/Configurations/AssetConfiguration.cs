@@ -10,10 +10,7 @@ namespace TEP.Infra.Persistence.Configurations
         {
             builder.Property(a => a.Name)
                 .HasMaxLength(200)
-                .IsRequired();
-
-            builder.Ignore( a => a.Categories);
-                
+                .IsRequired();                
         }
     }
 }

@@ -19,7 +19,7 @@ namespace TEP.Infra.Persistence.Configurations
             builder
                 .HasOne(ac => ac.Category)
                 .WithMany(c => c.AssetCategories)
-                .HasForeignKey(ac => ac.AssetId);
+                .HasForeignKey(ac => ac.CategoryId);
 
         }
     }

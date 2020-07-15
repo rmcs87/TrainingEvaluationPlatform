@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net;
 using TEP.Shared.Helpers;
 using System.Text.Json;
+using TEP.Application.Assets.Queries.GetAsset;
 
 namespace TEP.IntegrationTest.API
 {
@@ -12,10 +13,17 @@ namespace TEP.IntegrationTest.API
     {
         private readonly HttpClient _client;
 
+        JsonSerializerOptions _jsonOptions;
+
         public AssetApiTest()
         {
             var server = new ApiTestServer();
             _client = server.CreateClient();
+
+            _jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
         }
 
         [TestMethod]
@@ -242,7 +250,7 @@ namespace TEP.IntegrationTest.API
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
-            string url = JsonSerializer.Deserialize<Asset>(responseJson).imgPath;
+            string url = JsonSerializer.Deserialize<AssetDTO>(responseJson, _jsonOptions).IconPath;
 
             //Act
             requestMessage = new HttpRequestMessage(HttpMethod.Get, url);
@@ -273,7 +281,7 @@ namespace TEP.IntegrationTest.API
     {
         public int id { get; set; }
     }
-
+    /*
     internal class Asset
     {
         public int id { get; set; }
@@ -281,5 +289,5 @@ namespace TEP.IntegrationTest.API
         public string name { get; set; }
         public string imgPath { get; set; }
     }
-
+    */
 }

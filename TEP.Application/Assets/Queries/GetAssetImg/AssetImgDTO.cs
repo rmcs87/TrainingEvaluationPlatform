@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TEP.Application.Assets.Queries.GetAssetImg
+﻿namespace TEP.Application.Assets.Queries.GetAssetImg
 {
     public class AssetImgDTO
     {
