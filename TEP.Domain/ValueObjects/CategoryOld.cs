@@ -7,9 +7,9 @@ namespace TEP.Domain.ValueObjects
     /// <summary>
     /// Categories which an Interaction can be classified.
     /// </summary>
-    public class Category
+    public class CategoryOld
     {
-        public Category(string name)
+        public CategoryOld(string name)
         {
             this.name = name;
         }

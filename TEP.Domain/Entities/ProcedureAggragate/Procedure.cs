@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TEP.Shared.ValueObjects;
 using System.Linq;
 using TEP.Domain.Common;
+using TEP.Domain.ValueObjects;
 
 namespace TEP.Domain.Entities
 {

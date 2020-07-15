@@ -8,7 +8,7 @@ namespace TEP.Domain.Tests
 {
     [TestClass]
     public class ProcedureTests : Setup
-    {       
+    {
         [TestMethod]
         public void OnGettingCurrentInteraction_ReturnsCorretInteraction_OnMiddleStep()
         {
@@ -57,7 +57,7 @@ namespace TEP.Domain.Tests
             //Act            
             Interaction currentInteraction = procedure.GetCurrentInteraction();
             //Assert
-           
+
         }
         [TestMethod]
         public void OnCallNextInteraction_IfNotCompletedNorLastInteraction_ReturnsCorretInteraction()
@@ -161,7 +161,7 @@ namespace TEP.Domain.Tests
             procedure.NextInteraction(fifthTime);
             //Assert
             Assert.AreEqual(Math.Round(fifthTime.Subtract(firstTime).TotalSeconds), Math.Round(procedure.Execution.Seconds));
-        }   
+        }
         [TestMethod]
         public void OnCallRequiredAssets_ShoulReturnListWithNonDuplicatedAssets()
         {

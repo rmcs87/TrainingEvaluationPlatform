@@ -4,16 +4,15 @@ using TEP.Domain.Entities;
 
 namespace TEP.Infra.Persistence.Configurations
 {
-    public class AssetConfiguration : IEntityTypeConfiguration<Asset>
+    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Asset> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(a => a.Name)
+            builder.Property(c => c.Name)
                 .HasMaxLength(200)
                 .IsRequired();
-
-            builder.Ignore( a => a.Categories);
-                
+            builder.Property(c => c.Code)
+                .IsRequired();
         }
     }
 }

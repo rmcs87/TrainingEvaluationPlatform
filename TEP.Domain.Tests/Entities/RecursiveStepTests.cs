@@ -23,7 +23,7 @@ namespace TEP.Domain.Tests.Entities
         public RecursiveStepTests()
         {
             List<Category> takeKeyCategories = new List<Category>();
-            takeKeyCategories.Add(new Category("Operational") );
+            takeKeyCategories.Add(new Category("Operational"));
             Description takeKeyDescription = new Description("Take the Key.");
             Duration takeKeyExpected = new Duration(1000);
             Duration takeKeyLimit = new Duration(2000);
