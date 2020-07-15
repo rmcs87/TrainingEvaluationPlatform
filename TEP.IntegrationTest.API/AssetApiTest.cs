@@ -281,13 +281,4 @@ namespace TEP.IntegrationTest.API
     {
         public int id { get; set; }
     }
-    /*
-    internal class Asset
-    {
-        public int id { get; set; }
-        public string filePath { get; set; }
-        public string name { get; set; }
-        public string imgPath { get; set; }
-    }
-    */
 }

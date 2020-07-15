@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Appication.DTO;
@@ -23,7 +25,10 @@ namespace TEP.Application.Assets.Queries.GetAsset
 
         public async Task<AssetDTO> Handle(GetAssetQuery request, CancellationToken cancellationToken)
         {
-            var asset = await _context.Assets.FindAsync(request.Id);
+            var asset = await _context.Assets
+                .AsNoTracking()
+                .Include(a => a.AssetCategories).ThenInclude(ac => ac.Category)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (asset == null)
                 throw new NotFoundException(nameof(Asset), request.Id);
