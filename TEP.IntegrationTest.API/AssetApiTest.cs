@@ -106,9 +106,7 @@ namespace TEP.IntegrationTest.API
             //Assert
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        }
-
-        
+        }        
 
         [TestMethod]
         public async Task OnRequestInsertAsset_WithInvalidData_ReceivesBadRequest()

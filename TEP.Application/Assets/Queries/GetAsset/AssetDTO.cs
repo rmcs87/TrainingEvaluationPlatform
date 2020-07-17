@@ -15,12 +15,12 @@ namespace TEP.Application.Assets.Queries.GetAsset
         public string IconPath { get; set; }
         public IEnumerable<CategoryDTO> CategoryDTOs { get; set; }
 
-        public void Mapping(Profile profile)
+        public void MappingFrom(Profile profile)
         {
             profile.
                 CreateMap<Asset, AssetDTO>()
-                    .ForMember(dto => dto.CategoryDTOs, act => act.MapFrom(a => a.AssetCategories.Select(ac => ac.Category).ToList()));
+                    .ForMember(dto => dto.CategoryDTOs, 
+                        act => act.MapFrom(a => a.AssetCategories.Select(ac => ac.Category).ToList()));
         }
     }   
-
 }

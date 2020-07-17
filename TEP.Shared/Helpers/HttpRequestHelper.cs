@@ -17,7 +17,6 @@ namespace TEP.Shared.Helpers
                 multiPartContent.Add(CreateJsonContent(content.Value), content.Key);
             }
 
-
             if (filePath != null)
             {
                 ByteArrayContent byteArrayContent;

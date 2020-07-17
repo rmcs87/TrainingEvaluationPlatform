@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
 using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
+using TEP.Domain.Entities.ManyToMany;
 
 namespace TEP.Application.Assets.Commands.CreateAsset
 {
@@ -35,6 +36,11 @@ namespace TEP.Application.Assets.Commands.CreateAsset
                 asset.UpdateIcon(imgPath);
 
                 _context.Assets.Add(asset);
+
+                foreach (int categoryId in request.CategoriesIds)
+                {
+                    asset.AddCategoryById(categoryId);
+                }
 
                 await _context.SaveChangesAsync(cancellationToken);
 

@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using TEP.Appication.Categories;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;

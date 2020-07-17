@@ -25,7 +25,10 @@ namespace TEP.Application.Tests
         public CreateAssetCommandsTests()
         {
             _assetList = new List<Asset>();
-            _createAssetCommand = new CreateAssetCommand { FileURI = "webURI", Name = "moq", Image = new Mock<IFormFile>().Object };
+            _createAssetCommand = new CreateAssetCommand { 
+                FileURI = "webURI", Name = "moq", Image = new Mock<IFormFile>().Object,
+                CategoriesIds = new List<int> { 2, 4 }
+            };
             
             _context = new Mock<IApplicationDbContext>();            
             _mapper = new Mock<IMapper>();                        

@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TEP.Appication.Categories;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
@@ -36,7 +37,12 @@ namespace TEP.IntegrationTest.API
 
         public Setup()
         {
-            _createAssetKeyValid = new CreateAssetCommand { Name = Guid.NewGuid().ToString(), FileURI = "key.fbx" };
+            _createAssetKeyValid = new CreateAssetCommand
+            {
+                Name = Guid.NewGuid().ToString(),
+                FileURI = "key.fbx",
+                CategoriesIds = new List<int> { 2, 4, 5 }
+            };
             _createAssetKeyInvalid = new CreateAssetCommand { Name = "", FileURI = "" };
 
             _updateAssetKeyValid = new UpdateAssetComamnd { Name = Guid.NewGuid().ToString(), FilePath = "key.fbx" };

@@ -21,8 +21,13 @@ namespace TEP.Domain.Entities
         public string FileURI { get; private set; }
         public string Name { get; private set; }
         public string IconPath { get; private set; }
-        public IEnumerable<AssetCategory> AssetCategories { get; set; }
+        public IList<AssetCategory> AssetCategories { get; private set; }
 
+        public void AddCategoryById(int id)
+        {
+            AssetCategories.Add(new AssetCategory { CategoryId = id });
+        }
+        
         public void ChangeName(string newName)
         {
             Name = newName;

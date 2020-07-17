@@ -29,14 +29,19 @@ namespace TEP.Application.Common.Mappings
         
         private static void InvokeMappings(Object instance, Type type, MappingProfile mappingProfile)
         {
-            MethodInfo methodInfo = type.GetMethod("Mapping");
-            if (type.GetMethod("Mapping") != null)
-                methodInfo.Invoke(instance, new object[] { mappingProfile });
+            var teste1 = type.GetInterface("IMapFrom`1")?.GetMethod("MappingFrom");
+            var teste22 = type.GetInterface("IMapTo`1")?.GetMethod("MappingTo");
+
+            if (type.GetMethod("MappingFrom") != null)
+                type.GetMethod("MappingFrom").Invoke(instance, new object[] { mappingProfile });
             else
-            {
-                type.GetInterface("IMapFrom`1")?.GetMethod("Mapping").Invoke(instance, new object[] { mappingProfile });
-                type.GetInterface("IMapTo`1")?.GetMethod("Mapping").Invoke(instance, new object[] { mappingProfile });
-            }
+                type.GetInterface("IMapFrom`1")?.GetMethod("MappingFrom").Invoke(instance, new object[] { mappingProfile });
+
+            if (type.GetMethod("MappingTo") != null)
+                type.GetMethod("MappingTo").Invoke(instance, new object[] { mappingProfile });
+            else                                       
+                type.GetInterface("IMapTo`1")?.GetMethod("MappingTo").Invoke(instance, new object[] { mappingProfile });
+            
         }
     }
 }
