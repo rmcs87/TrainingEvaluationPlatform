@@ -8,6 +8,7 @@ namespace TEP.Application.Common.Interfaces
     public interface IApplicationDbContext
     {
         DbSet<Asset> Assets { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

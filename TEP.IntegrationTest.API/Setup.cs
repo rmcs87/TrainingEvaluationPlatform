@@ -41,12 +41,12 @@ namespace TEP.IntegrationTest.API
             {
                 Name = Guid.NewGuid().ToString(),
                 FileURI = "key.fbx",
-                CategoriesIds = new List<int> { 2, 4, 5 }
+                CategoriesIds = new List<int> { 2, 4 }
             };
             _createAssetKeyInvalid = new CreateAssetCommand { Name = "", FileURI = "" };
 
-            _updateAssetKeyValid = new UpdateAssetComamnd { Name = Guid.NewGuid().ToString(), FilePath = "key.fbx" };
-            _updateAssetKeyInvalid = new UpdateAssetComamnd { Name = "", FilePath = "" };
+            _updateAssetKeyValid = new UpdateAssetComamnd { Name = Guid.NewGuid().ToString(), FileURI = "key.fbx", CategoriesIds = new List<int> { 2 } };
+            _updateAssetKeyInvalid = new UpdateAssetComamnd { Name = "", FileURI = "" };
 
             _deletAssetKey = new DeleteAssetCommand();
 

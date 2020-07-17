@@ -21,7 +21,7 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
             RuleFor(a => a.Name)
                 .AssetNameValidation();
 
-            RuleFor(a => a.FilePath)
+            RuleFor(a => a.FileURI)
                 .FilePathValidation();
 
             RuleFor(a => a.Image)

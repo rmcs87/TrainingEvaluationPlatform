@@ -37,11 +37,6 @@ namespace TEP.Application.Assets.Commands.CreateAsset
 
                 _context.Assets.Add(asset);
 
-                foreach (int categoryId in request.CategoriesIds)
-                {
-                    asset.AddCategoryById(categoryId);
-                }
-
                 await _context.SaveChangesAsync(cancellationToken);
 
                 return asset.Id;

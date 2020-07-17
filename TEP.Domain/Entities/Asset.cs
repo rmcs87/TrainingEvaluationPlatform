@@ -27,7 +27,12 @@ namespace TEP.Domain.Entities
         {
             AssetCategories.Add(new AssetCategory { CategoryId = id });
         }
-        
+
+        public void RemoveAllCategories()
+        {
+            AssetCategories.Clear();
+        }
+
         public void ChangeName(string newName)
         {
             Name = newName;
