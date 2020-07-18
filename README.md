@@ -12,16 +12,15 @@ Besides providing services for storage and edition tools; score processing; and 
 
 ## Technologies being Studied:
 - ASP.NET Core 3.1 (with .NET Core 3.1)
-- ASP.NET MVC Core 
-- ASP.NET WebApi Core with JWT Bearer Authentication
+- ASP.NET Core with JWT Bearer Authentication
 - Entity Framework Core 3.1
-- .NET Core Native DI
 - AutoMapper
 - FluentValidation
 - MediatR
 - MSTests
-- Coverage
-- Swagger
+- Coverage*
+- Swagger*
+- GitHub Actions
 
 ## Architecture Principles being Studied:
 - Full architecture with responsibility separation concerns, SOLID and Clean Code*
@@ -60,6 +59,11 @@ Besides providing services for storage and edition tools; score processing; and 
 
 #### Caching:
 * Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
+
+#### CI/CD
+* Integração Contínua: https://www.youtube.com/watch?v=nI3IjYcBGiU
+* Integração e entrega contínuas: pipeline CI/CD: https://www.redhat.com/pt-br/topics/devops/what-is-ci-cd
+* GitHub Actions: https://docs.github.com/en/actions
 
 #### Compression:
 * Compression in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/response-compression?view=aspnetcore-3.1
