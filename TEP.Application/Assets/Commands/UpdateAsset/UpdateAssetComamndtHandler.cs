@@ -30,10 +30,9 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
             var asset = await _context.Assets
                 .Include(a => a.AssetCategories)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
+
             if (asset == null)
                 throw new NotFoundException(nameof(Asset), request.Id);
-
-            var assetUpdate = _mapper.Map<Asset>(request);
 
             if (request.Image != null)
             {
@@ -42,13 +41,13 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
                 asset.UpdateIcon(newImgPath);
             }
 
-            asset.ChangeName(assetUpdate.Name);
-            asset.UpdateFileURI(assetUpdate.FileURI);
-            asset.RemoveAllCategories();
+            asset.ChangeName(request.Name);
+            asset.UpdateFileURI(request.FileURI);
 
-            foreach (var categoryId in assetUpdate.AssetCategories)
+            asset.RemoveAllCategories();
+            foreach (var categoryId in request.CategoriesIds)
             {
-                asset.AddCategoryById(categoryId.CategoryId);
+                asset.AddCategoryById(categoryId);
             }
 
             await _context.SaveChangesAsync(cancellationToken);           
