@@ -59,11 +59,16 @@ namespace TEP.IntegrationTest.API
             _invalidUser = new ApplicationUser { Username = "rico", Password = "12345" };
             _erroFormatUser = new ApplicationUser { Username = "", Password = "12345" };
 
+            var sc = Path.DirectorySeparatorChar.ToString();
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
             _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\helmet.jpg";
+            _imgAssetValidPath.Replace("\\", sc);
             _imgAssetValidPath2 = $"{baseTestProjectDirectory}TestFiles\\gloves2.jpg";
+            _imgAssetValidPath2.Replace("\\", sc);
             _imgAssetValidPath3PNG = $"{baseTestProjectDirectory}TestFiles\\helmet.png";
+            _imgAssetValidPath3PNG.Replace("\\", sc);
             _imgAssetInvalidFileTXT = $"{baseTestProjectDirectory}TestFiles\\texto.txt";
+            _imgAssetInvalidFileTXT.Replace("\\", sc);
         }
 
         protected async Task AuthorizeClient(HttpClient client, ApplicationUser user)

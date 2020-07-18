@@ -25,9 +25,13 @@ namespace TEP.Infra.File.Tests
 
             _options = new FileAssetOptions();
 
+            var sc = Path.DirectorySeparatorChar.ToString();
+
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
             _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\helmet.jpg";
+            _imgAssetValidPath.Replace("\\", sc);
             _invalidImgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\gloves.jpg";
+            _invalidImgAssetValidPath.Replace("\\", sc);
         }
 
         [TestMethod]
@@ -90,7 +94,6 @@ namespace TEP.Infra.File.Tests
             fileServer.RemoveFile(name);
 
             //assert
-            var destinyPath = $"{_options.BasePath}\\{name}";
             Assert.IsFalse(System.IO.File.Exists(name));
         }
 

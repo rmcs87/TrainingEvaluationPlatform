@@ -17,7 +17,8 @@ namespace TEP.Application.Common.Options
         private string GetPath()
         {
             var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
-            return $"{baseTestProjectDirectory}fileStorage";
+            
+            return $"{baseTestProjectDirectory}fileStorage".Replace("\\", Path.DirectorySeparatorChar.ToString());
         } 
     }
 }
