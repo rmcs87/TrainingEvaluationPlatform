@@ -18,12 +18,14 @@ namespace TEP.Presentation.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment hostEnvironment,IConfiguration configuration)
         {
+            HostEnvironment = hostEnvironment;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -31,7 +33,7 @@ namespace TEP.Presentation.Api
             services.AddHttpContextAccessor();
 
             services.AddFileService();
-            services.AddInfraPersistence(Configuration);
+            services.AddInfraPersistence(Configuration, HostEnvironment);
             services.AddAuthProvider(Configuration);
             services.AddApplication(Configuration);
             services.AddDateTime();

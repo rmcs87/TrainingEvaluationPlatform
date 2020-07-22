@@ -1,15 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
 using TEP.Application.Common.Interfaces;
 
 namespace TEP.Infra.Persistence
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfraPersistence(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfraPersistence(this IServiceCollection services, 
+                                                                IConfiguration configuration, 
+                                                                IWebHostEnvironment env)
         {
-            var connectionString = configuration["ConnectionStrings:teps"];
+            string connectionString = (env.EnvironmentName == Environments.Development) ?
+                                       configuration["ConnectionStrings:teps"] 
+                                       : Environment.GetEnvironmentVariable("ConnectionStringTep");
+            
             services.AddDbContext<ApplicationDbContext>(o =>
                 o.UseSqlServer(connectionString,
                                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
