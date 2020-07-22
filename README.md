@@ -76,16 +76,16 @@ Besides providing services for storage and edition tools; score processing; and 
 * Domain-Driven Design: Atacando as Complexidades no Coração do Software: https://www.amazon.com.br/Domain-Driven-Design-Eric-Evans/dp/8550800651
 * Services in Domain-Driven Design (DDD): http://gorodinski.com/blog/2012/04/14/services-in-domain-driven-design-ddd/
 
+#### Docker: (future steps)
+* Step by step - Run and Connect to SQL Server in Docker: https://www.youtube.com/watch?v=SJAl3vOX05M
+* Docker - Guia de Referência Gratuito:
+[Docker Guide](https://medium.com/@renato.groffe/docker-guia-de-refer%C3%AAncia-gratuito-70c14cfd8132 "Docker Guide")
+
 #### EFC:
 * Entity Framework Core: https://docs.microsoft.com/pt-br/ef/core/
 * Criando uma API com ASP.NET Core 3 e EF Core 3 em menos de 15 minutos: https://www.youtube.com/watch?v=but7jqjopKM
 * Entity Framework Core Guide: https://www.learnentityframeworkcore.com/
 * Migrations: https://www.entityframeworktutorial.net/efcore/entity-framework-core-migration.aspx
-
-#### Docker: (future steps)
-* Azure na Prática Gratuito #2 - Docker: https://www.youtube.com/watch?v=AAp1N3gBWOU
-* Docker - Guia de Referência Gratuito:
-[Docker Guide](https://medium.com/@renato.groffe/docker-guia-de-refer%C3%AAncia-gratuito-70c14cfd8132 "Docker Guide")
 
 #### Fluent Validation
 * Fluent validation: https://fluentvalidation.net/
