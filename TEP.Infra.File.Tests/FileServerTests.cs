@@ -27,11 +27,11 @@ namespace TEP.Infra.File.Tests
 
             var sc = Path.DirectorySeparatorChar.ToString();
 
-            var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\"));
-            _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\helmet2.jpg";
-            _imgAssetValidPath.Replace("\\", sc);
-            _invalidImgAssetValidPath = $"{baseTestProjectDirectory}TestFiles\\gloves2.jpg";
-            _invalidImgAssetValidPath.Replace("\\", sc);
+            var baseTestProjectDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../../"));
+            _imgAssetValidPath = $"{baseTestProjectDirectory}TestFiles/helmet.jpg";
+            //_imgAssetValidPath.Replace("\\", sc);
+            _invalidImgAssetValidPath = $"{baseTestProjectDirectory}TestFiles/gloves.jpg";
+           // _invalidImgAssetValidPath.Replace("\\", sc);
         }
 
         [TestMethod]
