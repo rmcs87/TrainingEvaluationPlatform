@@ -13,12 +13,14 @@ using TEP.Infra.Persistence;
 using System.IO;
 using System;
 using TEP.Infra.DateTimeService;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace TEP.Presentation.Api
 {
     public class Startup
     {
-        public Startup(IWebHostEnvironment hostEnvironment,IConfiguration configuration)
+        public Startup(IWebHostEnvironment hostEnvironment, IConfiguration configuration)
         {
             HostEnvironment = hostEnvironment;
             Configuration = configuration;
@@ -74,8 +76,18 @@ namespace TEP.Presentation.Api
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context)
         {
+
+            if (context.Database.IsSqlServer())
+            {
+                context.Database.Migrate();
+            }
+
+            //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            //await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
+            ApplicationDbContextSeed.SeedSampleDataAsync(context);            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

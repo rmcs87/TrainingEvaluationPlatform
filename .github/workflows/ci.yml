@@ -21,8 +21,8 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
         env:
           ACCEPT_EULA: y
-          SA_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          MSSQL_PID:  Express
+          SA_PASSWORD: 1StrongPwd!!
+          MSSQL_PID: Express
         ports:
           - 1433:1433
 
@@ -42,8 +42,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      
+    - name: Test      
       run: dotnet test --no-restore --verbosity minimal
     #CODE COVERAGE TO DO NEXT
     #CODE COVERAGE TO A Artifact 

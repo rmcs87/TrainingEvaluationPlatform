@@ -16,7 +16,7 @@ namespace TEP.Presentation.Api
         {
             var host = CreateHostBuilder(args).Build();
 
-            using (var scope = host.Services.CreateScope())
+            /*using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
 
@@ -41,7 +41,7 @@ namespace TEP.Presentation.Api
 
                     throw;
                 }
-            }
+            }*/
 
             await host.RunAsync();
         }
