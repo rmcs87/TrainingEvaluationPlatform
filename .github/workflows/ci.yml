@@ -13,6 +13,8 @@ jobs:
       matrix:
         #os: [ubuntu-latest, windows-latest, macOS-latest]
         os: [ubuntu-latest]
+    env:
+      ConnectionStringTep: invalidstring
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -25,8 +27,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      env:
-        ConnectionStringTep: "invalidstring"
+      
       run: dotnet test --no-restore --verbosity minimal
     #CODE COVERAGE TO DO NEXT
     #CODE COVERAGE TO A Artifact 
