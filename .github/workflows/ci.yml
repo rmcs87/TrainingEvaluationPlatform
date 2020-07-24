@@ -27,4 +27,4 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity minimal
     #CODE COVERAGE TO DO NEXT
-    #CODE COVERAGE TO A Artifact
+    #CODE COVERAGE TO A Artifact 
