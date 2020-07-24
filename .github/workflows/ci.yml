@@ -21,8 +21,8 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
         env:
           ACCEPT_EULA: y
-          MSSQL_SA_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          MSSQL_PID:  Express
+          SA_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MSSQL_PID: Express
         ports:
           - 1433:1433
 
