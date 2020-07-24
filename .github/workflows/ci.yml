@@ -21,7 +21,7 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
         env:
           ACCEPT_EULA: y
-          SA_PASSWORD: "Pa$$w0rd2020"
+          SA_PASSWORD: "'Pa$$w0rd2020'"
           MSSQL_PID: Express
         ports:
           - 1433:1433
