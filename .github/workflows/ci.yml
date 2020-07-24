@@ -1,21 +1,20 @@
-name: .NET Core
+name: TEP.CI-Workflow
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ develop ]
 
 jobs:
   build:
 
-    runs-on: ${{ matrix.os}}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -24,3 +23,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    #- name: Test
+    #  run: dotnet test --no-restore --verbosity minimal
+    #CODE COVERAGE TO DO NEXT
+    #CODE COVERAGE TO A Artifact
