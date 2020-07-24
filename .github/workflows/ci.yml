@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         #os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [windows-latest]
+        os: [ubuntu-latest]
 
 
 
@@ -32,10 +32,6 @@ jobs:
     env:
       ConnectionStringTep: ${{ secrets.CONECTION_STRING }}
     steps:
-    - name: Sleep for 30 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
     - name: Checkout
       uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -46,8 +42,7 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    - name: Test
-      
+    - name: Test      
       run: dotnet test --no-restore --verbosity minimal
     #CODE COVERAGE TO DO NEXT
     #CODE COVERAGE TO A Artifact 
