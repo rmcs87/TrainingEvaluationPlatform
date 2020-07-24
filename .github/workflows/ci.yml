@@ -1,9 +1,10 @@
 name: TEP.CI-Workflow
 
 on:
-  pull_request:
-    branches: [ develop ]
-
+  #pull_request:
+  #  branches: [ develop ]
+  push:
+    
 jobs:
   build:
 
