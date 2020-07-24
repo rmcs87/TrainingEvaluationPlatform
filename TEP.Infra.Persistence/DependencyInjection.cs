@@ -14,9 +14,13 @@ namespace TEP.Infra.Persistence
                                                                 IConfiguration configuration, 
                                                                 IWebHostEnvironment env)
         {
+            /*string connectionString = (env.EnvironmentName == Environments.Development) ?
+                                       configuration["ConnectionStrings:teps"] 
+                                       : Environment.GetEnvironmentVariable("ConnectionStringTep");*/
+
             string connectionString = Environment.GetEnvironmentVariable("ConnectionStringTep")
                                         ?? configuration["ConnectionStrings:teps"];
-            
+
             services.AddDbContext<ApplicationDbContext>(o =>
                 o.UseSqlServer(connectionString,
                                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
