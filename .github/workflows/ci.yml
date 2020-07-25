@@ -1,8 +1,10 @@
 name: TEP CI-Workflow
 
 on:
-  pull_request:
-    branches: [ develop ]
+  #pull_request:
+  #  branches: [ master ]
+  push:
+    
     
 jobs:
   Build:
@@ -40,11 +42,16 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,lcov\""
     - name: Artifact Test Coverage
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage
         path: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.json
+    - name: Publish coverage report to coveralls.io
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.json
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
