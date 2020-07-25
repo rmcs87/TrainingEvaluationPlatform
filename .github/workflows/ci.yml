@@ -1,17 +1,23 @@
-name: TEP.CI-Workflow
+name: TEP CI-Workflow
 
 on:
   pull_request:
     branches: [ develop ]
-
+    
 jobs:
   build:
-
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-
+    runs-on: ubuntu-latest
+    services:
+      sqlServer:
+        image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+        env:
+          ACCEPT_EULA: y
+          SA_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MSSQL_PID: Express
+        ports:
+          - 1433:1433
+    env:
+      ConnectionStringTep: ${{ secrets.CONECTION_STRING }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -19,11 +25,13 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Install dependencies
+    - name: Install Dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
-    #- name: Test
-    #  run: dotnet test --no-restore --verbosity minimal
-    #CODE COVERAGE TO DO NEXT
-    #CODE COVERAGE TO A Artifact
+    - name: Tests and Coverage   
+      # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""    
+    # CODE COVERAGE TO A Artifact 
+    # CODE COVERAGE TO View Tool Artifact 
+    # Caching
