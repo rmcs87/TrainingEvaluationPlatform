@@ -43,4 +43,4 @@ jobs:
       run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""    
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
-    #
+    # testing build merge dependecy.
