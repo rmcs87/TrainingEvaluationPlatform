@@ -45,6 +45,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage
-        path: $(pwd)/coverage/coverage.json
+        path: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.json
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
