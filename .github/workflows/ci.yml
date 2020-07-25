@@ -13,22 +13,15 @@ jobs:
       matrix:
         #os: [ubuntu-latest, windows-latest, macOS-latest]
         os: [ubuntu-latest]
-
-
-
     services:
       sqlServer:
         image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
         env:
           ACCEPT_EULA: y
-          SA_PASSWORD: 1StrongPwd!!
+          SA_PASSWORD: ${{ secrets.DB_PASSWORD }}
           MSSQL_PID: Express
         ports:
           - 1433:1433
-
-
-
-
     env:
       ConnectionStringTep: ${{ secrets.CONECTION_STRING }}
     steps:
