@@ -32,11 +32,13 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
-    - name: Run codacy-coverage-reporter final
-      uses: codacy/codacy-coverage-reporter-action@master
-      with:
-        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        coverage-reports: cobertura.xml
+      #run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
+      #run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""
+    #- name: Run codacy-coverage-reporter final
+    #  uses: codacy/codacy-coverage-reporter-action@master
+    #  with:
+    #    project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+    #    coverage-reports: cobertura.xml
     
     #CODE COVERAGE TO A Artifact 
