@@ -33,7 +33,7 @@ jobs:
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
       run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
-    - name: Run codacy-coverage-reporter
+    - name: Run codacy-coverage-reporter final
       uses: codacy/codacy-coverage-reporter-action@master
       with:
         project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
