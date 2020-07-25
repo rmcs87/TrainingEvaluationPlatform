@@ -34,7 +34,7 @@ jobs:
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
       #run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
       #run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,xml\""
     #- name: Run codacy-coverage-reporter final
     #  uses: codacy/codacy-coverage-reporter-action@master
     #  with:
