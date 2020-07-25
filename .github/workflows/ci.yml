@@ -21,6 +21,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Cache Dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -32,6 +41,5 @@ jobs:
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
       run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""    
-    # CODE COVERAGE TO A Artifact 
-    # CODE COVERAGE TO View Tool Artifact 
-    # Caching
+    # CODE COVERAGE as Artifact 
+    # CODE COVERAGE TO View Tool 
