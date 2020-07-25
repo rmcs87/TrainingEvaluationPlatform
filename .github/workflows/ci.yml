@@ -40,7 +40,11 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
-      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""    
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:MergeWith=$(pwd)/coverage/coverage.json /p:CoverletOutput=$(pwd)/coverage/ "/p:CoverletOutputFormat=\"json,opencover\""
+    - name: Artifact Test Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage
+        path: $(pwd)/coverage/coverage.json
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
-    # testing build merge dependecy.
