@@ -31,6 +31,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Tests      
-      run: dotnet test --no-restore --verbosity minimal
+      run: dotnet test --no-restore --verbosity minimal /p:CollectCoverage=true /p:CoverletOutput=TestResults/
     #CODE COVERAGE TO DO NEXT
+    #All test projects must  add package coverlet.msbuild (only test ones)
     #CODE COVERAGE TO A Artifact 
