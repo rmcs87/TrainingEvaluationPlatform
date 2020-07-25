@@ -52,6 +52,6 @@ jobs:
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.json
+        path-to-lcov: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.lcov
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
