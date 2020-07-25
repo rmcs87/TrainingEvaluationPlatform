@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.File.Tests", "TEP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.DateTimeService", "TEP.Infra.DateTimeService\TEP.Infra.DateTimeService.csproj", "{617A9CFD-1387-457C-BF01-35E0D56E1DF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEP.Test.Utils", "TEP.Test.Utils\TEP.Test.Utils.csproj", "{D3D66CEF-CEB7-4F44-BD0B-665B83DD9A82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Test.Utils", "TEP.Test.Utils\TEP.Test.Utils.csproj", "{D3D66CEF-CEB7-4F44-BD0B-665B83DD9A82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
