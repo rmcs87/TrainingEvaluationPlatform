@@ -5,8 +5,8 @@ name: Build and deploy ASP.Net Core app to Azure Web App - tepvr
 
 on:
   push:
-    branches:
-      - master
+  #  branches:
+  #    - master
 
 jobs:
   build-and-deploy:
