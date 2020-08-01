@@ -126,7 +126,7 @@ Besides providing services for storage and edition tools; score processing; and 
 *  Mocking em testes unitários com o framework Moq: [link](https://www.devmedia.com.br/mocking-em-testes-unitarios-com-o-framework-moq/36724)
 *  Moq QuickStart: [link](https://github.com/Moq/moq4/wiki/Quickstart)
 *  Como Testar o ASP.NET Core Web API: [link](https://www.infoq.com/br/articles/testing-aspnet-core-web-api/)
-*  MSTest Cheat Sheet: [link](https://www.automatetheplanet.com/wp-content/uploads/2018/05/mstest-cheat-sheet-automatetheplanet.pdf || https://www.automatetheplanet.com/mstest-cheat-sheet/)
+*  MSTest Cheat Sheet: [link](https://www.automatetheplanet.com/wp-content/uploads/2018/05/mstest-cheat-sheet-automatetheplanet.pdf)
 
 #### Others:
 *  Efficient post calls with HttpClient and JSON.NET: [link](https://johnthiriet.com/efficient-post-calls/)
