@@ -57,6 +57,9 @@ Besides providing services for storage and edition tools; score processing; and 
 * C# Async / Await: https://www.youtube.com/watch?v=2moh18sh5p4
 * C# Advanced Async: https://www.youtube.com/watch?v=ZTKGRJy5P2M
 
+#### Azure
+* Deploy a WebApp: https://docs.microsoft.com/en-us/azure/developer/python/tutorial-deploy-app-service-on-linux-04
+
 #### Caching:
 * Caching in ASP.NET Core: https://docs.microsoft.com/pt-br/aspnet/core/performance/caching/response?view=aspnetcore-3.1
 
