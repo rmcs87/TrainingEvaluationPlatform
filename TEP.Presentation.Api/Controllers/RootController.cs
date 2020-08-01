@@ -11,7 +11,7 @@ namespace TEP.Presentation.Api.Controllers
         {
             try
             {
-                return new OkObjectResult("Hello TEP.");
+                return new OkObjectResult("Welcome to TEP.");
             }
             catch (Exception ex)
             {

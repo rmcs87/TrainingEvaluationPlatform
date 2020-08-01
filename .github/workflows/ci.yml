@@ -1,10 +1,8 @@
 name: TEP CI-Workflow
 
 on:
-  #pull_request:
-  #  branches: [ master ]
-  push:
-    
+  pull_request:
+    branches: [ master ]  
     
 jobs:
   Build:
@@ -38,7 +36,7 @@ jobs:
         dotnet-version: 3.1.101
     - name: Install Dependencies
       run: dotnet restore
-    - name: Build
+    - name: Build App
       run: dotnet build --configuration Release --no-restore
     - name: Tests and Coverage   
       # All TEST (only) projects MUST add package coverlet.msbuild for Coverage
@@ -48,38 +46,3 @@ jobs:
       with:
         name: code-coverage
         path: /home/runner/work/TrainingEvaluationPlatform/TrainingEvaluationPlatform/coverage/coverage.json
-
-
-    #- name: Publish
-    #  run: dotnet publish --configuration Release --no-restore -o ./output/
-
-
-    #- name: deploy to azure web app
-    #  uses: azure/webapps-deploy@v2
-    #  with: 
-    #    app-name: tepvr
-    #    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-    #    package: ./output/
-
-
-    #- name: Publish Build Artifact
-    #  uses: actions/upload-artifact@v2
-    #  with:
-    #    name: aspnetcore-webapp
-    #    path: ./output/
-    # CODE COVERAGE as Artifact 
-    # CODE COVERAGE TO View Tool 
-
-    #- name: Build with dotnet
-    #  run: dotnet build --configuration Release
-
-    #- name: dotnet publish
-    #  run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
-    #- name: Deploy to Azure Web App
-    #  uses: azure/webapps-deploy@v1
-    #  with:
-    #    app-name: 'tepvr'
-    #    slot-name: 'production'
-    #    publish-profile: ${{ secrets.AzureAppService_PublishProfile_0565be1920b84b7bb3690ec77cede0e5 }}
-    #    package: ${{env.DOTNET_ROOT}}/myapp 
