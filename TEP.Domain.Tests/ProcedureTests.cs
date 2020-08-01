@@ -16,9 +16,7 @@ namespace TEP.Domain.Tests
             var procedure = new Procedure(new Description("Door Oppening"), "Door 01", _MultinivelStep);
             DateTime firstTime = DateTime.Now;
             DateTime secondTime = DateTime.Now;
-            DateTime thirdTime = DateTime.Now;
-            DateTime fourthTime = DateTime.Now;
-            DateTime fifthTime = DateTime.Now;
+
             //Act
             procedure.NextInteraction(firstTime);
             procedure.NextInteraction(secondTime);
@@ -37,9 +35,10 @@ namespace TEP.Domain.Tests
             DateTime thirdTime = DateTime.Now;
             DateTime fourthTime = DateTime.Now;
             DateTime fifthTime = DateTime.Now;
+
             //Act
             procedure.NextInteraction(firstTime);
-            Interaction secondInteractions = procedure.NextInteraction(secondTime);
+            procedure.NextInteraction(secondTime);
             procedure.NextInteraction(thirdTime);
             procedure.NextInteraction(fourthTime);
             procedure.NextInteraction(fifthTime);

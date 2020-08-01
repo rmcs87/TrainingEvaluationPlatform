@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,6 +37,8 @@ namespace TEP.Infra.Persistence
                     case EntityState.Modified:
                         entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
+                        break;
+                    default:
                         break;
                 }
             }

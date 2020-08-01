@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
 using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
-using TEP.Domain.Entities.ManyToMany;
 
 namespace TEP.Application.Assets.Commands.CreateAsset
 {
@@ -43,9 +42,10 @@ namespace TEP.Application.Assets.Commands.CreateAsset
             }
             catch (Exception e)
             {
-                if(!string.IsNullOrEmpty(imgPath))
+                if (!string.IsNullOrEmpty(imgPath))
+                {
                     _fileService.RemoveFile(imgPath);
-
+                }
                 throw new CreateAssetCommandException("Sorry, we had an unknown problem while Creating your Asset.", e);
             }
         }

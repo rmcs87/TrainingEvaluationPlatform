@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TEP.Appication.DTO;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
 using TEP.Domain.Entities;
@@ -31,7 +28,9 @@ namespace TEP.Application.Assets.Queries.GetAsset
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (asset == null)
+            {
                 throw new NotFoundException(nameof(Asset), request.Id);
+            }
 
             var dto = _mapper.Map<AssetDTO>(asset);
 
