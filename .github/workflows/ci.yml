@@ -70,16 +70,16 @@ jobs:
     # CODE COVERAGE as Artifact 
     # CODE COVERAGE TO View Tool 
 
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
+    #- name: Build with dotnet
+    #  run: dotnet build --configuration Release
 
-    - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+    #- name: dotnet publish
+    #  run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v1
-      with:
-        app-name: 'tepvr'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_0565be1920b84b7bb3690ec77cede0e5 }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+    #- name: Deploy to Azure Web App
+    #  uses: azure/webapps-deploy@v1
+    #  with:
+    #    app-name: 'tepvr'
+    #    slot-name: 'production'
+    #    publish-profile: ${{ secrets.AzureAppService_PublishProfile_0565be1920b84b7bb3690ec77cede0e5 }}
+    #    package: ${{env.DOTNET_ROOT}}/myapp 
