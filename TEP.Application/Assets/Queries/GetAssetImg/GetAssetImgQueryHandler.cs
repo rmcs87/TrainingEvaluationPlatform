@@ -41,7 +41,7 @@ namespace TEP.Application.Assets.Queries.GetAssetImg
 
         }
 
-        private string GetMimeType(string fileName)
+        private static string GetMimeType(string fileName)
         {
             var provider = new FileExtensionContentTypeProvider();
             provider.Mappings.Add(".dnct", "application/dotnetcoretutorials");

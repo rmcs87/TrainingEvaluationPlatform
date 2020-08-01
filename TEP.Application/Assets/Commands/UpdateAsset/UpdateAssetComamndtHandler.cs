@@ -13,15 +13,13 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     public class UpdateAssetComamndtHandler : IRequestHandler<UpdateAssetComamnd>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileServiceFactory _fileServiceFactory;
         private readonly IFileService _fileService;
         private readonly IMapper _mapper;
 
         public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileServiceFactory fileFactory, IMapper mapper)
         {
             _context = context;
-            _fileServiceFactory = fileFactory;
-            _fileService = _fileServiceFactory.Create<FileAssetOptions>();
+            _fileService = fileFactory.Create<FileAssetOptions>();
             _mapper = mapper;
         }
 

@@ -11,13 +11,8 @@ namespace TEP.Infra.Persistence
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfraPersistence(this IServiceCollection services, 
-                                                                IConfiguration configuration, 
-                                                                IWebHostEnvironment env)
+                                                                IConfiguration configuration)
         {
-            /*string connectionString = (env.EnvironmentName == Environments.Development) ?
-                                       configuration["ConnectionStrings:teps"] 
-                                       : Environment.GetEnvironmentVariable("ConnectionStringTep");*/
-
             string connectionString = Environment.GetEnvironmentVariable("ConnectionStringTep")
                                         ?? configuration["ConnectionStrings:teps"];
 

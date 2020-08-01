@@ -32,13 +32,17 @@ namespace TEP.Infra.Files
         public static void ValidateFile(IFormFile data, IFileOptions options)
         {
             if (!FileHelper.IsFileExtensionValid(data.FileName, options.SupportedFilesExtension))
+            {
                 throw new FileCreationException($"File type is not Accepeted. Use {String.Join(",", options.SupportedFilesExtension)}");
-
+            }
             if (data.Length == 0)
+            {
                 throw new FileCreationException($"File is empty.");
-
+            }
             if (data.Length > options.SizeLimit)
+            {
                 throw new FileCreationException($"File exceeds Maximum Size of {options.SizeLimit}.");
+            }
         }
 
         private static bool IsFileExtensionValid(string fileName, string[] permittedExtensions)
@@ -58,7 +62,7 @@ namespace TEP.Infra.Files
 
         public static string CombinePathAndName(string filePath, string fileName)
         {
-            return Path.Combine(filePath, fileName); ;
+            return Path.Combine(filePath, fileName);
         }
 
     }

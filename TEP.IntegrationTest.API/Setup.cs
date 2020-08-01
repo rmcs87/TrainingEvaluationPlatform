@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using TEP.Appication.Categories;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Assets.Commands.DeleteAsset;
 using TEP.Application.Assets.Commands.UpdateAsset;
@@ -66,7 +65,7 @@ namespace TEP.IntegrationTest.API
             _imgAssetInvalidFileTXT = $"{baseTestProjectDirectory}TestFiles/texto.txt";
         }
 
-        protected async Task AuthorizeClient(HttpClient client, ApplicationUser user)
+        protected static async Task AuthorizeClient(HttpClient client, ApplicationUser user)
         {
             var json = JsonSerializer.Serialize(user);
             HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
@@ -91,7 +90,7 @@ namespace TEP.IntegrationTest.API
             return JsonSerializer.Deserialize<Identifier>(responseJson).id;
         }
 
-        protected Dictionary<string, string> ObjectAttributesToDicionary(object obj)
+        protected static Dictionary<string, string> ObjectAttributesToDicionary(object obj)
         {
             Dictionary<string, string> stringContents = new Dictionary<string, string>();
             Type type = obj.GetType();

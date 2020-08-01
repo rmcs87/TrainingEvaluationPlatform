@@ -8,7 +8,7 @@ namespace TEP.Domain.Common
     {
         public static bool operator !=(ValueObject obj1, ValueObject obj2) => !(obj1 == obj2);
 
-        public static bool operator ==(ValueObject obj1, ValueObject obj2)
+        public static bool operator == (ValueObject obj1, ValueObject obj2)
         {
             if (Equals(obj1, null))
             {

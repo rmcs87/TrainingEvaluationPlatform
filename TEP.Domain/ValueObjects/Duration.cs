@@ -6,21 +6,22 @@ namespace TEP.Domain.ValueObjects
     public class Duration : ValueObject
     {
         //Manages the duration of an event in Seconds, to a max of 596.52 Hour.
-        //https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6 (exemplo do Distance)
+        //Convert to something like this-> https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6 (exemplo do Distance)
         public Duration(double seconds)
         {
             Seconds = seconds;
         }
 
         public double Seconds { get; set; }
-        public void Increment(double increment)
+        public void Increment(double amount)
         {
-            Seconds += increment;
+            Seconds += amount;
         }
-        public void Decrement(double decrement)
+        public void Decrement(double amount)
         {
-            Seconds -= decrement;
-        }public void Increment(Duration increment)
+            Seconds -= amount;
+        }
+        public void Increment(Duration increment)
         {
             Seconds += increment.Seconds;
         }
@@ -32,26 +33,16 @@ namespace TEP.Domain.ValueObjects
         {
             Seconds = 0;
         }
-
         protected override IEnumerable<object> GetAtomicValues()
         {
             //https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6 (exemplo do Distance)
             throw new System.NotImplementedException();
         }
 
-        /*public override string ToString()
+        public override string ToString()
         {
-            var apt = !string.IsNullOrWhiteSpace(Street2) ? " " + Street2 : "";
-            return $"{Street1}{apt}, {City}, {State} {Zip}";
+            throw new System.NotImplementedException();
         }
 
-        protected override IEnumerable<object> GetAtomicValues()
-        {
-            yield return Street1;
-            yield return Street2;
-            yield return City;
-            yield return State;
-            yield return Zip;
-        }*/
     }
 }

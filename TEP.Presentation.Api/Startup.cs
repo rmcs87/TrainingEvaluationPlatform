@@ -14,7 +14,6 @@ using System.IO;
 using System;
 using TEP.Infra.DateTimeService;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace TEP.Presentation.Api
 {
@@ -35,7 +34,7 @@ namespace TEP.Presentation.Api
             services.AddHttpContextAccessor();
 
             services.AddFileService();
-            services.AddInfraPersistence(Configuration, HostEnvironment);
+            services.AddInfraPersistence(Configuration);
             services.AddAuthProvider(Configuration);
             services.AddApplication(Configuration);
             services.AddDateTime();
@@ -84,8 +83,6 @@ namespace TEP.Presentation.Api
                 context.Database.Migrate();
             }
 
-            //var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            //await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
             ApplicationDbContextSeed.SeedSampleDataAsync(context);            
 
             if (env.IsDevelopment())

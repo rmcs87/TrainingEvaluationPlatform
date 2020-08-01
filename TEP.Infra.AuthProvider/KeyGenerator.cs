@@ -8,11 +8,13 @@ namespace TEP.Infra.AuthProvider
 {
     public static class KeyGenerator
     {
-        private static RandomNumberGenerator Rng = RandomNumberGenerator.Create();        
+        private static RandomNumberGenerator Rng = RandomNumberGenerator.Create();
         public static SecurityKey Loadkey(string MyJwkLocation)
         {
             if (File.Exists(MyJwkLocation))
+            {
                 return JsonSerializer.Deserialize<JsonWebKey>(File.ReadAllText(MyJwkLocation));
+            }
 
             var newKey = CreateJWK();
             File.WriteAllText(MyJwkLocation, JsonSerializer.Serialize(newKey));

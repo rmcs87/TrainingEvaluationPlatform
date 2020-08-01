@@ -59,7 +59,9 @@ namespace TEP.Infra.AuthProvider
             };
 
             if (!users.Where(x => x.Username == userName && x.Password == password).Any())
+            {
                 throw new InvalidUserException("Invalid Username and/or password.");
+            }
 
             return users.Where(x => x.Username == userName && x.Password == password).FirstOrDefault();
         }

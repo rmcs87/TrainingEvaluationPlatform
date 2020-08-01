@@ -8,7 +8,13 @@ namespace TEP.Shared.Helpers
     {
         //Files UpTo 64KB
         public static HttpRequestMessage PrepareMultipartFormWithFile(
-            HttpMethod method, string url, Dictionary<string, string> stringContents, string filePath = null)
+           HttpMethod method, string url, Dictionary<string, string> stringContents)
+        {
+            return PrepareMultipartFormWithFile(method, url, stringContents, null);
+        }
+
+        public static HttpRequestMessage PrepareMultipartFormWithFile(
+        HttpMethod method, string url, Dictionary<string, string> stringContents, string filePath)
         {
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----MyBoundary");
 

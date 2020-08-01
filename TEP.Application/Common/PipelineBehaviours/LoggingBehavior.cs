@@ -9,8 +9,8 @@ namespace TEP.Application.Common.PipelineBehaviours
     public class LoggingBehavior<TRequest> : IRequestPreProcessor<TRequest>
     {
         private readonly ILogger _logger;
-        private ICurrentUserService _currentUserService;
-        private IIdentityService _identityService;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IIdentityService _identityService;
 
         public LoggingBehavior(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
         {
