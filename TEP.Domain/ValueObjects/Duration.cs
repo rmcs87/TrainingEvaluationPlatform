@@ -21,13 +21,13 @@ namespace TEP.Domain.ValueObjects
         {
             Seconds -= amount;
         }
-        public void Increment(Duration increment)
+        public void Increment(Duration duration)
         {
-            Seconds += increment.Seconds;
+            Seconds += duration.Seconds;
         }
-        public void Decrement(Duration decrement)
+        public void Decrement(Duration duration)
         {
-            Seconds -= decrement.Seconds;
+            Seconds -= duration.Seconds;
         }
         public void Reset()
         {
@@ -43,6 +43,5 @@ namespace TEP.Domain.ValueObjects
         {
             throw new System.NotImplementedException();
         }
-
     }
 }

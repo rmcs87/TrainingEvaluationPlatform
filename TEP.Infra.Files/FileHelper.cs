@@ -49,7 +49,9 @@ namespace TEP.Infra.Files
         {
             var ext = Path.GetExtension(fileName).ToLowerInvariant();
             if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+            {
                 return false;
+            }
 
             return true;
         }

@@ -12,8 +12,7 @@ namespace TEP.IntegrationTest.API
     public class AssetApiTest : Setup
     {
         private readonly HttpClient _client;
-
-        JsonSerializerOptions _jsonOptions;
+        private readonly JsonSerializerOptions _jsonOptions;
 
         public AssetApiTest()
         {

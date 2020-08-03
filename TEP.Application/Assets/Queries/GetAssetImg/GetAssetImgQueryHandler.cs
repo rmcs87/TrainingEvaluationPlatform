@@ -11,34 +11,34 @@ namespace TEP.Application.Assets.Queries.GetAssetImg
 {
     public class GetAssetImgQueryHandler : IRequestHandler<GetAssetImgQuery, AssetImgDTO>
     {
-        private readonly IFileServiceFactory _fileServiceFactory;
         private readonly IFileService _fileService;
 
         public GetAssetImgQueryHandler(IFileServiceFactory fileServiceFactory)
         {
-            _fileServiceFactory = fileServiceFactory;
-            _fileService = _fileServiceFactory.Create<FileAssetOptions>();
+            _fileService = fileServiceFactory.Create<FileAssetOptions>();
         }
 
         public async Task<AssetImgDTO> Handle(GetAssetImgQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var img = new AssetImgDTO {
+                var img = new AssetImgDTO
+                {
                     FilePath = await _fileService.GetFilePath(request.ImgName),
                     MimeType = GetMimeType(request.ImgName)
                 };
 
                 if (!_fileService.FileExists(img.FilePath))
-                    throw new Exception();
+                {
+                    throw new NotFoundException("File not found.");
+                }
 
                 return img;
             }
-            catch (Exception)
+            catch (NotFoundException nfe)
             {
-                throw new NotFoundException("File not found.");
+                throw nfe;
             }
-
         }
 
         private static string GetMimeType(string fileName)

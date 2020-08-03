@@ -14,13 +14,11 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
     {
         private readonly IApplicationDbContext _context;
         private readonly IFileService _fileService;
-        private readonly IMapper _mapper;
 
-        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileServiceFactory fileFactory, IMapper mapper)
+        public UpdateAssetComamndtHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
         {
             _context = context;
             _fileService = fileFactory.Create<FileAssetOptions>();
-            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(UpdateAssetComamnd request, CancellationToken cancellationToken)
@@ -30,7 +28,9 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (asset == null)
+            {
                 throw new NotFoundException(nameof(Asset), request.Id);
+            }
 
             if (request.Image != null)
             {
@@ -48,7 +48,7 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
                 asset.AddCategoryById(categoryId);
             }
 
-            await _context.SaveChangesAsync(cancellationToken);           
+            await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

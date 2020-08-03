@@ -54,13 +54,11 @@ namespace TEP.Infra.Files
             try
             {
                 var filePath = FileHelper.CombinePathAndName(Options.BasePath, fileName);               
-
                 return filePath;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "File Retrieval: {FileName} {BasePath}", fileName, Options.BasePath);
-
                 throw new FileRetrievalException("File Could not be recovered.");
             }
         }
@@ -90,7 +88,6 @@ namespace TEP.Infra.Files
             try
             {
                 string fileName = FileHelper.GetUniqueName(Options.NameSalt, data.FileName);
-                //FileHelper.ValidateFile(data, Options);
 
                 await FileHelper.ProcessFile(data, Options, fileName);
 

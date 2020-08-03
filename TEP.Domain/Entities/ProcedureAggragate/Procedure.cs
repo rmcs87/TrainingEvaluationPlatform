@@ -44,11 +44,11 @@ namespace TEP.Domain.Entities
         public Interaction NextInteraction(DateTime now)
         {
             if (Completed)
+            {
                 throw new InvalidOperationException(message: "This Procedure has already been completed. Can't perform it again.");
-
+            }
             var nextLeafStep = RootStep.AdvanceStep(now);
 
-            //If null, sets null, else, sets interaction;
             _currentInteraction = nextLeafStep?.Interaction;
 
             return _currentInteraction;

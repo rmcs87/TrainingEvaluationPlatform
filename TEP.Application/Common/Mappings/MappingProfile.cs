@@ -17,7 +17,7 @@ namespace TEP.Application.Common.Mappings
             var types = assembly.GetExportedTypes()
                 .Where(t => t.GetInterfaces().Any(i =>
                    i.IsGenericType && (i.GetGenericTypeDefinition() == typeof(IMapFrom<>)
-                                     || i.GetGenericTypeDefinition() == typeof(IMapTo<>) ) ))
+                                     || i.GetGenericTypeDefinition() == typeof(IMapTo<>))))
                 .ToList();
 
             foreach (var type in types)
@@ -26,22 +26,25 @@ namespace TEP.Application.Common.Mappings
                 InvokeMappings(instance, type, this);
             }
         }
-        
+
         private static void InvokeMappings(Object instance, Type type, MappingProfile mappingProfile)
         {
-            var teste1 = type.GetInterface("IMapFrom`1")?.GetMethod("MappingFrom");
-            var teste22 = type.GetInterface("IMapTo`1")?.GetMethod("MappingTo");
-
             if (type.GetMethod("MappingFrom") != null)
+            {
                 type.GetMethod("MappingFrom").Invoke(instance, new object[] { mappingProfile });
+            }
             else
+            {
                 type.GetInterface("IMapFrom`1")?.GetMethod("MappingFrom").Invoke(instance, new object[] { mappingProfile });
-
+            }
             if (type.GetMethod("MappingTo") != null)
+            {
                 type.GetMethod("MappingTo").Invoke(instance, new object[] { mappingProfile });
-            else                                       
+            }
+            else
+            {
                 type.GetInterface("IMapTo`1")?.GetMethod("MappingTo").Invoke(instance, new object[] { mappingProfile });
-            
+            }
         }
     }
 }

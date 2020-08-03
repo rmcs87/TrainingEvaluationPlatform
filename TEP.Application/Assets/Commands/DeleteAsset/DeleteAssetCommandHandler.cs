@@ -14,23 +14,23 @@ namespace TEP.Application.Assets.Commands.DeleteAsset
     public class DeleteAssetCommandHandler : IRequestHandler<DeleteAssetCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IFileServiceFactory _fileServiceFactory;
         private readonly IFileService _fileService;
 
         public DeleteAssetCommandHandler(IApplicationDbContext context, IFileServiceFactory fileFactory)
         {
             _context = context;
-            _fileServiceFactory = fileFactory;
-            _fileService = _fileServiceFactory.Create<FileAssetOptions>();
+            _fileService = fileFactory.Create<FileAssetOptions>();
         }
 
         public async Task<Unit> Handle(DeleteAssetCommand request, CancellationToken cancellationToken)
         {
             string imgName;
-            var asset = await _context.Assets.Where(l => l.Id == request.Id).SingleOrDefaultAsync(cancellationToken);            
+            var asset = await _context.Assets.Where(l => l.Id == request.Id).SingleOrDefaultAsync(cancellationToken);
 
             if (asset == null)
+            {
                 throw new NotFoundException(nameof(Asset), request.Id);
+            }
 
             imgName = asset.IconPath;
 

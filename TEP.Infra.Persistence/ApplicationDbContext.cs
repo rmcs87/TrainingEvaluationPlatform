@@ -38,8 +38,6 @@ namespace TEP.Infra.Persistence
                         entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
-                    default:
-                        break;
                 }
             }
 

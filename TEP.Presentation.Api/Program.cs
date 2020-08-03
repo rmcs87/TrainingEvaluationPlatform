@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TEP.Presentation.Api
 {
-    public class Program
+    public static class Program
     {
         public async static Task Main(string[] args)
         {
