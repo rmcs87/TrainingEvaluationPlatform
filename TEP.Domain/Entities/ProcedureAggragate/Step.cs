@@ -7,9 +7,8 @@ namespace TEP.Domain.Entities
 {
 
     public abstract class Step : AuditableEntity
-    {
-     
-        public Step(Standard standard, string name)
+    {     
+        protected Step(Standard standard, string name)
         {
             Standard = standard;
             Name = name;

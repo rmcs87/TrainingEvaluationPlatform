@@ -35,7 +35,6 @@ Besides providing services for storage and edition tools; score processing; and 
 
 ## Study References
 
-
 ### Architecture
 -   Common web application architectures: [link](https://docs.microsoft.com/pt-br/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
 -   Fundamentos de Arquitetura de Software: [link](https://www.youtube.com/watch?v=jUH5lKfpWE0)
