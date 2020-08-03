@@ -4,7 +4,10 @@ TEP is a open-source project written in .NET Core for BackEnding VR Trainning Ap
 
 Besides providing services for storage and edition tools; score processing; and alternative apps, such as Quizzes, this project aims to be used as self-learning PBL project by the authors. :mortar_board: 
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/91e984d9fad349de82d2888efce791ca)](https://app.codacy.com/manual/rmcs87/TrainingEvaluationPlatform?utm_source=github.com&utm_medium=referral&utm_content=rmcs87/TrainingEvaluationPlatform&utm_campaign=Badge_Grade_Dashboard)[![License](https://img.shields.io/github/license/rmcs87/TrainingEvaluationPlatform)](LICENSE)![.NET Core](https://github.com/rmcs87/TrainingEvaluationPlatform/workflows/.NET%20Core/badge.svg?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e9ba7510f8c843f8917baf4e070fdad5)](https://www.codacy.com/manual/rmcs87/TrainingEvaluationPlatform?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rmcs87/TrainingEvaluationPlatform&amp;utm_campaign=Badge_Grade)
+[![License](https://img.shields.io/github/license/rmcs87/TrainingEvaluationPlatform)](LICENSE)![TEP CI-Workflow](https://github.com/rmcs87/TrainingEvaluationPlatform/workflows/TEP%20CI-Workflow/badge.svg)
+
+Running at: https://tepvr.azurewebsites.net/
 
 ## How to use
 -   You will need the latest Visual Studio 2019 and the latest .NET Core SDK.
