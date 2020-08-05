@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -48,7 +48,7 @@ namespace TEP.Presentation.Api.Controllers
         [HttpGet]
         [Route("auth_test")]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
-        public async Task<IActionResult> TestPermissions()
+        public IActionResult TestPermissions()
         {
             return new OkResult();
         }
