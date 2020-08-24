@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 
@@ -32,25 +32,35 @@ namespace TEP.Application.Assets.Commands.UpdateAsset
                 throw new NotFoundException(nameof(Asset), request.Id);
             }
 
-            if (request.Image != null)
-            {
-                var newImgPath = await _fileService.SaveFile(request.Image);
-                _fileService.RemoveFile(asset.IconPath);
-                asset.UpdateIcon(newImgPath);
-            }
+            await ChangeAssetFile(request, asset);
 
             asset.ChangeName(request.Name);
             asset.UpdateFileURI(request.FileURI);
+            UpdateCategories(request, asset);
 
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
+        }
+
+        private static void UpdateCategories(UpdateAssetComamnd request, Asset asset)
+        {
             asset.RemoveAllCategories();
             foreach (var categoryId in request.CategoriesIds)
             {
                 asset.AddCategoryById(categoryId);
             }
+        }
 
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
+        private async Task ChangeAssetFile(UpdateAssetComamnd request, Asset asset)
+        {
+            if (request.Image != null)
+            {
+                ServiceResponse<string> response = await _fileService.SaveFile(request.Image);
+                var newImgPath = response.Data;
+                _fileService.RemoveFile(asset.IconPath);
+                asset.UpdateIcon(newImgPath);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Application.Common.PipelineBehaviours
 {
@@ -38,12 +39,13 @@ namespace TEP.Application.Common.PipelineBehaviours
             if (elapasedMilliseconds > boundaryMillisecondsTime)
             {
                 var requestName = typeof(TRequest).Name;
-                var userId = _currentUserService.UserId ?? string.Empty;
+                var userId = _currentUserService.RecoverUserId.Data ?? string.Empty;
                 var userName = string.Empty;
 
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    userName = await _identityService.GetUserNameAsync(userId);
+                    ServiceResponse<string> response = await _identityService.GetUserNameAsync(userId);
+                    userName = response.Data;
                 }
 
                 _logger.LogWarning("TEP Long Running Request: {Name} ({ElapsedMiliseconds} milliseconds) {@UserId} {@UserName} {@Request}",

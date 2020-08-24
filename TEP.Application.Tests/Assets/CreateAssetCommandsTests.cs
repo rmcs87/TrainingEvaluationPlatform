@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 using TEP.Application.Common.Options;
 using TEP.Domain.Entities;
 using TEP.Test.Utils;
@@ -42,7 +43,7 @@ namespace TEP.Application.Tests
             //Arrange                
             _context.Setup(c => c.Assets).Returns(TestUtils.GetQueryableMockDbSet<Asset>(_assetList));
             _mapper.Setup(m => m.Map<Asset>(It.IsAny<CreateAssetCommand>())).Returns(new Asset());
-            _fileService.Setup(f => f.SaveFile(It.IsAny<IFormFile>())).ReturnsAsync("iconPath");
+            _fileService.Setup(f => f.SaveFile(It.IsAny<IFormFile>())).ReturnsAsync(new ServiceResponse<string> { Data = "iconPath" });
             _fileServiceFactory.Setup(fs => fs.Create<FileAssetOptions>()).Returns(_fileService.Object);
 
             var handler = new CreateAssetCommandHandler(_context.Object, _fileServiceFactory.Object, _mapper.Object);

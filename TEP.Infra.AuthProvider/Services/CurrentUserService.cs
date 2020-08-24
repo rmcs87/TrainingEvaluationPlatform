@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Infra.AuthProvider
 {
@@ -8,9 +9,16 @@ namespace TEP.Infra.AuthProvider
     {
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
-            UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            RecoverUserId = new ServiceResponse<string>();
+            RecoverUserId.Data = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(RecoverUserId.Data == null)
+            {
+                RecoverUserId.Data = "";
+                RecoverUserId.Success = false;
+                RecoverUserId.Message = "Current Claim NameIdentifier not Found.";
+            }
         }
 
-        public string UserId { get; }
+        public ServiceResponse<string> RecoverUserId { get; }
     }
 }

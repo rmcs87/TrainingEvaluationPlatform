@@ -11,17 +11,17 @@ namespace TEP.Infra.AuthProvider
 {
     public class IdentityService : IIdentityService
     {
-        public Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
+        public Task<ServiceResponse<string>> CreateUserAsync(string userName, string password)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result> DeleteUserAsync(string userId)
+        public Task<ServiceResponse<bool>> DeleteUserAsync(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApplicationUser> GetUserAsync(string userId)
+        public async Task<ServiceResponse<ApplicationUser>> GetUserAsync(string userId)
         {
             var id = Int32.Parse(userId);
 
@@ -32,10 +32,14 @@ namespace TEP.Infra.AuthProvider
                 new ApplicationUser { Id = 3, Username = "joao", Password = "jonh", Role = UserRoles.Operator }
             };
 
-            return users.Where(x => x.Id == id).FirstOrDefault();
+            return new ServiceResponse<ApplicationUser>()
+            {
+                Data = users.Where(x => x.Id == id).FirstOrDefault(),
+                Success = true
+            };
         }
 
-        public async Task<string> GetUserNameAsync(string userId)
+        public async Task<ServiceResponse<string>> GetUserNameAsync(string userId)
         {
             var id = Int32.Parse(userId);
 
@@ -46,10 +50,14 @@ namespace TEP.Infra.AuthProvider
                 new ApplicationUser { Id = 3, Username = "joao", Password = "jonh", Role = UserRoles.Operator }
             };
 
-            return users.Where(x => x.Id == id).FirstOrDefault().Username;
+            return new ServiceResponse<string>()
+            {
+                Data = users.Where(x => x.Id == id).FirstOrDefault().Username,
+                Success = true
+            };
         }
 
-        public ApplicationUser ValidateLogin(string userName, string password)
+        public async Task<ServiceResponse<ApplicationUser>> ValidateLoginAsync(string userName, string password)
         {
             var users = new List<ApplicationUser>
             {
@@ -63,7 +71,11 @@ namespace TEP.Infra.AuthProvider
                 throw new InvalidUserException("Invalid Username and/or password.");
             }
 
-            return users.Where(x => x.Username == userName && x.Password == password).FirstOrDefault();
+            return new ServiceResponse<ApplicationUser>()
+            {
+                Data = users.Where(x => x.Username == userName && x.Password == password).FirstOrDefault(),
+                Success = true
+            };
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Assets.Commands.CreateAsset;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 using TEP.Application.Common.PipelineBehaviours;
 
 namespace TEP.Application.Tests.Common.Behaviors
@@ -27,7 +28,8 @@ namespace TEP.Application.Tests.Common.Behaviors
         public async Task OnLoggingBehavior_WithAuthenticadUser_CallsGetUserNameAsync()
         {
             //Arrange
-            _currentUserService.Setup(x => x.UserId).Returns("Administrator");
+            _currentUserService.Setup(x => x.RecoverUserId).Returns(new ServiceResponse<string>() { Data = "Administrator" });
+            _identityService.Setup(x => x.GetUserNameAsync(It.IsAny<string>())).ReturnsAsync(new ServiceResponse<string>() { Data = "Administrator" });
             var requestLogger = new LoggingBehavior<CreateAssetCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
 
             //Act
@@ -41,6 +43,8 @@ namespace TEP.Application.Tests.Common.Behaviors
         public async Task OnLoggingBehavior_WithUnauthenticadUser_CallsGetUserNameAsync()
         {
             //Arrange
+            _currentUserService.Setup(x => x.RecoverUserId).Returns(new ServiceResponse<string>() { Data = "Administrator" });
+            _identityService.Setup(x => x.GetUserNameAsync(It.IsAny<string>())).ReturnsAsync(new ServiceResponse<string>() { Data = "Administrator" });
             var requestLogger = new LoggingBehavior<CreateAssetCommand>(_logger.Object, _currentUserService.Object, _identityService.Object);
 
             //Act

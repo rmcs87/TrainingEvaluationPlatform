@@ -8,11 +8,12 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Infra.AuthProvider
 {
     public class TokenService : ITokenService
-    {        
+    {
         private readonly IIdentityService _identityService;
         private readonly IConfiguration _configuration;
 
@@ -22,9 +23,10 @@ namespace TEP.Infra.AuthProvider
             _configuration = configuration;
         }
 
-        public async Task<string> GenerateTokenAsync(string userId)
+        public async Task<ServiceResponse<string>> GenerateTokenAsync(string userId)
         {
-            var user = await _identityService.GetUserAsync(userId);
+            ServiceResponse<ApplicationUser> response = await _identityService.GetUserAsync(userId);
+            var user = response.Data;
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -44,10 +46,8 @@ namespace TEP.Infra.AuthProvider
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            return new ServiceResponse<string>() { Data = tokenHandler.WriteToken(token), Success = true };
         }
-
-        
 
     }
 }

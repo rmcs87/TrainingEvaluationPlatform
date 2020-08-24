@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Application.Auth.Commands
 {
@@ -18,10 +19,12 @@ namespace TEP.Application.Auth.Commands
             _tokenService = tokenService;
         }
 
-        public Task<string> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
-            var user = _identityService.ValidateLogin(request.UserName, request.Password);
-            return _tokenService.GenerateTokenAsync(user.Id.ToString());
+            ServiceResponse<ApplicationUser> identityResponse = await _identityService.ValidateLoginAsync(request.UserName, request.Password);
+            var user = identityResponse.Data;
+            ServiceResponse<string> tokenResponse = await _tokenService.GenerateTokenAsync(user.Id.ToString());
+            return tokenResponse.Data;
         }
     }
 }

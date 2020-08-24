@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Application.Common.CustomValidators
 {
@@ -18,16 +19,13 @@ namespace TEP.Application.Common.CustomValidators
         protected override bool IsValid(PropertyValidatorContext context)
         {
             var file = context.PropertyValue as IFormFile;
-            try
-            {
-                _fileService.ValidateFile(file);
-                return true;
-            }
-            catch (Exception e)
-            {
-                context.MessageFormatter.AppendArgument("Errors", e.Message);
-                return false;
-            }
+
+            ServiceResponse<bool> response = _fileService.ValidateFile(file);
+            _fileService.ValidateFile(file);
+            if(!response.Data)
+                context.MessageFormatter.AppendArgument("Errors", response.Message);
+
+            return response.Data;
         }
     }
 

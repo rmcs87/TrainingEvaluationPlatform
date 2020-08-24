@@ -1,7 +1,9 @@
-﻿namespace TEP.Application.Common.Interfaces
+﻿using TEP.Application.Common.Models;
+
+namespace TEP.Application.Common.Interfaces
 {
     public interface ICurrentUserService
     {
-        string UserId { get; }
+        ServiceResponse<string> RecoverUserId { get; }
     }
 }
