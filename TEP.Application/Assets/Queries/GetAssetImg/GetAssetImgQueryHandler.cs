@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.StaticFiles;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Exceptions;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 using TEP.Application.Common.Options;
 
 namespace TEP.Application.Assets.Queries.GetAssetImg
@@ -22,16 +22,17 @@ namespace TEP.Application.Assets.Queries.GetAssetImg
         {
             try
             {
+                ServiceResponse<string> filePathResponse = _fileService.GetFilePath(request.ImgName);
+                ServiceResponse<bool> fileExistssResponse = _fileService.FileExists(filePathResponse.Data);
+
+                if (!filePathResponse.Success || !fileExistssResponse.Data || !fileExistssResponse.Success)
+                    throw new NotFoundException(filePathResponse.Message);
+
                 var img = new AssetImgDTO
                 {
-                    FilePath = await _fileService.GetFilePath(request.ImgName),
+                    FilePath = filePathResponse.Data,
                     MimeType = GetMimeType(request.ImgName)
                 };
-
-                if (!_fileService.FileExists(img.FilePath))
-                {
-                    throw new NotFoundException("File not found.");
-                }
 
                 return img;
             }
@@ -52,5 +53,7 @@ namespace TEP.Application.Assets.Queries.GetAssetImg
             }
             return contentType;
         }
+
+       
     }
 }

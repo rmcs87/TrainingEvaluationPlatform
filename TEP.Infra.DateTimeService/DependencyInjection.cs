@@ -7,7 +7,7 @@ namespace TEP.Infra.DateTimeService
     {
         public static IServiceCollection AddDateTime(this IServiceCollection services)
         {
-            services.AddTransient<IDateTime, DateTimeService>();
+            services.AddTransient<IDateTimeService, DateTimeService>();
             return services;
         }
     }

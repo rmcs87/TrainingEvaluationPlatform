@@ -1,10 +1,14 @@
 ﻿using System;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Infra.DateTimeService
 {
-    public class DateTimeService : IDateTime
+    public class DateTimeService : IDateTimeService
     {
-        public DateTime Now => DateTime.Now;
+        public ServiceResponse<DateTime> GetCurrentTime()
+        {
+            return new ServiceResponse<DateTime> { Data = DateTime.Now, Success = true };
+        }
     }
 }

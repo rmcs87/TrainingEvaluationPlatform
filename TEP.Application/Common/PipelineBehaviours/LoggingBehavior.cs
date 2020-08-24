@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 using TEP.Application.Common.Interfaces;
+using TEP.Application.Common.Models;
 
 namespace TEP.Application.Common.PipelineBehaviours
 {
@@ -22,12 +23,13 @@ namespace TEP.Application.Common.PipelineBehaviours
         public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
             var requestName = typeof(TRequest).Name;
-            var userId = _currentUserService.UserId ?? string.Empty;
+            var userId = _currentUserService.RecoverUserId.Data ?? string.Empty;
             string userName = string.Empty;
 
             if (!string.IsNullOrEmpty(userId))
             {
-                userName = await _identityService.GetUserNameAsync(userId);
+                ServiceResponse<string> response = await _identityService.GetUserNameAsync(userId);
+                userName = response.Data;
             }
 
             _logger.LogInformation("TEP Request: {Name} {@UserId} {@UserName} {@Request}", 

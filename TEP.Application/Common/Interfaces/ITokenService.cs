@@ -1,10 +1,10 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TEP.Application.Common.Models;
 
 namespace TEP.Application.Common.Interfaces
 {
     public interface ITokenService
     {
-        Task<string> GenerateTokenAsync(string userId);
+        Task<ServiceResponse<string>> GenerateTokenAsync(string userId);
     }
 }

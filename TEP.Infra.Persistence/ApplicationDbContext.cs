@@ -12,9 +12,9 @@ namespace TEP.Infra.Persistence
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly ICurrentUserService _currentUserService;
-        private readonly IDateTime _dateTime;
+        private readonly IDateTimeService _dateTime;
 
-        public ApplicationDbContext(DbContextOptions options, ICurrentUserService currentUserService, IDateTime dateTime)
+        public ApplicationDbContext(DbContextOptions options, ICurrentUserService currentUserService, IDateTimeService dateTime)
             : base(options)
         {
             _currentUserService = currentUserService;
@@ -31,12 +31,12 @@ namespace TEP.Infra.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.UserId;
-                        entry.Entity.Created = _dateTime.Now;
+                        entry.Entity.CreatedBy = _currentUserService.RecoverUserId.Data;
+                        entry.Entity.Created = _dateTime.GetCurrentTime().Data;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
-                        entry.Entity.LastModified = _dateTime.Now;
+                        entry.Entity.LastModifiedBy = _currentUserService.RecoverUserId.Data;
+                        entry.Entity.LastModified = _dateTime.GetCurrentTime().Data;
                         break;
                 }
             }

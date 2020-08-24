@@ -5,6 +5,7 @@ using Moq;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using TEP.Application.Common.Models;
 using TEP.Application.Common.Options;
 using TEP.Infra.Files;
 using TEP.Infra.Files.Exceptions;
@@ -49,7 +50,8 @@ namespace TEP.Infra.File.Tests
                 };
 
                 //act
-                imgName = await fileServer.SaveFile(file);
+                ServiceResponse<string> response = await fileServer.SaveFile(file); ;
+                imgName = response.Data;
 
                 //assert
                 Assert.IsFalse(String.IsNullOrEmpty(imgName));
@@ -100,8 +102,11 @@ namespace TEP.Infra.File.Tests
             FileService fileServer = new FileService(_logger.Object);
             fileServer.Options = _options;
 
-            //act/assert
-            Assert.ThrowsException<FileRemovalException>(() => fileServer.RemoveFile("/casa/nops.jpg"));
+            //act
+            ServiceResponse<bool> response =  fileServer.RemoveFile("/casa/nops.jpg");
+
+            //assert
+            Assert.IsFalse(response.Success);
         }
 
         [TestMethod]
@@ -121,11 +126,11 @@ namespace TEP.Infra.File.Tests
                     ContentType = "application/jpg"
                 };
                 size = file.Length;
-                name = await fileServer.SaveFile(file);
+                name = (await fileServer.SaveFile(file)).Data;
             }
 
             //act
-            byte[] fileBytes = await fileServer.GetFileBytes(name);
+            byte[] fileBytes = (await fileServer.GetFileBytes(name)).Data;
 
             //assert            
             Assert.AreEqual(size, fileBytes.Length);
@@ -156,7 +161,7 @@ namespace TEP.Infra.File.Tests
                     Headers = new HeaderDictionary(),
                     ContentType = "application/jpg"
                 };
-                name = await fileServer.SaveFile(file);
+                name = (await fileServer.SaveFile(file)).Data;
             }
             return name;
         }

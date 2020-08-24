@@ -7,11 +7,14 @@ Besides providing services for storage and edition tools; score processing; and 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e9ba7510f8c843f8917baf4e070fdad5)](https://www.codacy.com/manual/rmcs87/TrainingEvaluationPlatform?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rmcs87/TrainingEvaluationPlatform&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/github/license/rmcs87/TrainingEvaluationPlatform)](LICENSE)![TEP CI-Workflow](https://github.com/rmcs87/TrainingEvaluationPlatform/workflows/TEP%20CI-Workflow/badge.svg)
 
-Running at: https://tepvr.azurewebsites.net/
+(not) Running at: https://tepvr.azurewebsites.net/ (DataBase is currently down)
 
 ## How to use
--   You will need the latest Visual Studio 2019 and the latest .NET Core SDK.
+-   You will need the latest Visual Studio 2019 (or VS Code) and the latest .NET Core SDK.
 -   The latest SDK and tools can be downloaded from [link](https://dot.net/core).
+-   You also need an Instance of Sql Server running:
+    -   Docker: ``` docker run -e 'ACCEPT_EULA=y' -e 'SA_PASSWORD=1StrongPwd!!' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu ```
+    -   Configure an Enviroment Variable with the ConnectionString: ``` "ConnectionStringTep": "Data Source=localhost,1433;Initial Catalog=db_teps;User ID=SA;Password=1StrongPwd!!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" ```
 
 ## Technologies being Studied
 -   ASP.NET Core 3.1 (with .NET Core 3.1)
