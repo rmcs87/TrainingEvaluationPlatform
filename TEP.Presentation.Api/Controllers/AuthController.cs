@@ -12,7 +12,7 @@ using TEP.Shared;
 namespace TEP.Presentation.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/login")]
+    [Route("api/v{version:apiVersion}/login")]
     [Authorize]
     public class AuthController : TEPControllerBase
     {

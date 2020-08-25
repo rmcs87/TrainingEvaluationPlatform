@@ -43,6 +43,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Infra.DateTimeService",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TEP.Test.Utils", "TEP.Test.Utils\TEP.Test.Utils.csproj", "{D3D66CEF-CEB7-4F44-BD0B-665B83DD9A82}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{425C3B87-4308-4061-86A0-B89B3EA2EECE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -16,7 +16,7 @@ using TEP.Shared;
 namespace TEP.Presentation.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/asset")]
+    [Route("api/v{version:apiVersion}/asset")]
     [Authorize]
     public class AssetController : TEPControllerBase
     {
@@ -27,6 +27,13 @@ namespace TEP.Presentation.Api.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Returns a List of All available Assets
+        /// </summary>
+        /// <remarks> An Example goes here.</remarks>
+        /// <returns></returns>
+        /// <response code="200">Product created</response>
+        /// <response code="500">Oops! Can't create your product right now</response>
         [HttpGet]
         [AuthorizePolicy(UserPolicies.SupervisorRights)]
         public async Task<ActionResult> List()
@@ -42,6 +49,12 @@ namespace TEP.Presentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Returns an spceific Asset, using its ID
+        /// </summary>
+        /// <remarks> An Example goes here.</remarks>
+        /// <param name="id"> The Asset ID</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
         [AuthorizePolicy(UserPolicies.SupervisorRights)]
@@ -62,6 +75,11 @@ namespace TEP.Presentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Return the image file that represents an Asset
+        /// </summary>
+        /// <param name="fileName">The URL to the Image</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("image/{fileName}")]
         [AuthorizePolicy(UserPolicies.SupervisorRights)]
@@ -82,6 +100,11 @@ namespace TEP.Presentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Resquests the Creation of a new Asset.
+        /// </summary>
+        /// <param name="command">Receives a CreateAssetCommand</param>
+        /// <returns></returns>
         [HttpPost]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
         public async Task<ActionResult> Insert([FromForm] CreateAssetCommand command)
@@ -101,6 +124,11 @@ namespace TEP.Presentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Resquests the Update of a an existing Asset.
+        /// </summary>
+        /// <param name="command">Receives an UpdateAssetComamnd</param>
+        /// <returns></returns>
         [HttpPut]
         [AuthorizePolicy(UserPolicies.ManagerRights)]
         public async Task<ActionResult> Update([FromForm] UpdateAssetComamnd command)
@@ -120,6 +148,11 @@ namespace TEP.Presentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Resquests the Deletion of a an existing Asset.
+        /// </summary>
+        /// <param name="id">Receives an ID</param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
         [AuthorizePolicy(UserPolicies.ManagerRights)]

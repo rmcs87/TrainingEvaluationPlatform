@@ -23,7 +23,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_validManagerUser);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/v1/login", json);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -38,7 +38,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_erroFormatUser);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/v1/login", json);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -53,7 +53,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_invalidUser);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/v1/login", json);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -68,7 +68,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             var json = JsonSerializer.Serialize(_invalidUser);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", json);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/v1/login/auth_test", json);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -84,7 +84,7 @@ namespace TEP.IntegrationTest.API
             //Arrange   
             await AuthorizeClient(_client, _validManagerUser);
 
-            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
+            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/v1/login/auth_test", "");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -99,7 +99,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange   
             await AuthorizeClient(_client, _validOperatorUser);
-            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/login/auth_test", "");
+            var requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Get, "api/v1/login/auth_test", "");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
