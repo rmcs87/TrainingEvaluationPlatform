@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TEP.Presentation.Api</name>
+    </assembly>
+    <members>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.List">
+            <summary>
+            Returns a List of All available Assets
+            </summary>
+            <remarks> An Example goes here.</remarks>
+            <returns></returns>
+            <response code="200">Product created</response>
+            <response code="500">Oops! Can't create your product right now</response>
+        </member>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.GetById(System.Int32)">
+            <summary>
+            Returns an spceific Asset, using its ID
+            </summary>
+            <remarks> An Example goes here.</remarks>
+            <param name="id"> The Asset ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.GetImage(System.String)">
+            <summary>
+            Return the image file that represents an Asset
+            </summary>
+            <param name="fileName">The URL to the Image</param>
+            <returns></returns>
+        </member>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.Insert(TEP.Application.Assets.Commands.CreateAsset.CreateAssetCommand)">
+            <summary>
+            Resquests the Creation of a new Asset.
+            </summary>
+            <param name="command">Receives a CreateAssetCommand</param>
+            <returns></returns>
+        </member>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.Update(TEP.Application.Assets.Commands.UpdateAsset.UpdateAssetComamnd)">
+            <summary>
+            Resquests the Update of a an existing Asset.
+            </summary>
+            <param name="command">Receives an UpdateAssetComamnd</param>
+            <returns></returns>
+        </member>
+        <member name="M:TEP.Presentation.Api.Controllers.AssetController.Delete(System.Int32)">
+            <summary>
+            Resquests the Deletion of a an existing Asset.
+            </summary>
+            <param name="id">Receives an ID</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

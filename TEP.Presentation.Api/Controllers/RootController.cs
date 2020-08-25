@@ -7,6 +7,7 @@ namespace TEP.Presentation.Api.Controllers
     {
         [HttpGet]
         [Route("")]
+        [Route("api/v{version:apiVersion}")]        
         public IActionResult Test()
         {
             try

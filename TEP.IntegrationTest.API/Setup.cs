@@ -68,7 +68,7 @@ namespace TEP.IntegrationTest.API
         protected static async Task AuthorizeClient(HttpClient client, ApplicationUser user)
         {
             var json = JsonSerializer.Serialize(user);
-            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/login", json);
+            HttpRequestMessage requestMessage = HttpRequestHelper.PrepareHttpRequestMessageAppJson(HttpMethod.Post, "api/v1/login", json);
             var response = await client.SendAsync(requestMessage);
             var responseContent = await response.Content.ReadAsStringAsync();
             var propertyName = "accessToken";
@@ -82,7 +82,7 @@ namespace TEP.IntegrationTest.API
         {
             var stringContentsDictionary = ObjectAttributesToDicionary(createAssetKeyValid);
             HttpRequestMessage requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/v1/asset", stringContentsDictionary, _imgAssetValidPath);
             var response = await _client.SendAsync(requestMessage);
 
             string responseJson = await response.Content.ReadAsStringAsync();

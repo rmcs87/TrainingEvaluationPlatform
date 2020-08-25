@@ -34,7 +34,7 @@ namespace TEP.Application.Assets.Queries.GetAsset
 
             var dto = _mapper.Map<AssetDTO>(asset);
 
-            dto.IconPath = $"api/asset/image/{asset.IconPath}";
+            dto.IconPath = $"api/v1/asset/image/{asset.IconPath}";
 
             return dto;
         }

@@ -30,7 +30,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/asset");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/v1/asset");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -45,7 +45,7 @@ namespace TEP.IntegrationTest.API
         {
             //Arrange
             await AuthorizeClient(_client, _validOperatorUser);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/asset");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "api/v1/asset");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -62,7 +62,7 @@ namespace TEP.IntegrationTest.API
             await AuthorizeClient(_client, _validManagerUser);
 
             var id = await AddAsset(_createAssetKeyValid, _client);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/v1/asset/{id}");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -79,7 +79,7 @@ namespace TEP.IntegrationTest.API
             await AuthorizeClient(_client, _validManagerUser);
 
             int id = -1;
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/v1/asset/{id}");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -97,7 +97,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
             HttpRequestMessage requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath3PNG);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/v1/asset", stringContentsDictionary, _imgAssetValidPath3PNG);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -115,7 +115,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyInvalid);
             HttpRequestMessage requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetValidPath);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/v1/asset", stringContentsDictionary, _imgAssetValidPath);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -133,7 +133,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_createAssetKeyValid);
             HttpRequestMessage requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/asset", stringContentsDictionary, _imgAssetInvalidFileTXT);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Post, "api/v1/asset", stringContentsDictionary, _imgAssetInvalidFileTXT);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -154,7 +154,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyValid);
             var requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary);            
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/v1/asset", stringContentsDictionary);            
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -175,7 +175,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyValid);
             var requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary, _imgAssetValidPath2);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/v1/asset", stringContentsDictionary, _imgAssetValidPath2);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -194,7 +194,7 @@ namespace TEP.IntegrationTest.API
 
             var stringContentsDictionary = ObjectAttributesToDicionary(_updateAssetKeyInvalid);
             var requestMessage =
-                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/asset", stringContentsDictionary, _imgAssetValidPath2);
+                HttpRequestHelper.PrepareMultipartFormWithFile(HttpMethod.Put, "api/v1/asset", stringContentsDictionary, _imgAssetValidPath2);
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -210,7 +210,7 @@ namespace TEP.IntegrationTest.API
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);           
             var id = await AddAsset(_createAssetKeyValid, _client);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/v1/asset/{id}");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -227,7 +227,7 @@ namespace TEP.IntegrationTest.API
             await AuthorizeClient(_client, _validManagerUser);
             var id = -1;
 
-            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Delete, $"api/v1/asset/{id}");
 
             //Act
             var response = await _client.SendAsync(requestMessage);
@@ -243,7 +243,7 @@ namespace TEP.IntegrationTest.API
             //Arrange
             await AuthorizeClient(_client, _validManagerUser);
             var id = await AddAsset(_createAssetKeyValid, _client);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/{id}");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/v1/asset/{id}");
             var response = await _client.SendAsync(requestMessage);
             string responseJson = await response.Content.ReadAsStringAsync();
 
@@ -265,7 +265,7 @@ namespace TEP.IntegrationTest.API
             await AuthorizeClient(_client, _validManagerUser);
 
             //Act
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/asset/image/nops");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, $"api/v1/asset/image/nops");
             var response = await _client.SendAsync(requestMessage);
 
             //Assert

@@ -133,6 +133,13 @@ Besides providing services for storage and edition tools; score processing; and 
 -   Como Testar o ASP.NET Core Web API: [link](https://www.infoq.com/br/articles/testing-aspnet-core-web-api/)
 -   MSTest Cheat Sheet: [link](https://www.automatetheplanet.com/wp-content/uploads/2018/05/mstest-cheat-sheet-automatetheplanet.pdf)
 
+### Versioning and Swagger
+-   .NET Core — API Versioning: [link](https://medium.com/@nelson.souza/net-core-api-versioning-d4f869fb9052)
+-   aspnet-api-versioning: [link](https://github.com/Microsoft/aspnet-api-versioning/wiki)
+-   Documenting an ASP.NET Core API: [link](https://blog.rashik.com.np/documenting-an-asp-net-core-api-with-openapi-swagger-in-detail/?fbclid=IwAR0Z5FNJydsKsPSetxlrrIpgOEFpYSE5vN_JvgGQMhPhUC1GYRIjFH3Aoq4)
+-   How to add method description in Swagger UI in WebAPI Application: [link](https://stackoverflow.com/questions/52883466/how-to-add-method-description-in-swagger-ui-in-webapi-application)
+
+
 ### Others
 -   Efficient post calls with HttpClient and JSON.NET: [link](https://johnthiriet.com/efficient-post-calls/)
 -   Upload files: [link](https://docs.microsoft.com/pt-br/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1)
