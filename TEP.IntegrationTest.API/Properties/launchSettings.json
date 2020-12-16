@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TEP.IntegrationTest.API": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ConnectionStringTep": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=tep;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+      }
+    }
+  }
+}

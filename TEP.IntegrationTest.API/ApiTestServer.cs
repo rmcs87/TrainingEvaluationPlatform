@@ -13,5 +13,6 @@ public class ApiTestServer : TestServer
       WebHost.CreateDefaultBuilder()
         .UseStartup<Startup>()
         .UseEnvironment("Development")
+        .UseSetting("ConnectionStrings:teps", "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=tep;Integrated Security=True;MultipleActiveResultSets=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
         .ConfigureAppConfiguration(config => config.AddUserSecrets<Startup>());
 }
