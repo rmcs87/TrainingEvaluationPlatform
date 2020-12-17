@@ -27,37 +27,28 @@ namespace TEP.Domain.Tests
 
             var doorssetMock = new Asset("door", "door.jpg", "door.fbx");
 
-            List<Category> takeKeyCategories = new List<Category>();
-            takeKeyCategories.Add(new Category("Operational"));
             Description takeKeyDescription = new Description("Take the Key.");
             Duration takeKeyExpected = new Duration(1000);
             Duration takeKeyLimit = new Duration(2000);
-            _keyInteraction = new Interaction(takeKeyCategories, Act.Grab, takeKeyDescription, takeKeyExpected, takeKeyLimit, keyAssetMock);
+            _keyInteraction = new Interaction(Act.Grab, takeKeyDescription, takeKeyExpected, takeKeyLimit, keyAssetMock);
             _takeKeyStep = new LeafStep(Standard.Mandatory, "Taking Key", _keyInteraction);
 
-            List<Category> insertKeyCategories = new List<Category>();
-            insertKeyCategories.Add(new Category("Operational"));
             Description insertKeyDescription = new Description("Insert key into door.");
             Duration insertKeyExpected = new Duration(1000);
             Duration insertKeyLimit = new Duration(2000);
-            _keyholeInteraction = new Interaction(insertKeyCategories, Act.Grab, insertKeyDescription, insertKeyExpected, insertKeyLimit, keyAssetMock, doorssetMock);
+            _keyholeInteraction = new Interaction(Act.Grab, insertKeyDescription, insertKeyExpected, insertKeyLimit, keyAssetMock, doorssetMock);
             _insertKeyStep = new LeafStep(Standard.Mandatory, "Insert key.", _keyholeInteraction);
 
-            List<Category> openDoorCategories = new List<Category>();
-            openDoorCategories.Add(new Category("Operational"));
             Description openDoorDescription = new Description("Open door.");
             Duration openDoorExpected = new Duration(1000);
             Duration openDoorLimit = new Duration(2000);
-            _doorInteraction = new Interaction(openDoorCategories, Act.Grab, openDoorDescription, openDoorExpected, openDoorLimit, doorssetMock);
+            _doorInteraction = new Interaction(Act.Grab, openDoorDescription, openDoorExpected, openDoorLimit, doorssetMock);
             _openDoorStep = new LeafStep(Standard.Mandatory, "Insert key.", _doorInteraction);
 
-            List<Category> grabHugCategories = new List<Category>();
-            grabHugCategories.Add(new Category("Operational"));
-            grabHugCategories.Add(new Category("Security"));
             Description grabHugDescription = new Description("Grab HUg.");
             Duration grabHugExpected = new Duration(1000);
             Duration grabHugLimit = new Duration(2000);
-            _grabHugInteraction = new Interaction(grabHugCategories, Act.Grab, grabHugDescription, grabHugExpected, grabHugLimit, hugAssetMock);
+            _grabHugInteraction = new Interaction(Act.Grab, grabHugDescription, grabHugExpected, grabHugLimit, hugAssetMock);
             _grabHugStep = new LeafStep(Standard.Mandatory, "Insert key.", _grabHugInteraction);
 
 

@@ -1,30 +1,24 @@
-﻿using System.Collections.Generic;
-using TEP.Domain.Common;
-
-namespace TEP.Domain.ValueObjects
+﻿namespace TEP.Domain.ValueObjects
 {
-    public class Duration : ValueObject
+    public class Duration
     {
-        //Manages the duration of an event in Seconds, to a max of 596.52 Hour.
-        //Convert to something like this-> https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6 (exemplo do Distance)
         public Duration(double seconds)
         {
             Seconds = seconds;
-        }
-
+        }        
         public double Seconds { get; set; }
         public void Increment(double amount)
         {
             Seconds += amount;
         }
-        public void Decrement(double amount)
-        {
-            Seconds -= amount;
-        }
         public void Increment(Duration duration)
         {
             Seconds += duration.Seconds;
         }
+        public void Decrement(double amount)
+        {
+            Seconds -= amount;
+        }        
         public void Decrement(Duration duration)
         {
             Seconds -= duration.Seconds;
@@ -33,15 +27,22 @@ namespace TEP.Domain.ValueObjects
         {
             Seconds = 0;
         }
-        protected override IEnumerable<object> GetAtomicValues()
+        public override bool Equals(object obj)
         {
-            //https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6 (exemplo do Distance)
-            throw new System.NotImplementedException();
-        }
+            if (obj == null || GetType() != obj.GetType())
+                return false;
 
+            var other = obj as Duration;
+            return Seconds.Equals(other.Seconds);    
+        }
+        public override int GetHashCode()
+        {
+            return Seconds.GetHashCode();
+        }
         public override string ToString()
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

@@ -14,12 +14,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectInitialStatsForLeafStep()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
 
@@ -31,12 +29,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectAdvanceStepForNonActiveNonCompletedStep()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
             leafStep.AdvanceStep(DateTime.Now);
@@ -48,12 +44,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectAdvanceStepForActiveNonCompletedStep()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
             leafStep.AdvanceStep(DateTime.Now);
@@ -67,12 +61,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectAdvanceStepForCompletedStep()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
             leafStep.AdvanceStep(DateTime.Now);
@@ -83,12 +75,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectExecutionTimeOnStart()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
 
@@ -99,12 +89,10 @@ namespace TEP.Domain.Tests.Entities
         public void CorrectExecutionTimeOnCompletion()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             DateTime firstTime = DateTime.Now;
             DateTime secondTime = DateTime.Now;
@@ -118,12 +106,10 @@ namespace TEP.Domain.Tests.Entities
         public void ExpectedTime_for_Interaction()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
             leafStep.UpdateDuration();
@@ -134,12 +120,10 @@ namespace TEP.Domain.Tests.Entities
         public void LimitTime_for_Interaction()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(1000);
             Duration limit = new Duration(2000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             // Act
             leafStep.UpdateDuration();
@@ -151,12 +135,10 @@ namespace TEP.Domain.Tests.Entities
         public void ErrorOnGettingDurationWithoutProcessing()
         {
             // Arrange
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category("Operational"));
             Description description = new Description("Take the Key.");
             Duration expected = new Duration(20000);
             Duration limit = new Duration(30000);
-            Interaction interaction = new Interaction(categories, Act.Grab, description, expected, limit);
+            Interaction interaction = new Interaction(Act.Grab, description, expected, limit);
             LeafStep leafStep = new LeafStep(Standard.Mandatory, "Taking Key", interaction);
             /// Act
             var millis = leafStep.ExpectedDuration.Seconds;
